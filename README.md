@@ -27,3 +27,5 @@ This command generates static content into the `build` directory and can be serv
 ### Deployment
 
 execute `./publish.sh` or just push to main (github actions workflow will take care of the rest)
+
+The repository needs to have its workflow permissions set to `read and write`, instead of the default. Change that under the repositories settings -> Workflow permissions
