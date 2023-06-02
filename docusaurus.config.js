@@ -11,15 +11,15 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://pl8tinium.github.io',
+  url: 'https://vsc-eco.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'pl8tinium', // Usually your GitHub org/user name.
-  projectName: 'pl8tinium.github.io', // Usually your repo name.
+  organizationName: 'vsc-eco', // Usually your GitHub org/user name.
+  projectName: 'vsc-eco.github.io', // Usually your repo name.
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
