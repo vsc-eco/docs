@@ -1,3 +1,7 @@
+---
+slug: running-a-node
+---
+
 # Running a node
 
 This tutorial will guide you through the process of setting up a VSC node .
