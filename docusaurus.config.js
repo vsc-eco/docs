@@ -109,7 +109,7 @@ const config = {
             ],
           },
         ],
-        copyright: ``,
+        copyright: `Built for the future of Hive`,
       },
       prism: {
         theme: lightCodeTheme,
