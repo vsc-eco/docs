@@ -81,29 +81,17 @@ const config = {
       footer: {
         style: 'dark',
         links: [
-          // {
-          //   title: 'Docs',
-          //   items: [
-          //     {
-          //       label: 'Landing',
-          //       to: '/docs/intro',
-          //     },
-          //   ],
-          // },
+
           {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
                 label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
+                href: 'https://discord.gg/yvGXZsQTU6',
               },
               {
                 label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                href: 'https://twitter.com/vsc_eco',
               },
             ],
           },
@@ -112,16 +100,16 @@ const config = {
             items: [
               {
                 label: 'Blog',
-                to: '/blog',
+                href: "https://peakd.com/@vsc.network"
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/vsc-eco',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: ``,
       },
       prism: {
         theme: lightCodeTheme,
