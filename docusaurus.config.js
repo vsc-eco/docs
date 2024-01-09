@@ -117,6 +117,7 @@ const config = {
         darkTheme: darkCodeTheme,
       },
     }),
+    plugins: ["@gracefullight/docusaurus-plugin-vercel-analytics"],
 };
 
 module.exports = config;
