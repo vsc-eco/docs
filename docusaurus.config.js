@@ -34,6 +34,7 @@ const config = {
     locales: ['en'],
   },
 
+  plugins: [["@gracefullight/docusaurus-plugin-vercel-analytics"]],
   presets: [
     [
       'classic',
