@@ -10,32 +10,32 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
+    title: 'Open smart contracts',
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        VSC smart contracts were build from the ground up for openness and transparancy.
+        Anyone can deploy a smart contract without needing approval, granting unlimited flexibility
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
+    title: 'Scalable & future proof',
     Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        VSC is a L2 sidechain. 
+        This allows VSC to easily onboard users using native lite accounts and significantly decreases our development time.
       </>
     ),
   },
   {
-    title: 'Powered by React',
+    title: 'Lightning Fast',
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        VSC is powered by the Hive blockchain's lightning fast 3s block times and one block irreversibility.
+        No need to wait for web3 speeds
       </>
     ),
   },
