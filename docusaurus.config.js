@@ -6,8 +6,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'My Site',
-  tagline: 'Dinosaurs are cool',
+  title: 'VSC Network',
+  tagline: 'Documentation for Hive Smart Contracts',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
@@ -71,7 +71,7 @@ const config = {
             position: 'left',
             label: 'Home',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {href: 'https://peakd.com/@vsc.network', label: 'Blog', position: 'left'},
           // {
           //   href: 'https://github.com/facebook/docusaurus',
           //   label: 'GitHub',
