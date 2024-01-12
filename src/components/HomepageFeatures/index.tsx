@@ -11,22 +11,22 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Open smart contracts',
+    title: 'Open Smart Contracts',
     src: require('@site/static/img/splash_1.png').default,
     description: (
       <>
-        VSC smart contracts were build from the ground up for openness and transparancy.
-        Anyone can deploy a smart contract without needing approval, granting unlimited flexibility
+        VSC smart contracts were build from the ground up with openness and transparancy in mind.
+        Anyone can deploy a smart contract without needing approval, granting unlimited flexibility coupled with a strong webassembly VM.
       </>
     ),
   },
   {
-    title: 'Scalable & future proof',
+    title: 'Scalable & Future Proof',
     src: require('@site/static/img/splash_2.png').default,
     description: (
       <>
         VSC is a L2 sidechain. 
-        This allows VSC to easily onboard users using native lite accounts and significantly decreases our development time.
+        This significantly improves onboarding and reduces development time.
       </>
     ),
   },
@@ -36,7 +36,7 @@ const FeatureList: FeatureItem[] = [
     description: (
       <>
         VSC is powered by the Hive blockchain's lightning fast 3s block times and one block irreversibility.
-        No need to wait for web3 speeds
+        Web3 speeds became Web2.
       </>
     ),
   },
