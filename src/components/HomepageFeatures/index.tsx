@@ -4,14 +4,15 @@ import styles from './styles.module.css';
 
 type FeatureItem = {
   title: string;
-  Svg: React.ComponentType<React.ComponentProps<'svg'>>;
+  Svg?: React.ComponentType<React.ComponentProps<'svg'>>;
+  src: string
   description: JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [
   {
     title: 'Open smart contracts',
-    Svg: require('@site/static/img/splash_1.png').default,
+    src: require('@site/static/img/splash_1.png').default,
     description: (
       <>
         VSC smart contracts were build from the ground up for openness and transparancy.
@@ -21,7 +22,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Scalable & future proof',
-    Svg: require('@site/static/img/splash_2.png').default,
+    src: require('@site/static/img/splash_2.png').default,
     description: (
       <>
         VSC is a L2 sidechain. 
@@ -31,7 +32,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Lightning Fast',
-    Svg: require('@site/static/img/splash_3.png').default,
+    src: require('@site/static/img/splash_3.png').default,
     description: (
       <>
         VSC is powered by the Hive blockchain's lightning fast 3s block times and one block irreversibility.
@@ -41,11 +42,12 @@ const FeatureList: FeatureItem[] = [
   },
 ];
 
-function Feature({title, Svg, description}: FeatureItem) {
+function Feature({title, Svg, src, description}: FeatureItem) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        {/* <Svg className={styles.featureSvg} role="img" /> */}
+        <img className={styles.featureSvg}  src={src} />
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
