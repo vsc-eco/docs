@@ -11,7 +11,7 @@ type FeatureItem = {
 const FeatureList: FeatureItem[] = [
   {
     title: 'Open smart contracts',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    Svg: require('@site/static/img/splash_1.png').default,
     description: (
       <>
         VSC smart contracts were build from the ground up for openness and transparancy.
@@ -21,7 +21,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Scalable & future proof',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    Svg: require('@site/static/img/splash_2.png').default,
     description: (
       <>
         VSC is a L2 sidechain. 
@@ -31,7 +31,7 @@ const FeatureList: FeatureItem[] = [
   },
   {
     title: 'Lightning Fast',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    Svg: require('@site/static/img/splash_3.png').default,
     description: (
       <>
         VSC is powered by the Hive blockchain's lightning fast 3s block times and one block irreversibility.
