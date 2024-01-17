@@ -1,4 +1,3 @@
-
 ---
 title: Why use VSC?
 ---
