@@ -2,7 +2,6 @@
 title: Why use VSC?
 ---
 
-## Why use VSC?
 
 Before picking a technology to use in your project, it's important to research and evaluate each one to determine a best fit technology for your use case. This document will give you a rough overview of what VSC does and enough details to make an informed decision for your project.
 
