@@ -1,6 +1,7 @@
 ---
 slug: creating-your-first-smart-contract
 title: Creating your first smart contract
+sidebar_position: 3
 ---
 
 # Creating your first smart contract

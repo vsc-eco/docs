@@ -1,5 +1,7 @@
 ---
-title: Why use VSC?
+title: Why VSC?
+sidebar_position: 1
+
 ---
 
 
