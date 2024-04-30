@@ -6,3 +6,4 @@ VSC (virtual smart chain) is a next generation smart contract L2 built on the Hi
 
 Already, VSC will power fully decentralized and trustless Bitcoin wrapping, along with many others. The time is now to start building on VSC.
 
+What do you think?
