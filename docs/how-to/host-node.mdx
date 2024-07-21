@@ -1,14 +1,8 @@
----
-slug: running-a-node
-sidebar_position: 2
-
----
-
-<iframe  src="https://3speak.tv/embed?v=vsc.network/vqtkycsg" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
-
 # Running a node
 
-This tutorial will guide you through the process of setting up a VSC node .
+This document will guide you through the process of setting up a VSC node .
+
+## Prerequisites
 
 Requirements:
 - Hive account (50HP, will rise in the future)
@@ -21,6 +15,11 @@ System requirements:
 - Raspberry pi 4 or better
 - 4 cores, 2GB ram or better
 
+## Video guide
+
+<iframe src="https://3speak.tv/watch?v=vsc.network/uthosijv" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>
+
+## Setup
 
 The setup:
 
@@ -45,3 +44,6 @@ We generally recommend you use a different Hive account from your main account.
 4 ) `docker-compose up -d`
 
 You should be off to the races at this point! We can verify that your node is operating correctly on our discord server. Please actively monitor our Hive blog and discord server for incoming updates regarding VSC. You will need to consistent update your node as we release new versions of the software. Staying up to date with the rest of the network is critical in ensuring reliable operation of the network.
+
+You can disable automatic updates by setting the environment variable AUTO_UPDATE to false. However, we recommend to keep this feature enabled to ensure the node is always up-to-date. In our rapidly evolving ecosystem, it's crucial to keep the node updated for optimal network health.
+

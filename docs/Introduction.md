@@ -58,7 +58,7 @@ You help us to scale and make the network more secure.
 
 By participating in the VSC network you will receive reimbursements for your node operation.  
 
-Interested? [Checkout how to host a node here](./how-to/host-node.md).
+Interested? [Checkout how to host a node here](./how-to/host-node.mdx).
 
 ### Bitcoin wrapping
 
@@ -71,7 +71,6 @@ We are building a decentralized exchange that allows users to exchange various c
 ### Contract example
 
 We have various example contracts/ applications that can be used as inspiration for your development journey. [You can see the full list here](./references/examples.md).
-
 ## The architecture
 
 Here we give you an overview of the VSC architecture. This is important to understand the underlying principles of the VSC network.
