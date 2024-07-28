@@ -79,6 +79,13 @@ const config = {
           // },
         ],
       },
+      // github codeblock theme configuration
+      codeblock: {
+        showGithubLink: true,
+        githubLinkLabel: 'View on GitHub',
+        showRunmeLink: false,
+        runmeLinkLabel: 'Checkout via Runme'
+      },
       footer: {
         style: 'dark',
         links: [
@@ -118,6 +125,9 @@ const config = {
       },
     }),
     plugins: ["@gracefullight/docusaurus-plugin-vercel-analytics"],
+    themes: [
+      'docusaurus-theme-github-codeblock'
+    ],
 };
 
 module.exports = config;
