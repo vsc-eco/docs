@@ -8,7 +8,7 @@ sidebar_position: 1
 
 VSC (virtual smart chain) is a next generation smart contract L2 built on the Hive blockchain. VSC not only aims to bring smart contracts to Hive, but completely change the onboarding experience by introducing native lite accounts and cross chain login functionality, support decentralized and secure wrapping technology, and power the future of DAPPs on Hive.  
 
-VSC operates as sidechain to Hive, this gives us a significant amount of flexibility to advance and build new features, along with the ability to scale the L2 network in the future. Using Hive as a clearing and synchronization method, VSC can push huge amounts of data with little to no overhead on the Hive L1. This approach allows VSC to inherit a lot of Hive's lower level functions such as feeless transactions and 3s block time.  
+VSC operates as a sidechain to Hive, this gives us a significant amount of flexibility to advance and build new features, along with the ability to scale the L2 network in the future. Using Hive as a clearing and synchronization method, VSC can push huge amounts of data with little to no overhead on the Hive L1. This approach allows VSC to inherit a lot of Hive's lower level functions such as feeless transactions and 3s block time.  
 
 VSC uses Webassembly for smart contracts, which us to support any language that compiles down to native webassembly. The flexibility this gives to developers is emmense, where as EVM chains Solidity is the only option. Currently we support AssemblyScript (JavaScript like) with more languages to be added in the future as we vet and build out development tools for each programming language.  
 
@@ -68,9 +68,14 @@ VSC's mission extends beyond its innovative smart contract capabilities. It aspi
 
 We are building a decentralized exchange that allows users to exchange various currencies on top of your network. This is a crucial part of the VSC ecosystem as it allows users to exchange their assets in a decentralized manner. [Inform yourself about the current state here](./references/dex.md).
 
+### Account types
+
+One of our main goals is to improve the accessibility of smart contract creation and invocation. This is supported by the integration of various account types in the VSC network. Learn about [our supported authentication methods here](./references/account-types.md).
+
 ### Contract example
 
 We have various example contracts/ applications that can be used as inspiration for your development journey. [You can see the full list here](./references/examples.md).
+
 ## The architecture
 
 Here we give you an overview of the VSC architecture. This is important to understand the underlying principles of the VSC network.

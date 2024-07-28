@@ -1,1 +1,0 @@
-guide on how to use the client to send a transaction

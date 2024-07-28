@@ -155,7 +155,7 @@ The deployed contract should now be visible [in the block explorer](../reference
 
 Now it's time to invoke our contract's `MyFirstContractTest` method on the VSC network.
 
-For that we are going to create a small demo application that makes use of the VSC client. Please [refer to this tutorial](./client-send-transaction.md) for how to do so. After you created the application and sent the transaction to the VSC network come back to this guide.  
+For that, we are going to create a small demo application that makes use of the _VSC client_. Please [refer to this guide](../tutorials/invoke-contract.md) for how to do so. After you created the application and sent the transaction to the VSC network come back to this guide.  
 
 After a short amount of time, after the submission of the transaction, we should be able to see our transaction included in one of the latest VSC blocks.  
 
