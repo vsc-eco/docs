@@ -28,7 +28,7 @@ The repository needs to have its workflow permissions set to `read and write`, i
 - [X] [client.md](./docs/references/client.md)
 - [ ] [contract-template.md](./docs/references/contract-template.md)
 - [X] [account-types.md](./docs/references/account-types.md)
-- [ ] [examples.md](./docs/references/examples.md)
+- [X] [examples.md](./docs/references/examples.md)
 - [ ] [sdk.md](./docs/references/sdk.md)
 - [X] [first-contract.md](./docs/tutorials/first-contract.md)
 - [X] [invoke-contract.md](./docs/tutorials/invoke-contract.md)
