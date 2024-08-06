@@ -14,7 +14,7 @@ If you are also using NodeJS for other projects, that require a different NodeJS
 
 ### IPFS
 
-You need IPFS to be able to inject data into the VSC network.  
+You need IPFS to be able to ingest data into the VSC network.  
 
 For a user friendly desktop application you can use `IPFS Desktop`. It is available for windows/ mac/ ubuntu [here](https://docs.ipfs.tech/install/ipfs-desktop/#install-instructions).
 
@@ -26,7 +26,7 @@ You need to install Git to clone the template repository. Refer to the [official
 
 ### Hive account
 
-A Hive account is required to inject the contract into the VSC network, if you dont have one already please visit [signup.hive.io](https://signup.hive.io).
+A Hive account is required to deploy the contract to the VSC network, if you dont have one already please visit [signup.hive.io](https://signup.hive.io).
 
 ### Environment setup
 

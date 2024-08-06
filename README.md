@@ -20,6 +20,7 @@ The repository needs to have its workflow permissions set to `read and write`, i
 - [X] [Introduction.md](./docs/Introduction.md)
 - [ ] [core-philosophy.md](./docs/discussions/core-philosophy.md)
 - [ ] [dex.md](./docs/discussions/dex.md)
+- [X] [FAQ.md](./docs/discussions/FAQ.md)
 - [ ] [wrapping.md](./docs/discussions/wrapping.md)
 - [X] [generate-wallet.md](./docs/how-to/generate-wallet.md)
 - [X] [host-node.mdx](./docs/how-to/host-node.mdx)
@@ -32,3 +33,8 @@ The repository needs to have its workflow permissions set to `read and write`, i
 - [ ] [sdk.md](./docs/references/sdk.md)
 - [X] [first-contract.md](./docs/tutorials/first-contract.md)
 - [X] [invoke-contract.md](./docs/tutorials/invoke-contract.md)
+
+
+### Reminders
+
+- when contract deployment supports lite accounts, add to the documentation

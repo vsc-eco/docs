@@ -76,6 +76,10 @@ One of our main goals is to improve the accessibility of smart contract creation
 
 We have various example contracts/ applications that can be used as inspiration for your development journey. [You can see the full list here](./references/examples.md).
 
+### FAQ
+
+The most frequently asked questions get a spot in our FAQ document. This should be your entrypoint in case you are stuck. [Checkout the document here](./discussions/FAQ.md)
+
 ## The architecture
 
 Here we give you an overview of the VSC architecture. This is important to understand the underlying principles of the VSC network.
