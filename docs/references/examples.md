@@ -8,7 +8,7 @@ This document lists sample projects that build on top of VSC. They can serve as 
 
 This simple game demonstrates the feasibility of integrating the VSC network into user-facing applications.
 
-INSERT IMAGE
+![guess-game-frontend](./img/guess-game-frontend.png)
 
 The game is very straightforward, 2 players take guesses of numbers and the player that's guess is closer to a _pseudo_ generated random number wins the round. When a player wins a round, they advance the next step on the ladder.
 
