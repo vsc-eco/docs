@@ -24,7 +24,7 @@ The repository needs to have its workflow permissions set to `read and write`, i
 - [ ] [wrapping.md](./docs/discussions/wrapping.md)
 - [X] [generate-wallet.md](./docs/how-to/generate-wallet.md)
 - [X] [host-node.mdx](./docs/how-to/host-node.mdx)
-- [ ] [api.md](./docs/references/api.md)
+- [X] [api.md](./docs/references/api.md)
 - [X] [block-explorers.md](./docs/references/block-explorers.md)
 - [X] [client.md](./docs/references/client.md)
 - [ ] [contract-template.md](./docs/references/contract-template.md)
