@@ -4,6 +4,8 @@ The VSC clients are libraries that serve a set of wrappers and abstraction layer
 
 ## VSC javascript client
 
+The API documentation can be found [here](https://vsc-eco.github.io/client/).
+
 ### Installation
 
 The [VSC javascript client](https://github.com/vsc-eco/client) can be installed via [_npm_](https://www.npmjs.com/package/@vsc.eco/client).

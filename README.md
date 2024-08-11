@@ -30,7 +30,7 @@ The repository needs to have its workflow permissions set to `read and write`, i
 - [ ] [contract-template.md](./docs/references/contract-template.md)
 - [X] [account-types.md](./docs/references/account-types.md)
 - [X] [examples.md](./docs/references/examples.md)
-- [ ] [sdk.md](./docs/references/sdk.md)
+- [X] [sdk.md](./docs/references/sdk.md)
 - [X] [first-contract.md](./docs/tutorials/first-contract.md)
 - [X] [invoke-contract.md](./docs/tutorials/invoke-contract.md)
 
@@ -38,3 +38,4 @@ The repository needs to have its workflow permissions set to `read and write`, i
 ### Reminders
 
 - when contract deployment supports lite accounts, add to the documentation
+- move api documentation to the code a la js/ typedoc and just link to it, only manually add documentation to the doc here that describes how those components might be used (examples) or in conjunction

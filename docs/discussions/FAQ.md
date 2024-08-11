@@ -53,3 +53,7 @@ As for a formal docs site, we don't have that at the moment.
 However, you can checkout the AssemblyScript docs for usage of the smart contract language. It is very similar to TypeScript. Then, everything you need to interface with the VSC chain state is available in the @vsc.eco/sdk npm package.
 
 If you have any concrete suggestions about what we should include in a formal documentation site, please let us know.
+
+## Why is the documentation structured in this way?
+
+The documentation approach is based on the _Diátaxis_ principle. You can watch a summary about it [here](https://www.youtube.com/watch?v=t4vKPhjcMZg).
