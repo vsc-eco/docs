@@ -17,7 +17,7 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/getting-started/running-a-node">
+            to="/docs/how-to/host-node">
             Run a VSC node - 5min ⏱️
           </Link>
         </div>
