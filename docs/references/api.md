@@ -1,4 +1,8 @@
+## NOTE: THIS SECTION HAS NOT BEEN UPDATED FOR MAINNET VSC (PROCEED WITH CAUTION)
+
 # API documentation
+
+
 
 The VSC API can be used to retrieve various kinds of information about the VSC network. It is the core building block when it comes to creating applications on top of VSC.
 

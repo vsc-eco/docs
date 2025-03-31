@@ -1,3 +1,5 @@
+## NOTE: THIS SECTION HAS NOT BEEN UPDATED FOR MAINNET VSC (PROCEED WITH CAUTION)
+
 # FAQ
 
 ## Do we supply node snapshots for node operators?
@@ -16,11 +18,7 @@ However, we are currently working on token and wrapping technology internally wi
 
 ## How do I run a node?
 
-Checkout [this repository](https://github.com/vsc-eco/vsc-deployment).
 
-## Why do I see Error: No withdrawals to process?
-
-This is typically normal, especially when your node is re-indexing. Most blocks don't generate withdrawals from the multisig, at the moment. In fact, at the time of writing, there should only be 1 withdrawal from vaultec, so you should see this message many times in your logs.
  
 ## How do to update a node?
 

@@ -1,3 +1,5 @@
+## NOTE: THIS SECTION HAS NOT BEEN UPDATED FOR MAINNET VSC (PROCEED WITH CAUTION)
+
 # SDK
 
 The VSC sdks are libraries that abstract away various functionalities that are useful in the context of coding a VSC smart contract.

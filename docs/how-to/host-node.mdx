@@ -5,7 +5,8 @@ This document will guide you through the process of setting up a VSC node .
 ## Prerequisites
 
 Requirements:
-- Hive account (50HP, will rise in the future)
+- Hive account (100HP minimum for RCs)
+- 2000 Hive bonded to your VSC node (required for participating in consensus)
 - Technical knowledge of using a command line interface
 - Docker and docker-compose installed. Please see [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/) for installation guide for docker. 
 
@@ -13,37 +14,15 @@ System requirements are very low, in the future requirements will rise as networ
 
 System requirements:
 - Raspberry pi 4 or better
-- 4 cores, 2GB ram or better
+- 4 cores, 8GB ram or better
 
 ## Video guide
 
-<iframe src="https://3speak.tv/embed?v=vsc.network/uthosijv" width="800" height="450" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>
+We will release an updated video guide in coming weeks after mainnet launch.
 
 ## Setup
 
-The setup:
+Please contact us on [discord](http://discord.gg/yvGXZsQTU6) and apply to the VSC Node runners early access [application](https://airtable.com/appviLDNqlKpQvGO9/pagUoOCii6OPMWPZd/form).
 
-1 ) `git clone https://github.com/vsc-eco/vsc-node`
-
-2 ) `cd vsc-node`
-
-3 ) < Fill in .env file here >
-
-You'll need to create a .env file with the following values from the .env.example file.
-
-```
-# Fill these in with your hive account details
-HIVE_ACCOUNT=Insert hive account username
-HIVE_ACCOUNT_POSTING=Insert hive account posting key
-HIVE_ACCOUNT_ACTIVE=Insert hive account active key
-```
-
-We generally recommend you use a different Hive account from your main account.
-
-
-4 ) `docker-compose up -d`
-
-You should be off to the races at this point! We can verify that your node is operating correctly on our discord server. Please actively monitor our Hive blog and discord server for incoming updates regarding VSC. You will need to consistent update your node as we release new versions of the software. Staying up to date with the rest of the network is critical in ensuring reliable operation of the network.
-
-You can disable automatic updates by setting the environment variable AUTO_UPDATE to false. However, we recommend to keep this feature enabled to ensure the node is always up-to-date. In our rapidly evolving ecosystem, it's crucial to keep the node updated for optimal network health.
-
+A few weeks after mainnet launch we will update the setup guide to allow for anyone to run a node.
+For now, we are keeping within a small highly dedicated group to resolve bugs, and ensure updates can happen quickly.

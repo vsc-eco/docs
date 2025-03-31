@@ -1,3 +1,5 @@
+## NOTE: THIS SECTION HAS NOT BEEN UPDATED FOR MAINNET VSC (PROCEED WITH CAUTION)
+
 # Invoke contract
 
 This guide explains how to invoke a contract on the VSC network via javascript code.

@@ -1,3 +1,5 @@
+## NOTE: THIS SECTION HAS NOT BEEN UPDATED FOR MAINNET VSC (PROCEED WITH CAUTION)
+
 # Creating your first smart contract
 
 This tutorial helps you to create your first simple `Hello-world` smart contract!

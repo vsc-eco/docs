@@ -1,3 +1,5 @@
+## NOTE: THIS SECTION HAS NOT BEEN UPDATED FOR MAINNET VSC (PROCEED WITH CAUTION)
+
 # VSC client
 
 The VSC clients are libraries that serve a set of wrappers and abstraction layers to more easily communicate with the VSC network.
