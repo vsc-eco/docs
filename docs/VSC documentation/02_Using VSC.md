@@ -1,4 +1,4 @@
-# **Using VSC**
+# Using VSC
 
 *Introduction of concepts that help make sense of services VSC is able to provide.*
 

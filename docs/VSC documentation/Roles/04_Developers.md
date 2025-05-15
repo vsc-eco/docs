@@ -1,4 +1,4 @@
-# **Developers: Build Decentralized Applications (dApps) on VSC**
+# Developers: Build Decentralized Applications (dApps) on VSC
 
 Developers on VSC gain a powerful advantage. Any application they build is instantly **interoperable with all supported blockchains**. VSC acts as a cross-chain hub which means your project isn’t siloed to one ecosystem. Instead, it's natively accessible to users from multiple chains, including Bitcoin, Ethereum, Solana, Hive and others.
 

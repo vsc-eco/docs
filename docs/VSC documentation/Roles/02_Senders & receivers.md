@@ -10,7 +10,7 @@
 
 - Connect wallets from different blockchains (BTC, ETH, SOL, etc.) to VSC.
 - Send native assets (e.g., BTC) to a connected wallet address associated with another blockchain (e.g., an ETH wallet).
-- Receive those assets natively, without any swap, bridging, or user interaction.
+- Receive those assets natively.
 
 The sender pays a one-time network fee to deposit the asset into VSC; the protocol handles the internal ledger shift and the receiver can send that asset to any other wallet address connected to VSC.
 

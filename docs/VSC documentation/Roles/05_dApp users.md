@@ -1,4 +1,4 @@
-# **dApp Users: Interact with Decentralized Applications**
+# dApp Users: Interact with Decentralized Applications
 
 dApp Users are individuals who interact directly with decentralized applications built on the VSC network. These applications range from DeFi tools and payment services to games, NFT platforms, remittance tools, and more, all powered by **WebAssembly-based smart contracts** on a secure, feeless, and decentralized infrastructure.
 

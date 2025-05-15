@@ -1,4 +1,4 @@
-# **Introduction**
+# Introduction
 
 *Welcome to the official documentation for VSC (Virtual Smart Chain), the next evolution in cross-chain payment infrastructure.*
 
@@ -10,23 +10,11 @@ All swaps are routed through a single base asset, a stablecoin, **HBD (Hive Back
 
 Unlike other cross-chain protocols limited to basic swap mechanics, VSC supports **full-featured smart contract execution**, allowing developers to build truly composable, cross-chain decentralized applications within the protocol itself.
 
-**Core Protocol Features:**
+## **Core Protocol Features:**
 
 - **Native Multi-Chain Asset Support** 
 
 Assets from supported blockchains (including Bitcoin, Solana, Ethereum, and others) are deposited directly into **on-chain vaults** secured by VSC validators. These validators are required to stake **Hive** as economic collateral, ensuring security and accountability.
-
-- **Native Asset Mapping** 
-
-VSC enables assets from different blockchains (e.g., BTC, SOL, Hive, ETH) to be securely locked on their native chains and mapped to VSC-connected addresses. This allows Ethereum wallet addresses to hold native Bitcoin (BTC), Solana wallet addresses to hold native Ethereum (ETH), and vice versa, all while leveraging VSC's decentralized validator network for seamless cross-chain interoperability.
-
-- **Feeless In-Protocol Swaps** 
-
-VSC eliminates gas fees for users by utilizing Hive’s **resource credit model**.
-
-- **HBD as the Base Asset in All Pairs** 
-
-Liquidity pools on VSC pair every asset against **HBD**, an algorithmic stablecoin with a decade-long track record of uptime and stability. This standardizes routing paths and simplifies liquidity provisioning across assets and chains while preventing volatility shocks and requiring exposure to a secondary volatile asset.
 
 - **Smart Contracts via WebAssembly (WASM)** 
 
@@ -44,3 +32,18 @@ Users can interact with the protocol using wallets from any supported blockchain
 
 Through native Hive integration, users benefit from readable usernames, account abstraction, social login, enabling Web2 simplicity without sacrificing decentralization.
 
+## *VSC’s Next-Gen Innovations*
+
+VSC introduces a suite of foundational innovations that redefine the landscape of cross-chain infrastructure in order to deliver a truly unified, scalable, and developer-friendly ecosystem. These innovations address long-standing limitations in interoperability, user experience, and liquidity fragmentation — setting a new benchmark for what a cross-chain protocol can achieve.
+
+- **Native Asset Mapping** 
+
+VSC enables assets from different blockchains (e.g., BTC, SOL, Hive, ETH) to be securely locked on their native chains and mapped to VSC-connected addresses. For example: this allows Ethereum wallet addresses to hold native Bitcoin (BTC), Solana wallet addresses to hold native Ethereum (ETH), and vice versa, all while leveraging VSC's decentralized validator network for seamless cross-chain interoperability.
+
+- **Feeless In-Protocol Transactions** 
+
+VSC eliminates gas fees for users by utilizing Hive’s **resource credit model**. These credits regenerate over time and are consumed when a user performs on-chain actions like transferring tokens, interacting with smart contracts, or signing transactions.This system enables truly feeless interactions, making VSC uniquely positioned to offer a gasless experience, ideal for onboarding mainstream users and scaling usage without friction.
+
+- **Stablecoin (HBD) as the Base Asset in All Pairs** 
+
+Liquidity pools on VSC pair every asset against **HBD**, an algorithmic stablecoin with a decade-long track record of uptime and stability. This standardizes routing paths and simplifies liquidity provisioning across assets and chains while preventing volatility shocks and requiring exposure to a secondary volatile asset.

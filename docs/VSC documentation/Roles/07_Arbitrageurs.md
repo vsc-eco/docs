@@ -1,4 +1,4 @@
-# **Arbitrageurs: Capitalize on Price Differences Across Liquidity Pools and Chains to Profit**
+# Arbitrageurs: Capitalize on Price Differences Across Liquidity Pools and Chains to Profit
 
 Arbitrageurs take advantage of price discrepancies between liquidity pools and across chains within the VSC ecosystem. By quickly executing trades between pools or chains, they profit from differences in asset prices. VSC’s decentralized cross-chain infrastructure and native asset support allow arbitrageurs to identify and capitalize on price inefficiencies without relying on third-party services.
 
