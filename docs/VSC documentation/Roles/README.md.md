@@ -1,4 +1,10 @@
-# ROLES
+---
+id: index
+title: Roles 
+sidebar_label: Roles
+---
+
+# Roles
 
 In the VSC ecosystem, there are several important roles:
 

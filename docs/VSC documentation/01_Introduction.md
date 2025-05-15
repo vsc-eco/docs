@@ -32,7 +32,7 @@ Users can interact with the protocol using wallets from any supported blockchain
 
 Through native Hive integration, users benefit from readable usernames, account abstraction, social login, enabling Web2 simplicity without sacrificing decentralization.
 
-## *VSC’s Next-Gen Innovations*
+## **VSC’s Next-Gen Innovations**
 
 VSC introduces a suite of foundational innovations that redefine the landscape of cross-chain infrastructure in order to deliver a truly unified, scalable, and developer-friendly ecosystem. These innovations address long-standing limitations in interoperability, user experience, and liquidity fragmentation — setting a new benchmark for what a cross-chain protocol can achieve.
 
