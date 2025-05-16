@@ -1,6 +1,6 @@
 # Native Asset Mapping
 
-**Native Asset Mapping** is the primary innovative feature of the VSC protocol that enables users to send and receive native assets between different blockchains, through VSC, without worrying about chain compatibility.
+**Native Asset Mapping** is the primary innovative feature of the VSC protocol that enables users to send and receive native assets between different blockchains wallet addresses, through VSC, without worrying about chain compatibility.
 
 It allows users to send, for example, **SOL from a Solana wallet to an Ethereum wallet address**. The recipient receives **native SOL**, viewable and usable on VSC when they log in with their Ethereum wallet. The received SOL tokens remain in the VSC vault on the Solana mainnet and are secured by the VSC protocol validator system. By completing the transaction, the ownership of those tokens is essentially passed on to the account receiving the SOL. 
 
