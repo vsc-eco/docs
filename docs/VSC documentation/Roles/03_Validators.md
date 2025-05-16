@@ -1,6 +1,5 @@
 # Validators
-
-**Securing the VSC Protocol through Hive Staking and Consensus Participation**
+**Securing the VSC Protocol through Hive Staking and Consensus Participation.**
 
 Validators are responsible for **securing the VSC network**, maintaining consensus, and validating all state changes — including deposits, withdrawals, and in-protocol actions like swaps or mapped transfers. They run the VSC validator software and participate in the consensus mechanism by **staking HIVE tokens**, which aligns their incentives with the integrity of the system.
 

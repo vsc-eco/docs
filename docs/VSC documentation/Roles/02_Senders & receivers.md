@@ -1,6 +1,5 @@
 # Senders & Receivers (via Native Asset Mapping)
-
-**Feeless Value Transfer via Native Asset Mapping Within VSC**
+**Feeless Value Transfer via Native Asset Mapping Within VSC.**
 
 **Senders & Receivers** are users who leverage VSC to send value **between different blockchain wallet addresses that are connected to VSC -** like sending BTC to an Ethereum wallet address — without using traditional bridges, swaps, or liquidity pools. All of this happens **inside VSC**, using its internal accounting system and wallet-layer abstraction, powered by **Native Asset Mapping**.
 
