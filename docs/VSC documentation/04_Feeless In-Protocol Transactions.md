@@ -1,4 +1,4 @@
-# Feeless In-Protocol Transactions (via Resource Credits)
+# Feeless In-Protocol Transactions 
 
 
 
