@@ -1,14 +1,13 @@
 # Introduction
 
-*Welcome to the official documentation for VSC (Virtual Smart Chain), the next evolution in cross-chain payment infrastructure.*
+*This documentation provides a technical overview of VSC (Virtual Smart Chain), a decentralized protocol for cross-chain asset custody and swaps, settlement, and smart contract execution. VSC connects EVM and non-EVM chains through validator-managed vaults and a unified stablecoin-based routing system using HBD. VSC enables feeless transactions, native asset support, and composable cross-chain logic in a single trust-minimized environment.*
 
-**VSC** is a neutral, decentralized protocol that acts as a crosschain hub for EVM, non-EVM (Solana, Bitcoin, Litecoin…) chains under one seamless, secure, and lightning-fast roof.
 
-Built as a high-performance, feeless settlement layer, VSC leverages **WebAssembly smart contracts**, **zero-knowledge proofs**, **validator-managed vaults** and a **collateral-backed native asset model** to unify fragmented liquidity across ecosystems.
+Built as a high-performance, feeless settlement layer, VSC leverages **WebAssembly smart contracts**, **zero-knowledge proofs**, **validator-managed vaults** and a **collateral-backed native asset model** that reduces liquidity fragmentation across ecosystems.
 
-All swaps are routed through a single base asset, a stablecoin, **HBD (Hive Backed Dollars). Using HBD exposes LPs only to 1-sided volatility which** makes liquidity provision on VSC **more predictable, safer, and attractive** for both institutional and retail participants.
+All swaps are routed through a single base asset, a stablecoin, **HBD (Hive Backed Dollars). Using HBD exposes LPs only to 1-sided volatility which** makes liquidity provision on VSC **more predictable and efficient** for both institutional and retail participants.
 
-Unlike other cross-chain protocols limited to basic swap mechanics, VSC supports **full-featured smart contract execution**, allowing developers to build truly composable, cross-chain decentralized applications within the protocol itself.
+Unlike other cross-chain protocols limited to basic swap mechanics, VSC supports **smart contract execution**, allowing developers to build composable, cross-chain, decentralized applications within the protocol itself.
 
 ## **Core Protocol Features:**
 
@@ -34,7 +33,7 @@ Through native Hive integration, users benefit from readable usernames, account 
 
 ## **VSC’s Next-Gen Innovations**
 
-VSC introduces a suite of foundational innovations that redefine the landscape of cross-chain infrastructure in order to deliver a truly unified, scalable, and developer-friendly ecosystem. These innovations address long-standing limitations in interoperability, user experience, and liquidity fragmentation — setting a new benchmark for what a cross-chain protocol can achieve.
+VSC introduces several novel architectural components to address common limitations in existing cross-chain protocols in order to deliver a unified, scalable, and developer-friendly ecosystem. These innovations address long-standing limitations in interoperability, user experience, and liquidity fragmentation. These components aim to simplify development and improve the user experience in multi-chain environments.
 
 - **Native Asset Mapping** 
 

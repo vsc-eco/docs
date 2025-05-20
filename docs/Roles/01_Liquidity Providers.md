@@ -2,9 +2,9 @@
 
 ### What Are Liquidity Providers?
 
-Liquidity Providers (LPs) are users who deposit tokens into liquidity pools on VSC to enable cross-chain swaps and decentralized trading. In return for supplying assets, LPs earn fees and may be eligible for additional rewards. LPs are fundamental to the VSC ecosystem, providing the capital that powers Automated Market Makers (AMMs), cross-chain settlement, and efficient token routing.
+Liquidity Providers (LPs) are users who add tokens to VSC’s liquidity pools. Their contributions make cross-chain swaps and decentralized trading possible. In return for supplying assets, LPs earn fees and may be eligible for additional rewards. LPs are fundamental to the VSC ecosystem, providing the capital that powers Automated Market Makers (AMMs), cross-chain settlement, and efficient token routing.
 
-Unlike centralized exchanges where liquidity is maintained by a small set of market makers, VSC democratizes access to this role, allowing anyone to become a liquidity provider and earn yield on their capital.
+Unlike centralized exchanges where a few market makers control liquidity, VSC opens the door for anyone to become an LP and earn rewards by providing liquidity.
 
 ### The Role of LPs in VSC
 
@@ -26,7 +26,7 @@ To become an LP, you need to supply equal USD value of:
 - A volatile token (e.g., BTC, Hive)
 - HBD (Hive Backed Dollars)
 
-For example, if BTC is priced at $60,000, you would deposit $60,000 worth of BTC and $60,000 worth of HBD into the pool.
+For example, if BTC is priced at $60,000, you would add $60,000 worth of BTC and $60,000 worth of HBD into the pool.
 
 ### Depositing to the Pool
 
@@ -53,7 +53,7 @@ VSC may also introduce additional rewards in the form of governance tokens or pr
 
 ### Withdrawing Liquidity
 
-Liquidity can be withdrawn at any time by burning LP tokens. Upon withdrawal, you will receive:
+Liquidity can be withdrawn at any time by redeeming (burning) LP tokens. Upon withdrawal, you will receive:
 
 - Your portion of both tokens in the pool.
 - Your share of accrued swap fees.
@@ -70,6 +70,9 @@ Obtain HBD through Hive’s DEX or integrations, and the corresponding token (e.
 3. **Select a Pool**Use Altera to choose a liquidity pool that fits your strategy (e.g., BTC/HBD, ETH/HBD).
 4. **Deposit Assets**Provide an equal USD value of both assets and confirm your deposit to receive LP tokens.
 5. **Earn & Monitor**Once deposited, your liquidity earns swap fees passively. Use Altera to monitor performance, fees, and exposure.
+
+### Impermanent Loss
+Impermanent loss occurs when the price of tokens in a liquidity pool changes compared to when you deposited them. This can cause your withdrawal value to be lower than simply holding the tokens. Fees and rewards may offset this loss, but it’s important to be aware of this risk when providing liquidity.
 
 ### Final Thoughts
 

@@ -9,7 +9,7 @@
 
 - Connect wallets from different blockchains (BTC, ETH, SOL, etc.) to VSC.
 - Send native assets (e.g., BTC) to a connected wallet address associated with another blockchain (e.g., an ETH wallet).
-- Receive those assets natively.
+- Receive native assets.
 
 The sender pays a one-time network fee to deposit the asset into VSC; the protocol handles the internal ledger shift and the receiver can send that asset to any other wallet address connected to VSC.
 
@@ -17,7 +17,7 @@ The sender pays a one-time network fee to deposit the asset into VSC; the protoc
 
 - **Protocol-level value movement** - no external bridges or intermediaries.
 - **Receive native BTC to a connected ETH wallet** (and vice versa).
-- **Only fees are for entry and exit** - transfers within VSC are feeless.
+- **Users pay a fee only when depositing to or withdrawing from VSC; all internal transfers between connected wallets are feeless.** - transfers within VSC are feeless.
 - **Receivers must connect to VSC to access funds** - the system auto-resolves the deposit to their mapped address.
 - **Receivers can withdraw funds after completing a swap to the asset of their choice**.
 - **All assets remain native throughout**.

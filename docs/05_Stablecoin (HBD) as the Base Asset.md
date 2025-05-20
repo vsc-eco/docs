@@ -27,7 +27,7 @@ Using HBD as a universal intermediary enables straightforward asset swaps. For e
 HBD is designed to maintain a stable value, providing a predictable base for liquidity pools. This stability reduces exposure to volatility shocks often seen in systems that use volatile tokens as base pairs, protecting liquidity providers and traders from sudden price fluctuations.
 
 
-- **Reduced Pool Fragmentation:** Pairing all assets exclusively with HBD minimizes the number of liquidity pools needed, concentrating liquidity and improving overall capital efficiency.
+- **Reduced Pool Fragmentation:** Pairing assets with HBD lowers the number of liquidity pools required, which can help concentrate liquidity and improve capital efficiency..
 
 - **Simplified Price Discovery:** Pricing is more straightforward when based on a stable asset, relying primarily on the relative value between HBD and the paired asset.
 
