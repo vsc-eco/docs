@@ -1,4 +1,4 @@
-# VSC Node deployment 
+# How To Deploy a VSC Validator Node
 
 This repository hosts the Docker Compose file necessary for deploying the VSC node.
 
