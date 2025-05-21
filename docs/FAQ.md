@@ -11,9 +11,6 @@ Once first HBD pools are launched Q3-Q4 2025 we will define public token standar
 ## How do smart contracts work on VSC?
 VSC uses WebAssembly (or WASM) to power it's smart contracts. WASM enables developers to write smart contracts in any WASM compatible language. Developers take advantage of thousands of already existing libraries and tools
 
-## Deploying on VSC
-Tokens can be easily deployed on VSC using smart contracts. Please reach out to us if you plan on integrating your token with VSC.
-
 ## When is mainnet launch?
 Mainnet has launched March 31st 2025.
 
