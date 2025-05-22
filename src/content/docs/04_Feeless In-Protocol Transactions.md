@@ -4,7 +4,7 @@ sidebar:
   order: 5
 ---
 
-VSC offers users a **feeless experience** for on-chain interactions by leveraging the **Hive blockchain’s Resource Credit (RC) system** which allocates bandwidth instead of charging traditional gas fees. This approach removes traditional gas fees from the user experience while preserving decentralization and network integrity. It enables scalable, low-friction onboarding and usage suited for mainstream applications.
+VSC offers users a **feeless experience** for on-chain interactions by adopting a system similar to the **Hive blockchain’s Resource Credit (RC) system** which allocates bandwidth instead of charging traditional gas fees. This approach removes traditional gas fees from the user experience while preserving decentralization and network integrity. It enables scalable, low-friction onboarding and usage suited for mainstream applications. The difference being that VSC uses HBD as the base for RC distribution while Hive uses staked Hive (HP).
 
 
 
@@ -13,9 +13,9 @@ VSC offers users a **feeless experience** for on-chain interactions by leveragin
 VSC uses a **Resource Credit (RC)** model in place of conventional transaction fees. RCs act as an internal bandwidth allocation system, ensuring fair use of the network without requiring payments in a native token for each action.
 
 - RCs are **not tradable tokens**.
-- They are **tied to the amount of Hive Power (HP)** an account holds.
+- They are **tied to the amount of HBD** an account holds.
 - RCs are often automatically delegated to users by dApps and other Hive associated projects like VSC, creating an instant gasless experience.
-- Every user account has an RC pool that **regenerates over time** at a rate of approximately 22% per day, reaching full capacity in about 5 days if unused.
+- Every user account has an RC pool that **regenerates over time** at a rate of approximately 25% per day, reaching full capacity in about 4 days if unused.
 
 RCs are **consumed** when a user performs actions on-chain, such as:
 
@@ -44,9 +44,9 @@ VSC is built on top of the Hive blockchain and **directly utilizes Hive’s RC s
 
 ### For Users
 
-- **No gas fees**: Interacting with VSC does not require the user to spend HIVE or any other token for transactions.
+- **No gas fees**: Interacting with VSC does not require the user to spend HIVE, HBD or any other token for transactions.
 - **Automatic regeneration**: RCs recharge over time.
-- **Usage-based limits**: Heavier usage temporarily depletes RCs; activity resumes as they recharge, user stakes more Hive. Currently staking single digit $ values of Hive tokens covers average daily transaction usage. Generally this is not a problem due to projects like VSC or Hive dApps covering RC expenditure for users.
+- **Usage-based limits**: Heavier usage temporarily depletes RCs; activity resumes as they recharge, user stakes more Hive. Currently owning single digit $ values of HBD tokens covers average daily transaction usage. Generally this is not a problem due to projects like VSC or Hive dApps covering RC expenditure for users.
 
 ### For Developers
 
@@ -66,6 +66,6 @@ While the RC model offers a gasless experience, it’s important to note:
 
 ## Conclusion
 
-VSC’s integration with Hive’s RC system enables a feeless, scalable, and user-friendly blockchain experience. By abstracting away gas fees and utilizing regenerative credits, VSC provides a platform for mainstream adoption without compromising on decentralization or performance.
+VSC’s adoption of the Hive’s RC system enables a feeless, scalable, and user-friendly blockchain experience. By abstracting away gas fees and utilizing regenerative credits, VSC provides a platform for mainstream adoption without compromising on decentralization or performance.
 
 For developers, this model encourages thoughtful resource management while opening the door to applications that are as seamless as traditional web services.
