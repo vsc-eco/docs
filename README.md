@@ -1,41 +1,54 @@
-# VSC Documentation
+# Starlight Starter Kit: Basics
 
-### Local Development
+[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
 
 ```
-$ yarn install
-$ yarn start
+npm create astro@latest -- --template starlight
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/starlight/tree/main/examples/basics)
+[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/starlight/tree/main/examples/basics)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/withastro/starlight&create_from_path=examples/basics)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fwithastro%2Fstarlight%2Ftree%2Fmain%2Fexamples%2Fbasics&project-name=my-starlight-docs&repository-name=my-starlight-docs)
 
-### Deployment
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
-execute `./publish.sh` or just push to main (github actions workflow will take care of the rest)
+## 🚀 Project Structure
 
-The repository needs to have its workflow permissions set to `read and write`, instead of the default vaule. Change that under the repositories settings -> Workflow permissions
+Inside of your Astro + Starlight project, you'll see the following folders and files:
 
-### TODO
+```
+.
+├── public/
+├── src/
+│   ├── assets/
+│   ├── content/
+│   │   ├── docs/
+│   └── content.config.ts
+├── astro.config.mjs
+├── package.json
+└── tsconfig.json
+```
 
-- [X] [Introduction.md](./docs/Introduction.md)
-- [ ] [core-philosophy.md](./docs/discussions/core-philosophy.md)
-- [ ] [dex.md](./docs/discussions/dex.md)
-- [X] [FAQ.md](./docs/discussions/FAQ.md)
-- [ ] [wrapping.md](./docs/discussions/wrapping.md)
-- [X] [generate-wallet.md](./docs/how-to/generate-wallet.md)
-- [X] [host-node.mdx](./docs/how-to/host-node.mdx)
-- [X] [api.md](./docs/references/api.md)
-- [X] [block-explorers.md](./docs/references/block-explorers.md)
-- [X] [client.md](./docs/references/client.md)
-- [ ] [contract-template.md](./docs/references/contract-template.md)
-- [X] [account-types.md](./docs/references/account-types.md)
-- [X] [examples.md](./docs/references/examples.md)
-- [X] [sdk.md](./docs/references/sdk.md)
-- [X] [first-contract.md](./docs/tutorials/first-contract.md)
-- [X] [invoke-contract.md](./docs/tutorials/invoke-contract.md)
+Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
 
+Images can be added to `src/assets/` and embedded in Markdown with a relative link.
 
-### Reminders
+Static assets, like favicons, can be placed in the `public/` directory.
 
-- when contract deployment supports lite accounts, add to the documentation
-- move api documentation to the code a la js/ typedoc and just link to it, only manually add documentation to the doc here that describes how those components might be used (examples) or in conjunction
+## 🧞 Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `npm install`             | Installs dependencies                            |
+| `npm run dev`             | Starts local dev server at `localhost:4321`      |
+| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run preview`         | Preview your build locally, before deploying     |
+| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `npm run astro -- --help` | Get help using the Astro CLI                     |
+
+## 👀 Want to learn more?
+
+Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
