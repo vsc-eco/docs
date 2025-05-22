@@ -46,7 +46,7 @@ VSC is built on top of the Hive blockchain and **directly utilizes Hive’s RC s
 
 - **No gas fees**: Interacting with VSC does not require the user to spend HIVE, HBD or any other token for transactions.
 - **Automatic regeneration**: RCs recharge over time.
-- **Usage-based limits**: Heavier usage temporarily depletes RCs; activity resumes as they recharge, user stakes more Hive. Currently owning single digit $ values of HBD tokens covers average daily transaction usage. Generally this is not a problem due to projects like VSC or Hive dApps covering RC expenditure for users.
+- **Usage-based limits**: Heavier usage temporarily depletes RCs; activity resumes as they recharge, user deposits more HBD. Currently owning single digit $ values of HBD tokens covers average daily transaction usage. Generally this is not a problem due to projects like VSC or Hive dApps covering RC expenditure for users.
 
 ### For Developers
 
@@ -59,7 +59,7 @@ VSC is built on top of the Hive blockchain and **directly utilizes Hive’s RC s
 While the RC model offers a gasless experience, it’s important to note:
 
 - **High-frequency usage** may lead to temporary RC exhaustion. This does not incur a fee but delays further transactions until RCs recharge.
-- **Applications must manage HP effectively**, either by maintaining reserves or using delegation to support active users.
+- **Applications must manage HBD effectively**, either by maintaining reserves or using delegation to support active users.
 - **Stake-backed access** supports sustainability and reduces abuse, aligning incentives with network health.
 
 ---
