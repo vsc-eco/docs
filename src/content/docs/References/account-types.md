@@ -5,7 +5,7 @@ sidebar:
 ---
 
 
-The VSC network supports various account types for authentification.
+The VSC network supports various account types for authentication.
 
 ## DID | Private/ Public key
 
@@ -19,10 +19,10 @@ You can directly use your [HIVE](https://hive.io/) account to communicate with t
 
 To register a HIVE account, you need someone with an existing account to invite you to the network.  
 
-This is also offered as a service by various providers. For more information please take a look at [HIVE's signup page](https://signup.hive.io/).
+This is also offered as a service by various providers. For more information, please take a look at [HIVE's signup page](https://signup.hive.io/).
 
 ## ETH
 
-We do support Ethereum based wallets.
+We do support Ethereum-based wallets.
 
 Create your Ethereum wallet via a [known provider](https://ethereum.org/en/wallets/) with access to your keys. We only support self-custodial wallets.  
