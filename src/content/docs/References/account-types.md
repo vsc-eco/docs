@@ -23,6 +23,6 @@ This is also offered as a service by various providers. For more information, pl
 
 ## ETH
 
-We do support Ethereum-based wallets.
+We do support Ethereum based wallets.
 
 Create your Ethereum wallet via a [known provider](https://ethereum.org/en/wallets/) with access to your keys. We only support self-custodial wallets.  
