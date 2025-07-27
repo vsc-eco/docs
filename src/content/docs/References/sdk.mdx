@@ -218,7 +218,20 @@ The below methods are within the `env` namespace.
 
 #### Abort
 
-Abort and revert the contract execution.
+Abort contract execution and revert transaction.
+
+```go
+import "contract-template/env"
+
+//go:wasmexport abortMe
+func AbortMe(a *string) *string {
+  // ...
+  err := "some error here"
+  fname := "abort.go"
+  env.Abort(&err, &fname, 1, 1)
+  // ...
+}
+```
 
 ## Env Vars
 
