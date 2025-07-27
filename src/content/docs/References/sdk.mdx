@@ -1,0 +1,234 @@
+---
+title: SDK
+sidebar:
+  order: 13
+---
+
+import { Aside } from '@astrojs/starlight/components'
+
+The VSC SDK is a library that abstract away various functionalities that are useful in the context of writing a VSC smart contract.
+
+<Aside type="tip" title="Nice To Know">
+They also serve access to the smart contract's database layer by exposing namespaces and interfaces. At the stage of the contract execution, invocations of such interfaces are translated to generalized calls of the VSC node. Thereby ensuring that those functionalities are equal regardless of the language implementation of the SDK.
+</Aside>
+
+## Go Contract SDK
+
+The [Go contract SDK](https://github.com/vsc-eco/go-contract-template) implements the necessary runtime and SDK functions for the VSC smart contract environment.
+
+### Example Usage
+
+```go
+package main
+
+import (
+  "contract-template/sdk"
+)
+
+//go:wasmexport entrypoint
+func Entrypoint(a *string) *string {
+  msg := "Entrypoint logged"
+  sdk.Log(a)
+  sdk.Log(&msg)
+  return a
+}
+```
+
+### SDK Methods
+
+The below methods are within the `sdk` namespace. All parameters and return types are `*string`.
+
+#### Log
+
+Log a string to the node console for debugging purposes.
+
+```go
+//go:wasmexport entrypoint
+func Entrypoint(a *string) *string {
+  // ...
+  sdk.Log(a)
+  // ...
+}
+```
+
+#### SetObject
+
+Set the value of a key in the contract database.
+
+```go
+//go:wasmexport setString
+func SetString(a *string) *string {
+  // ...
+  key := "myString"
+  sdk.SetObject(&key, a)
+  // ...
+}
+```
+
+#### GetObject
+
+Retrieve the value of a key from the contract database.
+
+```go
+//go:wasmexport getString
+func GetString(a *string) *string {
+  // ...
+  key := "myString"
+  value := sdk.GetObject(&key)
+  // ...
+}
+```
+
+#### DelObject
+
+Delete the value of a key in the contract database.
+
+```go
+//go:wasmexport clearString
+func ClearString(a *string) *string {
+  // ...
+  key := "myString"
+  sdk.DelObject(&key)
+  // ...
+}
+```
+
+#### Call
+
+Make a system call.
+
+```go
+//go:wasmexport systemCall
+func SystemCall(a *string) *string {
+  // ...
+  method := "Method name here"
+  payload := "Payload here"
+  ret := sdk.Call(&method, &payload)
+  // ...
+}
+```
+
+#### GetEnv
+
+Retrieve the current runtime environment variables. List of variable names are listed [below](#env-vars).
+
+```go
+//go:wasmexport dumpEnv
+func DumpEnv(a *string) *string {
+  // ...
+  varContractId := "contract_id"
+  contract_id := sdk.GetEnv(&varContractId)
+  // ...
+}
+```
+
+#### Sha256
+
+Calculate the SHA256 hash of a hex-encoded string.
+
+```go
+//go:wasmexport sha256
+func Sha256(a *string) *string {
+  // ...
+  input := "abcd"
+  sha256hash := sdk.Sha256(&input)
+  // ...
+}
+```
+
+#### Ripemd160
+
+Calculate the RIPEMD160 hash of a hex-encoded string.
+
+```go
+//go:wasmexport ripemd160
+func Ripemd160(a *string) *string {
+  // ...
+  input := "abcd"
+  ripemd160hash := sdk.Ripemd160(&input)
+  // ...
+}
+```
+
+#### GetBalance
+
+Retrieve the balance of any VSC account or contract.
+
+```go
+//go:wasmexport getBalance
+func GetBalance(a *string) *string {
+  // ...
+  acc := "hive:vaultec.vsc"
+	asset := "hive"                       // valid assets: hive, hive_consensus, hbd, hbd_savings
+	bal := sdk.GetBalance(&acc, &asset)   // in terms of mHIVE/mHBD
+  // ...
+}
+```
+
+#### Draw
+
+Transfer assets from caller account to the contract up to the limit specified in `intents`. The transaction must be signed using active authority for Hive accounts.
+
+```go
+//go:wasmexport drawBalance
+func DrawBalance(a *string) *string {
+  // ...
+  amt := "1000"       // in terms of mHIVE/mHBD
+	asset := "hive"     // valid assets: hive, hbd, hbd_savings
+	sdk.Draw(&amt, &asset)
+  // ...
+}
+```
+
+#### Transfer
+
+Transfer assets from the contract to another account.
+
+```go
+//go:wasmexport transferBalance
+func TransferBalance(a *string) *string {
+  // ...
+  toacc := "hive:vaultec.vsc"
+  amt := "1000"       // in terms of mHIVE/mHBD
+	asset := "hive"     // valid assets: hive, hbd, hbd_savings
+	sdk.Transfer(&toacc, &amt, &asset)
+  // ...
+}
+```
+
+#### Withdraw
+
+Unmap assets from the contract to a specified Hive account.
+
+```go
+//go:wasmexport unmapBalance
+func UnmapBalance(a *string) *string {
+  // ...
+  toacc := "hive:vaultec.vsc"
+  amt := "1000"       // in terms of mHIVE/mHBD
+	asset := "hive"     // valid assets: hive, hbd, hbd_savings
+	sdk.Withdraw(&toacc, &amt, &asset)
+  // ...
+}
+```
+
+### Environment Methods
+
+The below methods are within the `env` namespace.
+
+#### Abort
+
+Abort and revert the contract execution.
+
+## Env Vars
+
+* `contract_id`: ID of the current contract
+* `msg.sender`: Address of the transaction sender. If there are multiple, the first account specified in `required_auths` or `required_posting_auths` is returned.
+* `msg.required_auths`: The `required_auths` field of the transaction.
+* `msg.required_posting_auths`: The `required_posting_auths` field of the transaction.
+* `anchor.id`: ID of the transaction
+* `anchor.block`: L1 block ID in which the transaction is included in. For offchain transactions, this refers to the L1 block ID of the VSC block in which the transaction was included in.
+* `anchor.height`: L1 block number in which the transaction is included in. For offchain transactions, this refers to the L1 block number of the VSC block in which the transaction was included in.
+* `anchor.timestamp`: Timestamp of when the transaction was included in (i.e. `2025-07-26T14:10:42`).
+* `anchor.tx_index`: Transaction position in block
+* `anchor.op_index`: Operation position in transaction
