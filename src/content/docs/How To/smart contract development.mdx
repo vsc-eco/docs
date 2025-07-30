@@ -1,0 +1,212 @@
+---
+title: Write, Test and Deploy a Smart Contract
+sidebar:
+  order: 11
+---
+
+import { Aside, FileTree } from '@astrojs/starlight/components'
+
+This is a brief overview of VSC smart contract development with Go.
+
+## Environment Setup
+
+### Prerequisites
+- [Golang](https://go.dev/dl)
+- [Git](https://git-scm.com/downloads)
+- [TinyGo](https://tinygo.org/getting-started/install)
+- [Wasm Edge](https://wasmedge.org/docs/start/install)
+- [Wasm Tools](https://github.com/bytecodealliance/wasm-tools)
+
+### Install Dependencies
+
+<Aside type="tip">
+These are used to test and deploy smart contracts.
+</Aside>
+
+```sh
+git clone https://github.com/vsc-eco/go-vsc-node
+cd go-vsc-node
+go mod download
+go build -buildvcs=false -o vsc-contract-deploy vsc-node/cmd/contract-deployer
+```
+
+This will generate an executable named `vsc-contract-deploy`. You may move it to `/usr/bin` (Linux) or `/usr/local/bin` (macOS).
+
+---
+
+## Writing Your First Contract
+
+### Setup
+
+Clone the Go contract template:
+
+```sh
+git clone https://github.com/vsc-eco/go-contract-template
+```
+
+### Project Structure
+
+<FileTree>
+- env
+  - env.go
+- runtime
+  - gc_leaking_exported.go
+- sdk
+  - sdk.go
+- src your contract code goes here
+  - main.go
+- .gitignore
+- go.mod
+- go.sum
+</FileTree>
+
+### Hello World Contract
+
+The below contract demonstrates calling SDK methods to interact with the contract database and defining WASM exports to mark a function as callable by VSC accounts or other contracts.
+
+Find out more about the Go contract SDK methods [here](/references/sdk).
+
+```go title="main.go"
+package main
+
+import "contract-template/sdk"
+
+//go:wasmexport hello_world
+func HelloWorld(a *string) *string {
+  ret := "Hello world"
+  return &ret
+}
+
+//go:wasmexport setString
+func SetString(a *string) *string {
+  key := "myString"
+  sdk.SetObject(&key, a)
+  return a
+}
+
+//go:wasmexport getString
+func GetString(a *string) *string {
+  key := "myString"
+  return sdk.GetObject(&key)
+}
+```
+
+---
+
+## Compile Contract
+
+To compile your contract:
+
+```sh
+tinygo build -gc=custom -scheduler=none -panic=trap -no-debug -target=wasm-unknown -o build/main.wasm src/main.go
+```
+
+To remove metadata from the output WASM binary to reduce file size:
+
+```sh
+wasm-tools strip -o build/main-striped.wasm build/main.wasm
+```
+
+---
+
+## Test and Debug Contract
+
+<Aside type="note">
+This section is still WIP.
+</Aside>
+
+### Inspect Output
+
+To inspect the output WASM assembly:
+
+```sh
+wasm-tools print build/main.wasm
+```
+
+---
+
+## Deploy Contract
+
+Firstly, initialize the deployer configuration:
+
+```sh
+vsc-contract-deploy -init
+```
+
+This will generate some config files in `data/config` folder in your current directory. Insert your Hive username and active key of the deployer account in `identityConfig.json`:
+
+```json title="identityConfig.json"
+{
+  "BlsPrivKeySeed": "9e264692ced37...",
+  "HiveActiveKey": "ADD_YOUR_PRIVATE_WIF",
+  "HiveUsername": "ADD_YOUR_USERNAME",
+  "Libp2pPrivKey": "125cd98aed75d..."
+}
+```
+
+Then deploy your contract to VSC:
+
+```sh
+vsc-contract-deploy -wasmPath build/main-striped.wasm -name "my first contract"
+```
+
+You should see an output similar to this:
+
+```
+WASM_CODE: 1130 [0 97 115 109 1 0 0 0 1 9] ...
+peer ID: 12D3KooWS7N7zmrkMHxGX9ibNXbKk4byfkx8ckEhfgXM8eQcgBtK
+NAT Status {Private}
+12D3KooWS7N7zmrkMHxGX9ibNXbKk4byfkx8ckEhfgXM8eQcgBtK pubsub /vsc/mainnet/data-availability/v1 peers: 20
+pubsub handling error: message did not add any signatures
+pubsub handling error: message did not add any signatures
+pubsub handling error: message did not add any signatures
+pubsub handling error: message did not add any signatures
+pubsub handling error: message did not add any signatures
+pubsub handling error: message did not add any signatures
+pubsub handling error: message did not add any signatures
+pubsub handling error: message did not add any signatures
+{bafkreibwwj3fypek5uz6l3scacy47yw3b2adgbxmfab2ybmkarljaggbey {i_TLUMJVJb6n6X-5_lKvBibiLvP0RUVz2tn20KJTw5Q_lQ-tcVt9jrZr4s1WVga1CR7q0Ldnrc-EjNpqgaY7GpnhE2d3pC3nfNhUKkmN1za6h9SwCEUuo3CByNnmnqYE __f9}}
+{"__v":"0.1","code":"bafkreibwwj3fypek5uz6l3scacy47yw3b2adgbxmfab2ybmkarljaggbey","description":"","name":"go test","net_id":"vsc-mainnet","owner":"techcoderx.vsc","runtime":"go","storage_proof":{"hash":"bafkreibwwj3fypek5uz6l3scacy47yw3b2adgbxmfab2ybmkarljaggbey","signature":{"sig":"i_TLUMJVJb6n6X-5_lKvBibiLvP0RUVz2tn20KJTw5Q_lQ-tcVt9jrZr4s1WVga1CR7q0Ldnrc-EjNpqgaY7GpnhE2d3pC3nfNhUKkmN1za6h9SwCEUuo3CByNnmnqYE","bv":"__f9"}}}
+pubsub handling error: message did not add any signatures
+pubsub handling error: message did not add any signatures
+tx id: bef70add6d21cd812cf68da2caee72da05de48b4
+contract id: vsc1Bem8RnoLgGPP7E2MBN52ekrdVqy2LNpSqF
+Error in subscription: subscription cancelled
+```
+
+---
+
+## Call Contract
+
+Contracts may be called from L1 using Hive accounts or on VSC using offchain accounts.
+
+### Call From L1
+
+Contract invokation from L1 involves sending a `custom_json_operation` with `vsc.call` as its ID and the following JSON format:
+
+```json
+{
+  "net_id": "vsc-mainnet",
+  "contract_id": "vsc1...",
+  "action": "methodName",
+  "payload": "your payload string here",
+  "rc_limit": 2000,
+  "intents": []
+}
+```
+
+An example transaction may be seen [here](https://hivehub.dev/tx/8e384c116bdc6c585340a36ba29bdd67652358c2).
+
+### Intents
+
+A contract call transaction may include a list of `intents` which authorizes the contract to spend up to a specific amount of assets from your account. For example, an intent of 1 HIVE allowance may be specified as follows:
+
+```json
+{
+  "type": "transfer.allow",
+  "args": {
+    "limit": "1.000",
+    "token": "hive"
+  }
+}
+```
