@@ -1,5 +1,5 @@
 ---
-title: Cross-Chain Arhitecture
+title: Cross-Chain Architecture
 sidebar:
   order: 8
 ---
