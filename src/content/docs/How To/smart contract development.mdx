@@ -30,7 +30,7 @@ go mod download
 go build -buildvcs=false -o vsc-contract-deploy vsc-node/cmd/contract-deployer
 ```
 
-This will generate an executable named `vsc-contract-deploy`. You may move it to `/usr/bin` (Linux) or `/usr/local/bin` (macOS).
+This will generate an executable named `vsc-contract-deploy`. You may move it to your `PATH` directory (i.e. `/usr/bin` for Linux or `/usr/local/bin` for macOS).
 
 ---
 
@@ -47,14 +47,14 @@ git clone https://github.com/vsc-eco/go-contract-template
 ### Project Structure
 
 <FileTree>
-- env
-  - env.go
+- contract your contract code goes here
+  - main.go
 - runtime
   - gc_leaking_exported.go
 - sdk
+  - address.go
+  - env.go
   - sdk.go
-- src your contract code goes here
-  - main.go
 - .gitignore
 - go.mod
 - go.sum
