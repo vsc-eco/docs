@@ -43,7 +43,7 @@ VSC supports smart contracts compiled to **WebAssembly (WASM)**, enabling develo
 VSC currently supports contract development in:
 
 - **Golang** – Suitable for lower-level or system-focused contracts  
-- **AssemblyScript** – A TypeScript-like language with a lightweight footprint and WebAssembly compatibility  
+- ~~**AssemblyScript** – A TypeScript-like language with a lightweight footprint and WebAssembly compatibility~~
 
 Contracts can be compiled to WASM and deployed to the VSC network using SDKs or developer tooling provided by the protocol.
 Supporting familiar and performant languages lowers the barrier to entry and reduces time-to-deploy for new applications.
