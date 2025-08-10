@@ -79,15 +79,13 @@ func HelloWorld(a *string) *string {
 
 //go:wasmexport setString
 func SetString(a *string) *string {
-  key := "myString"
-  sdk.SetObject(&key, a)
+  sdk.StateSetObject("myString", *a)
   return a
 }
 
 //go:wasmexport getString
 func GetString(a *string) *string {
-  key := "myString"
-  return sdk.GetObject(&key)
+  return sdk.StateGetObject("myString")
 }
 ```
 

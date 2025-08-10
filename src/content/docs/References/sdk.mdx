@@ -27,9 +27,8 @@ import (
 
 //go:wasmexport entrypoint
 func Entrypoint(a *string) *string {
-  msg := "Entrypoint logged"
-  sdk.Log(a)
-  sdk.Log(&msg)
+  sdk.Log(*a)
+  sdk.Log("Entrypoint logged")
   return a
 }
 ```
@@ -46,7 +45,7 @@ Log a string to the node console for debugging purposes.
 //go:wasmexport entrypoint
 func Entrypoint(a *string) *string {
   // ...
-  sdk.Log(a)
+  sdk.Log(*a)
   // ...
 }
 ```
@@ -59,8 +58,7 @@ Set the value of a key in the contract database.
 //go:wasmexport setString
 func SetString(a *string) *string {
   // ...
-  key := "myString"
-  sdk.SetObject(&key, a)
+  sdk.StateSetObject("myString", *a)
   // ...
 }
 ```
@@ -73,8 +71,7 @@ Retrieve the value of a key from the contract database.
 //go:wasmexport getString
 func GetString(a *string) *string {
   // ...
-  key := "myString"
-  value := sdk.GetObject(&key)
+  value := sdk.StateGetObject("myString")
   // ...
 }
 ```
@@ -87,23 +84,7 @@ Delete the value of a key in the contract database.
 //go:wasmexport clearString
 func ClearString(a *string) *string {
   // ...
-  key := "myString"
-  sdk.DelObject(&key)
-  // ...
-}
-```
-
-#### Call
-
-Make a system call.
-
-```go
-//go:wasmexport systemCall
-func SystemCall(a *string) *string {
-  // ...
-  method := "Method name here"
-  payload := "Payload here"
-  ret := sdk.Call(&method, &payload)
+  sdk.StateDeleteObject("myString")
   // ...
 }
 ```
@@ -116,36 +97,20 @@ Retrieve the current runtime environment variables. List of variable names are l
 //go:wasmexport dumpEnv
 func DumpEnv(a *string) *string {
   // ...
-  varContractId := "contract_id"
-  contract_id := sdk.GetEnv(&varContractId)
+  envs := sdk.GetEnv()
   // ...
 }
 ```
 
-#### Sha256
+#### GetEnvKey
 
-Calculate the SHA256 hash of a hex-encoded string.
-
-```go
-//go:wasmexport sha256
-func Sha256(a *string) *string {
-  // ...
-  input := "abcd"
-  sha256hash := sdk.Sha256(&input)
-  // ...
-}
-```
-
-#### Ripemd160
-
-Calculate the RIPEMD160 hash of a hex-encoded string.
+Retrieve an environment variable by key. List of variable names are listed [below](#env-vars).
 
 ```go
-//go:wasmexport ripemd160
-func Ripemd160(a *string) *string {
+//go:wasmexport dumpEnvKey
+func DumpEnvKey(a *string) *string {
   // ...
-  input := "abcd"
-  ripemd160hash := sdk.Ripemd160(&input)
+  contract_id := sdk.GetEnvKey("contract.id")
   // ...
 }
 ```
@@ -158,9 +123,7 @@ Retrieve the balance of any VSC account or contract.
 //go:wasmexport getBalance
 func GetBalance(a *string) *string {
   // ...
-  acc := "hive:vaultec.vsc"
-	asset := "hive"                       // valid assets: hive, hive_consensus, hbd, hbd_savings
-	bal := sdk.GetBalance(&acc, &asset)   // in terms of mHIVE/mHBD
+	bal := sdk.GetBalance("hive:vaultec.vsc", sdk.AssetHive)   // result in terms of mHIVE/mHBD
   // ...
 }
 ```
@@ -173,9 +136,7 @@ Transfer assets from caller account to the contract up to the limit specified in
 //go:wasmexport drawBalance
 func DrawBalance(a *string) *string {
   // ...
-  amt := "1000"       // in terms of mHIVE/mHBD
-	asset := "hive"     // valid assets: hive, hbd, hbd_savings
-	sdk.Draw(&amt, &asset)
+	sdk.HiveDraw(1000, sdk.AssetHive) // Draw 1 HIVE from caller
   // ...
 }
 ```
@@ -188,10 +149,7 @@ Transfer assets from the contract to another account.
 //go:wasmexport transferBalance
 func TransferBalance(a *string) *string {
   // ...
-  toacc := "hive:vaultec.vsc"
-  amt := "1000"       // in terms of mHIVE/mHBD
-	asset := "hive"     // valid assets: hive, hbd, hbd_savings
-	sdk.Transfer(&toacc, &amt, &asset)
+	sdk.HiveTransfer("hive:vaultec.vsc", 1000, sdk.AssetHive) // Transfer 1 HIVE from contract
   // ...
 }
 ```
@@ -204,10 +162,7 @@ Unmap assets from the contract to a specified Hive account.
 //go:wasmexport unmapBalance
 func UnmapBalance(a *string) *string {
   // ...
-  toacc := "hive:vaultec.vsc"
-  amt := "1000"       // in terms of mHIVE/mHBD
-	asset := "hive"     // valid assets: hive, hbd, hbd_savings
-	sdk.Withdraw(&toacc, &amt, &asset)
+	sdk.HiveWithdraw("hive:vaultec.vsc", 1000, sdk.AssetHive) // Withdraw 1 HIVE from contract
   // ...
 }
 ```
@@ -235,13 +190,14 @@ func AbortMe(a *string) *string {
 
 ## Env Vars
 
-* `contract_id`: ID of the current contract
-* `msg.sender`: Address of the transaction sender. If there are multiple, the first account specified in `required_auths` or `required_posting_auths` is returned.
+* `contract.id`: ID of the current contract
+* `tx.id`: ID of the transaction
+* `tx.index`: Transaction position in block
+* `tx.op_index`: Operation position in transaction
+* `block.id`: L1 block ID in which the transaction is included in. For offchain transactions, this refers to the L1 block ID of the VSC block in which the transaction was included in.
+* `block.height`: L1 block number in which the transaction is included in. For offchain transactions, this refers to the L1 block number of the VSC block in which the transaction was included in.
+* `block.timestamp`: Timestamp of when the transaction was included in (i.e. `2025-07-26T14:10:42`).
+* `msg.sender`: Address of the transaction sender. This must be a user address. If there are multiple, the first account specified in `required_auths` or `required_posting_auths` is returned.
 * `msg.required_auths`: The `required_auths` field of the transaction.
 * `msg.required_posting_auths`: The `required_posting_auths` field of the transaction.
-* `anchor.id`: ID of the transaction
-* `anchor.block`: L1 block ID in which the transaction is included in. For offchain transactions, this refers to the L1 block ID of the VSC block in which the transaction was included in.
-* `anchor.height`: L1 block number in which the transaction is included in. For offchain transactions, this refers to the L1 block number of the VSC block in which the transaction was included in.
-* `anchor.timestamp`: Timestamp of when the transaction was included in (i.e. `2025-07-26T14:10:42`).
-* `anchor.tx_index`: Transaction position in block
-* `anchor.op_index`: Operation position in transaction
+* `caller`: The address that is calling the contract. It can be a contract ID or user address.
