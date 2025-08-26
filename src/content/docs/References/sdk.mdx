@@ -167,23 +167,15 @@ func UnmapBalance(a *string) *string {
 }
 ```
 
-### Environment Methods
-
-The below methods are within the `env` namespace.
-
 #### Abort
 
 Abort contract execution and revert transaction.
 
 ```go
-import "contract-template/env"
-
 //go:wasmexport abortMe
 func AbortMe(a *string) *string {
   // ...
-  err := "some error here"
-  fname := "abort.go"
-  env.Abort(&err, &fname, 1, 1)
+  sdk.Abort("something went wrong")
   // ...
 }
 ```
