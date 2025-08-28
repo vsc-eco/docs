@@ -91,7 +91,7 @@ func ClearString(a *string) *string {
 
 #### GetEnv
 
-Retrieve the current runtime environment variables. List of variable names are listed [below](#env-vars).
+Retrieve the current runtime environment variables, returning an object of [`Env` struct](https://github.com/vsc-eco/go-contract-template/blob/main/sdk/env.go).
 
 ```go
 //go:wasmexport dumpEnv
@@ -192,4 +192,5 @@ func AbortMe(a *string) *string {
 * `msg.sender`: Address of the transaction sender. This must be a user address. If there are multiple, the first account specified in `required_auths` or `required_posting_auths` is returned.
 * `msg.required_auths`: The `required_auths` field of the transaction.
 * `msg.required_posting_auths`: The `required_posting_auths` field of the transaction.
-* `caller`: The address that is calling the contract. It can be a contract ID or user address.
+* `msg.caller`: The address that is calling the contract. It can be a contract ID or user address.
+* `intents`: List of intents passed into the transaction (i.e. token allowance).
