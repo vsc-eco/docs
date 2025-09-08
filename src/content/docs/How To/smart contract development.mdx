@@ -55,6 +55,8 @@ git clone https://github.com/vsc-eco/go-contract-template
   - address.go
   - env.go
   - sdk.go
+- test
+  - contract_test.go
 - .gitignore
 - go.mod
 - go.sum
@@ -96,30 +98,79 @@ func GetString(a *string) *string {
 To compile your contract:
 
 ```sh
-tinygo build -gc=custom -scheduler=none -panic=trap -no-debug -target=wasm-unknown -o build/main.wasm contract/main.go
+tinygo build -gc=custom -scheduler=none -panic=trap -no-debug -target=wasm-unknown -o artifacts/main.wasm contract/main.go
 ```
 
 To remove metadata from the output WASM binary to reduce file size:
 
 ```sh
-wasm-tools strip -o build/main-striped.wasm build/main.wasm
+wasm-tools strip -o artifacts/main-striped.wasm artifacts/main.wasm
+```
+
+To inspect the output WASM assembly:
+
+```sh
+wasm-tools print artifacts/main.wasm
 ```
 
 ---
 
 ## Test and Debug Contract
 
-<Aside type="note">
-This section is still WIP.
-</Aside>
+We provide a contract test environment for you to execute contract calls on a state engine that resembles the live network. Your contract test code will look something like this:
 
-### Inspect Output
+```go
+package contract_test
 
-To inspect the output WASM assembly:
+import (
+  "encoding/json"
+  "testing"
 
-```sh
-wasm-tools print build/main.wasm
+  "github.com/stretchr/testify/assert"
+  "github.com/vsc-eco/go-vsc-node/lib/test_utils"
+  "github.com/vsc-eco/go-vsc-node/modules/db/vsc/contracts"
+  ledgerDb "github.com/vsc-eco/go-vsc-node/modules/db/vsc/ledger"
+  stateEngine "github.com/vsc-eco/go-vsc-node/modules/state-processing"
+)
+
+//go:embed artifacts/main.wasm
+var ContractWasm []byte
+
+func TestContract(t *testing.T) {
+  ct := test_utils.NewContractTest()
+  ct.RegisterContract("vsccontractid", ContractWasm)
+  ct.Deposit("hive:someone", 1000, ledgerDb.AssetHive) // deposit 1 HIVE
+  ct.Deposit("hive:someone", 1000, ledgerDb.AssetHbd) // deposit 1 HBD
+
+  result, gasUsed, logs := ct.Call(stateEngine.TxVscCallContract{
+    Self: stateEngine.TxSelf{
+      TxId:                 "sometxid",
+      BlockId:              "abcdef",
+      Index:                69,
+      OpIndex:              0,
+      Timestamp:            "2025-09-03T00:00:00",
+      RequiredAuths:        []string{"hive:someone"},
+      RequiredPostingAuths: []string{},
+    },
+    ContractId: contractId,
+    Action:     "yourMethodName",
+    Payload:    json.RawMessage([]byte("1000")),
+    RcLimit:    1000,
+    Intents:    []contracts.Intent{{
+      Type: "transfer.allow",
+      Args: map[string]string{
+        "limit": "1.000",
+        "token": "hive",
+      },
+    }},
+  })
+  assert.True(t, result.Success)                  // assert contract execution success
+  assert.LessOrEqual(t, gasUsed, uint(10000000))  // assert this call uses no more than 10M WASM gas
+  assert.GreaterOrEqual(t, len(logs), 1)          // assert at least 1 log emitted
+}
 ```
+
+Find out more about methods provided by the contract test utils [here](/references/sdk/#contract-test-utils).
 
 ---
 
@@ -145,7 +196,7 @@ This will generate some config files in `data/config` folder in your current dir
 Then deploy your contract to VSC:
 
 ```sh
-vsc-contract-deploy -wasmPath build/main-striped.wasm -name "my first contract"
+vsc-contract-deploy -wasmPath artifacts/main-striped.wasm -name "my first contract"
 ```
 
 You should see an output similar to this:

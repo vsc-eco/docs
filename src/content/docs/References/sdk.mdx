@@ -39,13 +39,14 @@ The below methods are within the `sdk` namespace. All parameters and return type
 
 #### Log
 
-Log a string to the node console for debugging purposes.
+Log a string for debugging purposes. Logs emitted will also be appended to the contract output which may be useful for external applications (i.e. indexers).
 
 ```go
 //go:wasmexport entrypoint
 func Entrypoint(a *string) *string {
   // ...
   sdk.Log(*a)
+  sdk.Log("hello world")
   // ...
 }
 ```
@@ -194,3 +195,155 @@ func AbortMe(a *string) *string {
 * `msg.required_posting_auths`: The `required_posting_auths` field of the transaction.
 * `msg.caller`: The address that is calling the contract. It can be a contract ID or user address.
 * `intents`: List of intents passed into the transaction (i.e. token allowance).
+
+## Contract Test Utils
+
+The contract test utils provides a testing environment that lets you execute your contracts.
+
+### Instantiation
+
+Create a new contract test environment.
+
+```go
+import (
+  "encoding/json"
+  "testing"
+
+  "github.com/stretchr/testify/assert"
+  "github.com/vsc-eco/go-vsc-node/lib/test_utils"
+  "github.com/vsc-eco/go-vsc-node/modules/db/vsc/contracts"
+  ledgerDb "github.com/vsc-eco/go-vsc-node/modules/db/vsc/ledger"
+  stateEngine "github.com/vsc-eco/go-vsc-node/modules/state-processing"
+)
+
+func TestContract(t *testing.T) {
+  ct := test_utils.NewContractTest()
+}
+```
+
+### Increment Blocks
+
+Increment a specified number of L1 blocks in the contract testing environment. The block height starts from 0 during instantiation.
+
+```go
+func TestContract(t *testing.T) {
+  // ...
+  ct.IncrementBlocks(20)
+  // ...
+}
+```
+
+### Register Contract
+
+Bind a WASM bytecode to a contract ID.
+
+```go
+//go:embed artifacts/main.wasm
+var ContractWasm []byte
+
+func TestContract(t *testing.T) {
+  // ...
+  ct.RegisterContract("vsccontractid", ContractWasm)
+  // ...
+}
+```
+
+### Call Contract
+
+Executes a contract call transaction. Returns the call result, gas used and logs emitted.
+
+```go
+func TestContract(t *testing.T) {
+  // ...
+  result, gasUsed, logs := ct.Call(stateEngine.TxVscCallContract{
+      Self: stateEngine.TxSelf{
+      TxId:                 "sometxid",
+      BlockId:              "abcdef",
+      Index:                69,
+      OpIndex:              0,
+      Timestamp:            "2025-09-03T00:00:00",
+      RequiredAuths:        []string{"hive:someone"},
+      RequiredPostingAuths: []string{},
+    },
+    ContractId: contractId,
+    Action:     "yourMethodName",
+    Payload:    json.RawMessage([]byte("1000")),
+    RcLimit:    1000,
+    Intents:    []contracts.Intent{{
+      Type: "transfer.allow",
+      Args: map[string]string{
+        "limit": "1.000",
+        "token": "hive",
+      },
+    }},
+  })
+  assert.True(t, result.Success)
+  assert.LessOrEqual(t, gasUsed, uint(10000000))
+  assert.GreaterOrEqual(t, len(logs), 1)
+  // ...
+}
+```
+
+### Deposit
+
+Add funds to an account in the ledger.
+
+```go
+func TestContract(t *testing.T) {
+  // ...
+  ct.Deposit("hive:someone", 1000, ledgerDb.AssetHive) // deposit 1 HIVE
+  ct.Deposit("hive:someone", 1000, ledgerDb.AssetHbd) // deposit 1 HBD
+  // ...
+}
+```
+
+### Get Balance
+
+Retrieve the current balance of an account.
+
+```go
+func TestContract(t *testing.T) {
+  // ...
+  bal := ct.GetBalance("hive:someone", ledgerDb.AssetHive)
+  assert.Equal(t, int64(1000), bal)
+  // ...
+}
+```
+
+### State Set
+
+Set the value of a key in the contract state storage.
+
+```go
+func TestContract(t *testing.T) {
+  // ...
+  ct.StateSet("vsccontractid", "someKey", "hi")
+  // ...
+}
+```
+
+### State Get
+
+Retrieve the value of a key from the contract state storage.
+
+```go
+func TestContract(t *testing.T) {
+  // ...
+  val := ct.StateGet("vsccontractid", "someKey")
+  assert.Equal(t, "hi", val)
+  // ...
+}
+```
+
+### State Delete
+
+Unset the value of a key in the contract state storage.
+
+```go
+func TestContract(t *testing.T) {
+  // ...
+  ct.StateDelete("vsccontractid", "someKey")
+  assert.Equal(t, "", ct.StateGet("vsccontractid", "someKey"))
+  // ...
+}
+```
