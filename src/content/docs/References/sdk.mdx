@@ -181,6 +181,19 @@ func AbortMe(a *string) *string {
 }
 ```
 
+#### Revert
+
+Abort contract execution and revert transaction in the same way as `sdk.Abort()` but with error symbol.
+
+```go
+//go:wasmexport revertMe
+func RevertMe(a *string) *string {
+  // ...
+  sdk.Revert("something went wrong", "some_error_code")
+  // ...
+}
+```
+
 ## Env Vars
 
 * `contract.id`: ID of the current contract
