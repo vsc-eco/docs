@@ -168,6 +168,48 @@ func UnmapBalance(a *string) *string {
 }
 ```
 
+#### Contract State Get
+
+Read the value of a key from the state of another contract.
+
+```go
+//go:wasmexport contractGetString
+func ContractGetString(a *string) *string {
+  // ...
+  value := sdk.ContractStateGet("anotherContractId", "myString")
+  // ...
+}
+```
+
+#### Contract Call
+
+Call another contract, returning the resulting value to the caller.
+
+<Aside type="caution">
+There is a call recursion depth limit of **20**. The transaction will fail with the error symbol `ic_recursion_limit_hit` if the contract call exceeds this limit.
+</Aside>
+
+```go
+//go:wasmexport contractCall
+func ContractCall(a *string) *string {
+  // ...
+  // Call another contract with 1 HIVE allowance, allowing the other contract to draw up to 1 HIVE from this contract.
+  ret := sdk.ContractCall("anotherContractId", "methodName", "payload", &sdk.ContractCallOptions{
+    Intents: []sdk.Intent{{
+      Type: "transfer.allow",
+      Args: map[string]string{
+        "token": "hive",
+        "limit": "1.000",
+      },
+    }},
+  })
+
+  // Call another contract without options.
+  ret2 := sdk.ContractCall("anotherContractId", "methodName2", "payload", nil)
+  // ...
+}
+```
+
 #### Abort
 
 Abort contract execution and revert transaction.
@@ -196,18 +238,44 @@ func RevertMe(a *string) *string {
 
 ## Env Vars
 
-* `contract.id`: ID of the current contract
-* `tx.id`: ID of the transaction
-* `tx.index`: Transaction position in block
-* `tx.op_index`: Operation position in transaction
-* `block.id`: L1 block ID in which the transaction is included in. For offchain transactions, this refers to the L1 block ID of the VSC block in which the transaction was included in.
-* `block.height`: L1 block number in which the transaction is included in. For offchain transactions, this refers to the L1 block number of the VSC block in which the transaction was included in.
-* `block.timestamp`: Timestamp of when the transaction was included in (i.e. `2025-07-26T14:10:42`).
-* `msg.sender`: Address of the transaction sender. This must be a user address. If there are multiple, the first account specified in `required_auths` or `required_posting_auths` is returned.
-* `msg.required_auths`: The `required_auths` field of the transaction.
-* `msg.required_posting_auths`: The `required_posting_auths` field of the transaction.
-* `msg.caller`: The address that is calling the contract. It can be a contract ID or user address.
-* `intents`: List of intents passed into the transaction (i.e. token allowance).
+|Variable|Description|
+|-|-|
+|`contract.id`|ID of the current contract|
+|`contract.owner`|Owner of the current contract|
+|`tx.id`|ID of the transaction|
+|`tx.index`|Transaction position in block|
+|`tx.op_index`|Operation position in transaction|
+|`block.id`|L1 block ID in which the transaction is included in. For offchain transactions, this refers to the L1 block ID of the VSC block in which the transaction was included in.|
+|`block.height`|L1 block number in which the transaction is included in. For offchain transactions, this refers to the L1 block number of the VSC block in which the transaction was included in.|
+|`block.timestamp`|Timestamp of when the transaction was included in (i.e. `2025-07-26T14:10:42`).|
+|`msg.sender`|Address of the transaction sender. This must be a user address. If there are multiple, the first account specified in `required_auths` or `required_posting_auths` is returned.|
+|`msg.required_auths`|The `required_auths` field of the transaction.|
+|`msg.required_posting_auths`|The `required_posting_auths` field of the transaction.|
+|`msg.caller`|The address that is calling the contract. It can be a contract ID or user address.|
+|`intents`|List of intents passed into the transaction (i.e. token allowance).|
+
+## Error Symbols
+
+|Symbol|Description|
+|-|-|
+|`runtime_error`|Generic WASM runtime error.|
+|`runtime_abort`|Transaction execution aborted at runtime.|
+|`ic_invalid_payload`|Invalid intercontract call payload.|
+|`ic_contract_not_found`|Contract being called by another contract does not exist.|
+|`ic_contract_get_error`|Error occured when fetching contract info during intercontract call.|
+|`ic_code_fetch_error`|Error occured when fetching contract code during intercontract call.|
+|`ic_cid_decode_error`|Error occured when decoding contract code CID during intercontract call.|
+|`ic_recursion_limit_hit`|Intercontract call recursion depth limit hit.|
+|`gas_limit_hit`|WASM gas limit exceeded due to insufficient RC limit.|
+|`sdk_error`|Generic SDK call error.|
+|`missing_required_auth`|Missing required authority.|
+|`env_var_error`|Failed to serialize or parse environment variables.|
+|`ledger_error`|Failed to execute token transfer (i.e. due to insufficient balance).|
+|`ledger_intent_error`|Missing intents or attempting to draw balances above the specified limit.|
+|`wasm_init_error`|Failed to initialize WASM execution context.|
+|`wasm_ret_error`|Contract call did not return exactly one value.|
+|`wasm_function_not_found`|Attempting to call a non-existent method.|
+|`unknown_error`|Errors raised at runtime without any specified error symbol.|
 
 ## Contract Test Utils
 
@@ -248,7 +316,7 @@ func TestContract(t *testing.T) {
 
 ### Register Contract
 
-Bind a WASM bytecode to a contract ID.
+Bind a WASM bytecode to a contract ID with a specified owner.
 
 ```go
 //go:embed artifacts/main.wasm
@@ -256,7 +324,7 @@ var ContractWasm []byte
 
 func TestContract(t *testing.T) {
   // ...
-  ct.RegisterContract("vsccontractid", ContractWasm)
+  ct.RegisterContract("vsccontractid", "hive:someone", ContractWasm)
   // ...
 }
 ```
