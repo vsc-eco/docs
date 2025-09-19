@@ -4,7 +4,7 @@ sidebar:
   order: 11
 ---
 
-import { Aside, FileTree } from '@astrojs/starlight/components'
+import { Aside, FileTree, Tabs, TabItem } from '@astrojs/starlight/components'
 
 This is a brief overview of VSC smart contract development with Go.
 
@@ -15,7 +15,7 @@ This is a brief overview of VSC smart contract development with Go.
 - [Git](https://git-scm.com/downloads)
 - [TinyGo](https://tinygo.org/getting-started/install)
 - [Wasm Edge](https://wasmedge.org/docs/start/install)
-- [Wasm Tools](https://github.com/bytecodealliance/wasm-tools)
+- [Wabt](https://github.com/WebAssembly/wabt) or [Wasm Tools](https://github.com/bytecodealliance/wasm-tools)
 
 ### Install Dependencies
 
@@ -103,15 +103,33 @@ tinygo build -gc=custom -scheduler=none -panic=trap -no-debug -target=wasm-unkno
 
 To remove metadata from the output WASM binary to reduce file size:
 
-```sh
-wasm-tools strip -o artifacts/main-striped.wasm artifacts/main.wasm
-```
+<Tabs>
+  <TabItem label="Wabt">
+    ```sh
+    wasm-strip -o artifacts/main-striped.wasm artifacts/main.wasm
+    ```
+  </TabItem>
+  <TabItem label="Wasm Tools">
+    ```sh
+    wasm-tools strip -o artifacts/main-striped.wasm artifacts/main.wasm
+    ```
+  </TabItem>
+</Tabs>
 
 To inspect the output WASM assembly:
 
-```sh
-wasm-tools print artifacts/main.wasm
-```
+<Tabs>
+  <TabItem label="Wabt">
+    ```sh
+    wasm2wat artifacts/main.wasm
+    ```
+  </TabItem>
+  <TabItem label="Wasm Tools">
+    ```sh
+    wasm-tools print artifacts/main.wasm
+    ```
+  </TabItem>
+</Tabs>
 
 ---
 
