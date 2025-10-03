@@ -1,7 +1,7 @@
 ---
 title: How to use the VSC API (OUTLINE)
 sidebar:
-  order: 12
+  order: 20
 ---
 
 
