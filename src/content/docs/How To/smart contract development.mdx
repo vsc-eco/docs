@@ -168,7 +168,7 @@ func TestContract(t *testing.T) {
   ct.Deposit("hive:someone", 1000, ledgerDb.AssetHive) // deposit 1 HIVE
   ct.Deposit("hive:someone", 1000, ledgerDb.AssetHbd) // deposit 1 HBD
 
-  result, gasUsed, logs := ct.Call(stateEngine.TxVscCallContract{
+  result := ct.Call(stateEngine.TxVscCallContract{
     Self: stateEngine.TxSelf{
       TxId:                 "sometxid",
       BlockId:              "abcdef",
@@ -191,8 +191,8 @@ func TestContract(t *testing.T) {
     }},
   })
   assert.True(t, result.Success)                  // assert contract execution success
-  assert.LessOrEqual(t, gasUsed, uint(10000000))  // assert this call uses no more than 10M WASM gas
-  assert.GreaterOrEqual(t, len(logs), 1)          // assert at least 1 log emitted
+  assert.LessOrEqual(t, result.GasUsed, uint(10000000))  // assert this call uses no more than 10M WASM gas
+  assert.GreaterOrEqual(t, len(result.Logs), 1)          // assert at least 1 log emitted
 }
 ```
 

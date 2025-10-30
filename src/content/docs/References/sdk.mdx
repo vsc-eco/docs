@@ -331,12 +331,12 @@ func TestContract(t *testing.T) {
 
 ### Call Contract
 
-Executes a contract call transaction. Returns the call result, gas used and logs emitted.
+Executes a contract call transaction. Returns the call result consisting execution status, error symbol and message (if any), return value, RC used, WASM gas used, logs emitted and state diff summary.
 
 ```go
 func TestContract(t *testing.T) {
   // ...
-  result, gasUsed, logs := ct.Call(stateEngine.TxVscCallContract{
+  result := ct.Call(stateEngine.TxVscCallContract{
       Self: stateEngine.TxSelf{
       TxId:                 "sometxid",
       BlockId:              "abcdef",
@@ -359,8 +359,16 @@ func TestContract(t *testing.T) {
     }},
   })
   assert.True(t, result.Success)
-  assert.LessOrEqual(t, gasUsed, uint(10000000))
-  assert.GreaterOrEqual(t, len(logs), 1)
+  assert.LessOrEqual(t, result.RcUsed, uint(100))
+  assert.LessOrEqual(t, result.GasUsed, uint(10000000))
+  assert.GreaterOrEqual(t, len(result.Logs), 1)
+
+  // value of someKey changed from oldvalue to newvalue
+  assert.Equal(t, "oldvalue", string(result.StateDiff[contractId].KeyDiff["someKey"].Previous))
+  assert.Equal(t, "newvalue", string(result.StateDiff[contractId].KeyDiff["someKey"].Current))
+
+  // deleted value from deletethis key
+  assert.True(t, result.StateDiff[contractId].Deletions["deletethis"])
   // ...
 }
 ```
