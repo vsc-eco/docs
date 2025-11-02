@@ -1,0 +1,38 @@
+---
+title: Introducción
+sidebar:
+  order: 1
+---
+
+
+> *Esta documentación ofrece una visión técnica general de VSC (Virtual Smart Chain), un protocolo descentralizado para la custodia y el intercambio de activos entre cadenas, la liquidación y la ejecución de contratos inteligentes. VSC conecta cadenas EVM y no-EVM a través de bóvedas gestionadas por validadores y sistema de enrutamiento unificado basado en stablecoin que utiliza HBD. VSC permite transacciones sin comisiones, soporte de activos nativos y lógica entre cadenas componible en un único entorno de confianza minimizada.*
+
+Construida como una capa de liquidación (o asentamiento) sin comisiones  y de alto rendimiento, VSC aprovecha los **contratos inteligentes de WebAssembly**, las **pruebas de conocimiento cero (zero-knowledge proofs)**, las **bóvedas gestionadas por validadores** y un **modelo de activo nativo respaldado por garantía (colateral)** que reduce la fragmentación de la liquidez en todos los ecosistemas.
+
+Todos los intercambios se enrutan a través de un único activo base, una stablecoin (moneda estable), **HBD (Hive Backed Dollars). Usar HBD expone a los proveedores de liquidez (LPs) a una volatilidad de un solo lado**, lo que hace que la provisión de liquidez en VSC sea **más predecible y eficiente** tanto para participantes institucionales como minoristas.
+
+A diferencia de otros protocolos entre cadenas limitados a mecanismos de intercambio básicos, VSC soporta la **ejecución de contratos inteligentes**, lo que permite a los desarrolladores crear aplicaciones descentralizadas, entre cadenas y componibles, dentro del propio protocolo.
+
+## Características principales del protocolo:
+
+- **Soporte nativo de activos multicadena:** Activos de las blockchains soportadas (incluyendo Bitcoin, Solana, Ethereum y otras) se depositan directamente en **bóvedas en cadena** aseguradas por los validadores de VSC. Se exige a estos validadores que hagan staking de **HVE** como garantía (colateral) económica, asegurando la seguridad y la rendición de cuentas.
+
+- **Contratos inteligentes a través de WebAssembly (WASM):** Los desarrolladores pueden crear lógica potente en cadena utilizando contratos basados en WASM, con acceso nativo a activos de múltiples cadenas.
+
+- **Arquitectura de pruebas de conocimiento cero (Zero-Knowledge Proofs - ZKPs):** Las ZKPs se utilizan para validar las interacciones de cadenas externas y mantener la verificabilidad entre sistemas, sin comprometer la velocidad ni la privacidad del usuario.
+
+- **Interoperabilidad universal de carteras:** Los usuarios pueden interactuar con el protocolo utilizando carteras de cualquier blockchain soportada, eliminando la necesidad de gestionar múltiples cuentas o formatos.
+
+- **Capa de identidad centrada en el usuario:** Mediante la integración nativa de Hive, los usuarios se benefician de nombres de usuario legibles, abstracción de cuentas y inicio de sesión social, lo que permite una simplicidad Web2 sin sacrificar la descentralización.
+
+## Innovaciones de próxima generación de VSC
+
+VSC presenta varios componentes arquitectónicos novedosos para abordar las limitaciones comunes en los protocolos entre cadenas existentes, con el fin de ofrecer un ecosistema unificado, escalable y amigable para los desarrolladores.
+
+Estas innovaciones abordan limitaciones persistentes en la interoperabilidad, la experiencia del usuario y la fragmentación de la liquidez. Estos componentes tienen como objetivo simplificar el desarrollo y mejorar la experiencia del usuario en entornos multicadena.
+
+- **Mapeo de activos nativos:** VSC permite que los activos de diferentes blockchains (por ejemplo, BTC, SOL, Hive, ETH) se bloqueen de forma segura en sus cadenas nativas y se mapeen a direcciones conectadas a VSC. Por ejemplo: esto permite que las direcciones de carteras de Ethereum mantengan Bitcoin (BTC) nativo, que las direcciones de carteras de Solana mantengan Ethereum (ETH) nativo, y viceversa, todo mientras se aprovecha la red descentralizada de validadores de VSC para una interoperabilidad entre cadenas fluida.
+
+- **Transacciones sin comisiones dentro del protocolo:** VSC elimina las comisiones de gas para los usuarios al utilizar el modelo de **crédito de recursos** de Hive. Estos créditos se regeneran con el tiempo y se consumen cuando un usuario realiza acciones en cadena, como transferir tokens, interactuar con contratos inteligentes o firmar transacciones. Este sistema permite interacciones verdaderamente sin comisiones, lo que posiciona a VSC de forma única para ofrecer una experiencia sin gas, ideal para incorporar usuarios convencionales y escalar el uso sin fricción.
+
+- **La Stablecoin (HBD) como activo base en todos los pares:** Los fondos de liquidez (liquidity pools) en VSC emparejan cada activo con **HBD**, una stablecoin algorítmica con una trayectoria de una década de tiempo de actividad y estabilidad. Esto estandariza las rutas de enrutamiento y simplifica la provisión de liquidez a través de activos y cadenas, al mismo tiempo que previene los choques de volatilidad y evita la necesidad de exponerse a un activo volátil secundario.
