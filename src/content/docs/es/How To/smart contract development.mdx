@@ -1,0 +1,288 @@
+---
+title: Escribir, probar e desplegar un contrato inteligente
+sidebar:
+  order: 11
+---
+
+import { Aside, FileTree, Tabs, TabItem } from '@astrojs/starlight/components'
+
+Esta es una breve visión general del desarrollo de contratos inteligentes de VSC con Go.
+
+## Configuración del entorno
+
+### Requisitos previos
+- [Golang](https://go.dev/dl)
+- [Git](https://git-scm.com/downloads)
+- [TinyGo](https://tinygo.org/getting-started/install)
+- [Wasm Edge](https://wasmedge.org/docs/start/install)
+- [Wabt](https://github.com/WebAssembly/wabt) o [Wasm Tools](https://github.com/bytecodealliance/wasm-tools)
+
+### Instalar dependencias
+
+<Aside type="tip">
+Estas se utilizan para probar y desplegar contratos inteligentes.
+</Aside>
+
+```sh
+git clone https://github.com/vsc-eco/go-vsc-node
+cd go-vsc-node
+go mod download
+go build -buildvcs=false -o vsc-contract-deploy vsc-node/cmd/contract-deployer
+```
+Esto generará un ejecutable llamado `vsc-contract-deploy`. Puedes moverlo a tu directorio `PATH` (es decir, `/usr/bin` for Linux or `/usr/local/bin` para macOS).
+
+---
+
+## Escribiendo tu primer contrato
+
+### Configuración
+
+Clona la plantilla del contrato Go:
+
+```sh
+git clone https://github.com/vsc-eco/go-contract-template
+```
+
+### Estructura del proyecto
+
+<FileTree>
+- contract Aquí va tu código de contrato.
+  - main.go
+- runtime
+  - gc_leaking_exported.go
+- sdk
+  - address.go
+  - env.go
+  - sdk.go
+- test
+  - contract_test.go
+- .gitignore
+- go.mod
+- go.sum
+</FileTree>
+
+### Contrato "Hola Mundo" (Hello World)
+
+El siguiente contrato demuestra cómo llamar a los métodos del SDK para interactuar con la base de datos del contrato y definir exportaciones WASM para marcar una función como invocable (callable) por cuentas de VSC u otros contratos.
+
+Obtén más información sobre los métodos del SDK de contratos de Go [aquí](/es/references/sdk).
+
+```go title="main.go"
+package main
+
+import "contract-template/sdk"
+
+//go:wasmexport hello_world
+func HelloWorld(a *string) *string {
+  ret := "Hello world"
+  return &ret
+}
+
+//go:wasmexport setString
+func SetString(a *string) *string {
+  sdk.StateSetObject("myString", *a)
+  return a
+}
+
+//go:wasmexport getString
+func GetString(a *string) *string {
+  return sdk.StateGetObject("myString")
+}
+```
+
+---
+
+## Compilar contrato
+
+Para compilar tu contrato:
+
+```sh
+tinygo build -gc=custom -scheduler=none -panic=trap -no-debug -target=wasm-unknown -o artifacts/main.wasm contract/main.go
+```
+
+<Aside type="tip">
+Para obtener la mejor posibilidad de una verificación exitosa del código fuente del contrato en los exploradores de bloques, compila tu contrato usando Docker:
+```sh
+docker pull tinygo/tinygo:0.39.0
+docker run --rm -v $(pwd):/home/tinygo tinygo/tinygo:0.39.0 tinygo build -gc=custom -scheduler=none -panic=trap -no-debug -target=wasm-unknown -o artifacts/main.wasm contract/main.go
+```
+</Aside>
+
+Para eliminar los metadatos del binario WASM de salida y reducir el tamaño del archivo:
+
+<Tabs syncKey="wasmTools">
+  <TabItem label="Wabt">
+    ```sh
+    wasm-strip -o artifacts/main-striped.wasm artifacts/main.wasm
+    ```
+  </TabItem>
+  <TabItem label="Wasm Tools">
+    ```sh
+    wasm-tools strip -o artifacts/main-striped.wasm artifacts/main.wasm
+    ```
+  </TabItem>
+</Tabs>
+
+Para inspeccionar el ensamblado WASM de salida:
+
+<Tabs syncKey="wasmTools">
+  <TabItem label="Wabt">
+    ```sh
+    wasm2wat artifacts/main.wasm
+    ```
+  </TabItem>
+  <TabItem label="Wasm Tools">
+    ```sh
+    wasm-tools print artifacts/main.wasm
+    ```
+  </TabItem>
+</Tabs>
+
+---
+
+## Probar y depurar contrato
+
+Proporcionamos un entorno de prueba de contratos para que ejecutes llamadas a contratos en un motor de estado que se asemeja a la red en vivo. Tu código de prueba de contratos se verá algo como esto:
+
+```go
+package contract_test
+
+import (
+  "encoding/json"
+  "testing"
+
+  "github.com/stretchr/testify/assert"
+  "github.com/vsc-eco/go-vsc-node/lib/test_utils"
+  "github.com/vsc-eco/go-vsc-node/modules/db/vsc/contracts"
+  ledgerDb "github.com/vsc-eco/go-vsc-node/modules/db/vsc/ledger"
+  stateEngine "github.com/vsc-eco/go-vsc-node/modules/state-processing"
+)
+
+//go:embed artifacts/main.wasm
+var ContractWasm []byte
+
+func TestContract(t *testing.T) {
+  ct := test_utils.NewContractTest()
+  ct.RegisterContract("vsccontractid", ContractWasm)
+  ct.Deposit("hive:someone", 1000, ledgerDb.AssetHive) // depósito de 1 HIVE
+  ct.Deposit("hive:someone", 1000, ledgerDb.AssetHbd) // ddepósito de 1 HBD
+
+  result, gasUsed, logs := ct.Call(stateEngine.TxVscCallContract{
+    Self: stateEngine.TxSelf{
+      TxId:                 "sometxid",
+      BlockId:              "abcdef",
+      Index:                69,
+      OpIndex:              0,
+      Timestamp:            "2025-09-03T00:00:00",
+      RequiredAuths:        []string{"hive:someone"},
+      RequiredPostingAuths: []string{},
+    },
+    ContractId: contractId,
+    Action:     "yourMethodName",
+    Payload:    json.RawMessage([]byte("1000")),
+    RcLimit:    1000,
+    Intents:    []contracts.Intent{{
+      Type: "transfer.allow",
+      Args: map[string]string{
+        "limit": "1.000",
+        "token": "hive",
+      },
+    }},
+  })
+  assert.True(t, result.Success)                  // asegura que la ejecución del contrato fue exitosa
+  assert.LessOrEqual(t, gasUsed, uint(10000000))  // asegura que esta llamada no utiliza más de 10M de gas WASM
+  assert.GreaterOrEqual(t, len(logs), 1)          // asegura que se emitió al menos 1 registro.
+}
+```
+Obtén más información sobre los métodos proporcionados por las utilidades de prueba de contratos [aquí](/es/references/sdk/#contract-test-utils).
+
+---
+
+## Desplegar contrato
+
+<Aside type="note">
+Hay una tarifa de despliegue de **10 HBD** por contrato. Esta se paga con tu saldo en capa 1 (L1).
+</Aside>
+
+En primer lugar, inicializa la configuración del desplegador (deployer):
+
+```sh
+vsc-contract-deploy -init
+```
+
+Esto generará algunos archivos de configuración en la carpeta `data/config` de tu directorio actual. Inserta tu nombre de usuario de Hive y la clave activa de la cuenta del desplegador en `identityConfig.json`:
+
+```json title="identityConfig.json"
+{
+  "BlsPrivKeySeed": "9e264692ced37...",
+  "HiveActiveKey": "ADD_YOUR_PRIVATE_WIF",
+  "HiveUsername": "ADD_YOUR_USERNAME",
+  "Libp2pPrivKey": "125cd98aed75d..."
+}
+```
+
+Luego, despliega tu contrato en VSC:
+
+```sh
+vsc-contract-deploy -wasmPath artifacts/main-striped.wasm -name "my first contract"
+```
+
+Debería ver un resultado similar a este:
+
+```
+WASM_CODE: 1130 [0 97 115 109 1 0 0 0 1 9] ...
+peer ID: 12D3KooWS7N7zmrkMHxGX9ibNXbKk4byfkx8ckEhfgXM8eQcgBtK
+NAT Status {Private}
+12D3KooWS7N7zmrkMHxGX9ibNXbKk4byfkx8ckEhfgXM8eQcgBtK pubsub /vsc/mainnet/data-availability/v1 peers: 20
+pubsub handling error: message did not add any signatures
+pubsub handling error: message did not add any signatures
+pubsub handling error: message did not add any signatures
+pubsub handling error: message did not add any signatures
+pubsub handling error: message did not add any signatures
+pubsub handling error: message did not add any signatures
+pubsub handling error: message did not add any signatures
+pubsub handling error: message did not add any signatures
+{bafkreibwwj3fypek5uz6l3scacy47yw3b2adgbxmfab2ybmkarljaggbey {i_TLUMJVJb6n6X-5_lKvBibiLvP0RUVz2tn20KJTw5Q_lQ-tcVt9jrZr4s1WVga1CR7q0Ldnrc-EjNpqgaY7GpnhE2d3pC3nfNhUKkmN1za6h9SwCEUuo3CByNnmnqYE __f9}}
+{"__v":"0.1","code":"bafkreibwwj3fypek5uz6l3scacy47yw3b2adgbxmfab2ybmkarljaggbey","description":"","name":"go test","net_id":"vsc-mainnet","owner":"techcoderx.vsc","runtime":"go","storage_proof":{"hash":"bafkreibwwj3fypek5uz6l3scacy47yw3b2adgbxmfab2ybmkarljaggbey","signature":{"sig":"i_TLUMJVJb6n6X-5_lKvBibiLvP0RUVz2tn20KJTw5Q_lQ-tcVt9jrZr4s1WVga1CR7q0Ldnrc-EjNpqgaY7GpnhE2d3pC3nfNhUKkmN1za6h9SwCEUuo3CByNnmnqYE","bv":"__f9"}}}
+pubsub handling error: message did not add any signatures
+pubsub handling error: message did not add any signatures
+tx id: bef70add6d21cd812cf68da2caee72da05de48b4
+contract id: vsc1Bem8RnoLgGPP7E2MBN52ekrdVqy2LNpSqF
+Error in subscription: subscription cancelled
+```
+
+---
+
+## Llamar a contrato
+
+Los contratos pueden ser llamados desde capa 1 (L1) utilizando cuentas de Hive o en VSC utilizando cuentas fuera de cadena (off-chain).
+
+### Llamar desde capa 1 (L1)
+
+La invocación de contratos desde L1 implica el envío de una `custom_json_operation` con `vsc.call` como su ID y el siguiente formato JSON:
+
+```json
+{
+  "net_id": "vsc-mainnet",
+  "contract_id": "vsc1...",
+  "action": "methodName",
+  "payload": "your payload string here",
+  "rc_limit": 2000,
+  "intents": []
+}
+```
+[Aquí](https://hivehub.dev/tx/8e384c116bdc6c585340a36ba29bdd67652358c2) puede verse un ejemplo de transacción.
+
+### Intents
+
+Una transacción de llamada a contrato puede incluir una lista de `intents` que autorizan al contrato a gastar hasta una cantidad específica de activos de tu cuenta. Por ejemplo, una intent de permiso de 1 HIVE puede especificarse de la siguiente manera:
+
+```json
+{
+  "type": "transfer.allow",
+  "args": {
+    "limit": "1.000",
+    "token": "hive"
+  }
+}
+```
