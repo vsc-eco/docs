@@ -1,0 +1,431 @@
+---
+title: SDK
+sidebar:
+  order: 13
+---
+
+import { Aside } from '@astrojs/starlight/components'
+
+El SDK de VSC es una librería que abstrae diversas funcionalidades que son útiles en el contexto de escribir un contrato inteligente VSC.
+
+<Aside type="tip" title="Dato útil">
+También ofrece acceso a la capa de base de datos del contrato inteligente al namespaces de nombres e interfaces. En la etapa de ejecución del contrato, las invocaciones de dichas interfaces se traducen en llamadas generalizadas al nodo VSC. Esto garantiza que dichas funcionalidades sean iguales independientemente del lenguaje de implementación del SDK.
+</Aside>
+
+## SDK de contrato en Go
+
+El [SDK de contrato en Go](https://github.com/vsc-eco/go-contract-template) implementa runtime y las funciones de SDK necesarias para el entorno de contratos inteligentes VSC.
+
+### Ejemplo de uso
+
+```go
+package main
+
+import (
+  "contract-template/sdk"
+)
+
+//go:wasmexport entrypoint
+func Entrypoint(a *string) *string {
+  sdk.Log(*a)
+  sdk.Log("Entrypoint logged")
+  return a
+}
+```
+
+### Métodos SDK
+
+Los siguientes métodos están dentro del namespace `sdk`. Todos los parámetros y tipos de retorno son de tipo `*string`.
+
+#### Log
+
+Registra un string con fines de depuración (debugging). Los registros emitidos también se adjuntarán al contract output, lo cual puede ser útil para aplicaciones externas (es decir, indexadores).
+
+```go
+//go:wasmexport entrypoint
+func Entrypoint(a *string) *string {
+  // ...
+  sdk.Log(*a)
+  sdk.Log("hello world")
+  // ...
+}
+```
+
+#### SetObject
+
+Establece el valor de una clave en la base de datos del contrato.
+
+```go
+//go:wasmexport setString
+func SetString(a *string) *string {
+  // ...
+  sdk.StateSetObject("myString", *a)
+  // ...
+}
+```
+
+#### GetObject
+
+Recupera el valor de una clave de la base de datos del contrato.
+
+```go
+//go:wasmexport getString
+func GetString(a *string) *string {
+  // ...
+  value := sdk.StateGetObject("myString")
+  // ...
+}
+```
+
+#### DelObject
+
+Elimina el valor de una clave en la base de datos del contrato.
+
+```go
+//go:wasmexport clearString
+func ClearString(a *string) *string {
+  // ...
+  sdk.StateDeleteObject("myString")
+  // ...
+}
+```
+
+#### GetEnv
+
+Recupera las variables de entorno del tiempo de ejecución actual, devolviendo un objeto con la [estructura `Env`](https://github.com/vsc-eco/go-contract-template/blob/main/sdk/env.go).
+
+```go
+//go:wasmexport dumpEnv
+func DumpEnv(a *string) *string {
+  // ...
+  envs := sdk.GetEnv()
+  // ...
+}
+```
+
+#### GetEnvKey
+
+Recupera una variable de entorno por clave. La lista de nombres de variables se enumera a [continuación](#env-vars).
+
+```go
+//go:wasmexport dumpEnvKey
+func DumpEnvKey(a *string) *string {
+  // ...
+  contract_id := sdk.GetEnvKey("contract.id")
+  // ...
+}
+```
+
+#### GetBalance
+
+Recupera el balance de cualquier cuenta o contrato de VSC.
+
+```go
+//go:wasmexport getBalance
+func GetBalance(a *string) *string {
+  // ...
+	bal := sdk.GetBalance("hive:vaultec.vsc", sdk.AssetHive)   // Resultado en términos de mHIVE/mHBD
+  // ...
+}
+```
+
+#### Draw
+
+Transfiere activos de la cuenta del emisor al contrato hasta el límite especificado en las `intents`. La transacción debe estar firmada utilizando la autoridad activa para las cuentas Hive.
+
+```go
+//go:wasmexport drawBalance
+func DrawBalance(a *string) *string {
+  // ...
+	sdk.HiveDraw(1000, sdk.AssetHive) // Extrae 1 HIVE de la cuenta del emisor.
+  // ...
+}
+```
+
+#### Transfer
+
+Transfiere activos del contrato a otra cuenta.
+
+```go
+//go:wasmexport transferBalance
+func TransferBalance(a *string) *string {
+  // ...
+	sdk.HiveTransfer("hive:vaultec.vsc", 1000, sdk.AssetHive) // Transfiere 1 HIVE desde el contrato
+  // ...
+}
+```
+
+#### Withdraw
+
+Desvincular activos del contrato a una cuenta Hive específica.
+
+```go
+//go:wasmexport unmapBalance
+func UnmapBalance(a *string) *string {
+  // ...
+	sdk.HiveWithdraw("hive:vaultec.vsc", 1000, sdk.AssetHive) // Retirar 1 HIVE del contrato
+  // ...
+}
+```
+
+#### Contract State Get
+
+Lee el valor de una clave del estado de otro contrato.
+
+```go
+//go:wasmexport contractGetString
+func ContractGetString(a *string) *string {
+  // ...
+  value := sdk.ContractStateGet("anotherContractId", "myString")
+  // ...
+}
+```
+
+#### Contract Call
+
+Llamar a otro contrato, devolviendo el valor resultante al emisor.
+
+<Aside type="caution">
+Existe un límite de profundidad de recursión de llamada de 20. La transacción fallará con el símbolo de error `ic_recursion_limit_hit` si la llamada al contrato excede este límite.
+</Aside>
+
+```go
+//go:wasmexport contractCall
+func ContractCall(a *string) *string {
+  // ...
+  // Llamar a otro contrato con una asignación de 1 HIVE, permitiendo que el otro contrato retire hasta 1 HIVE de este contrato.
+  ret := sdk.ContractCall("anotherContractId", "methodName", "payload", &sdk.ContractCallOptions{
+    Intents: []sdk.Intent{{
+      Type: "transfer.allow",
+      Args: map[string]string{
+        "token": "hive",
+        "limit": "1.000",
+      },
+    }},
+  })
+
+  // Call another contract without options.
+  ret2 := sdk.ContractCall("anotherContractId", "methodName2", "payload", nil)
+  // ...
+}
+```
+
+#### Abort
+
+Aborta la ejecución del contrato y revierte la transacción.
+
+```go
+//go:wasmexport abortMe
+func AbortMe(a *string) *string {
+  // ...
+  sdk.Abort("something went wrong")
+  // ...
+}
+```
+
+#### Revert
+
+Aborta la ejecución del contrato y revierte la transacción de la misma manera que `sdk.Abort()`, pero con un símbolo de error.
+
+```go
+//go:wasmexport revertMe
+func RevertMe(a *string) *string {
+  // ...
+  sdk.Revert("something went wrong", "some_error_code")
+  // ...
+}
+```
+
+## Variables de entorno
+
+|Variable|Descripción|
+|-|-|
+|`contract.id`|ID del contrato actual|
+|`contract.owner`|Propietario del contrato actual|
+|`tx.id`|ID de la transacción|
+|`tx.index`|Posición de la transacción en el bloque|
+|`tx.op_index`|Posición de la operación en la transacción|
+|`block.id`|ID del bloque L1 en el que se incluye la transacción. Para las transacciones fuera de la cadena (offchain), esto se refiere a la ID del bloque L1 del bloque VSC en el que se incluyó la transacción.|
+|`block.height`|Número de bloque L1 en el que se incluye la transacción. Para las transacciones fuera de la cadena (offchain), esto se refiere al número de bloque L1 del bloque VSC en el que se incluyó la transacción.|
+|`block.timestamp`|Marca de tiempo de cuándo se incluyó la transacción (es decir, `2025-07-26T14:10:42`).|
+|`msg.sender`|Dirección del remitente de la transacción. Debe ser una dirección de usuario. Si hay múltiples, se devuelve la primera cuenta especificada en `required_auths` o en `required_posting_auths`.|
+|`msg.required_auths`|El campo `required_auths` de la transacción.|
+|`msg.required_posting_auths`|El campo `required_posting_auths` de la transacción.|
+|`msg.caller`|La dirección que está llamando al contrato. Puede ser una ID de contrato o una dirección de usuario.|
+|`intents`|Lista de intents pasadas a la transacción (es decir, asignación de tokens).|
+
+## Códigos de error
+
+|Código|Descripción|
+|-|-|
+|`runtime_error`|Error genérico del tiempo de ejecución WASM.|
+|`runtime_abort`|Ejecución de la transacción abortada en tiempo de ejecución.|
+|`ic_invalid_payload`|Payload de la llamada entre contratos no válida.|
+|`ic_contract_not_found`|El contrato llamado por otro contrato no existe.|
+|`ic_contract_get_error`|Ocurrió un error al obtener la información del contrato durante la llamada entre contratos.|
+|`ic_code_fetch_error`|Ocurrió un error al obtener el código del contrato durante la llamada entre contratos.|
+|`ic_cid_decode_error`|Ocurrió un error al decodificar el CID del código del contrato durante la llamada entre contratos.|
+|`ic_recursion_limit_hit`|Límite de profundidad de recursión de llamada entre contratos alcanzado.|
+|`gas_limit_hit`|Límite de gas WASM excedido debido a un límite insuficiente de RC.|
+|`sdk_error`|Error genérico de llamada al SDK.|
+|`missing_required_auth`|Falta la autoridad requerida.|
+|`env_var_error`|Error al serializar o analizar las variables de entorno.|
+|`ledger_error`|Error al ejecutar la transferencia de tokens (es decir, debido a balance insuficiente).|
+|`ledger_intent_error`|Faltan intenciones o se intenta retirar saldos por encima del límite especificado.|
+|`wasm_init_error`|Error al inicializar el contexto de ejecución WASM.|
+|`wasm_ret_error`|La llamada al contrato no devolvió exactamente un valor.|
+|`wasm_function_not_found`|Se intenta llamar a un método inexistente.|
+|`unknown_error`|Errores generados en tiempo de ejecución sin un código de error especificado.|
+
+## Herramientas de prueba de contratos
+
+Las herramientas de prueba de contratos proporcionan un entorno de pruebas que te permite ejecutar tus contratos.
+
+
+### Instanciación
+
+Crea un nuevo entorno de prueba de contratos.
+
+```go
+import (
+  "encoding/json"
+  "testing"
+
+  "github.com/stretchr/testify/assert"
+  "github.com/vsc-eco/go-vsc-node/lib/test_utils"
+  "github.com/vsc-eco/go-vsc-node/modules/db/vsc/contracts"
+  ledgerDb "github.com/vsc-eco/go-vsc-node/modules/db/vsc/ledger"
+  stateEngine "github.com/vsc-eco/go-vsc-node/modules/state-processing"
+)
+
+func TestContract(t *testing.T) {
+  ct := test_utils.NewContractTest()
+}
+```
+
+### Increment Blocks
+
+Incrementa un número especificado de bloques L1 en el entorno de pruebas de contratos. La altura del bloque comienza desde 0 durante la instanciación.
+
+```go
+func TestContract(t *testing.T) {
+  // ...
+  ct.IncrementBlocks(20)
+  // ...
+}
+```
+
+### Register Contract
+
+Vincula un código de bytes WASM a una ID de contrato con un propietario especificado.
+
+```go
+//go:embed artifacts/main.wasm
+var ContractWasm []byte
+
+func TestContract(t *testing.T) {
+  // ...
+  ct.RegisterContract("vsccontractid", "hive:someone", ContractWasm)
+  // ...
+}
+```
+
+### Call Contract
+
+Ejecuta una transacción de llamada al contrato. Devuelve el resultado de la llamada, el gas utilizado y los registros emitidos.
+
+```go
+func TestContract(t *testing.T) {
+  // ...
+  result, gasUsed, logs := ct.Call(stateEngine.TxVscCallContract{
+      Self: stateEngine.TxSelf{
+      TxId:                 "sometxid",
+      BlockId:              "abcdef",
+      Index:                69,
+      OpIndex:              0,
+      Timestamp:            "2025-09-03T00:00:00",
+      RequiredAuths:        []string{"hive:someone"},
+      RequiredPostingAuths: []string{},
+    },
+    ContractId: contractId,
+    Action:     "yourMethodName",
+    Payload:    json.RawMessage([]byte("1000")),
+    RcLimit:    1000,
+    Intents:    []contracts.Intent{{
+      Type: "transfer.allow",
+      Args: map[string]string{
+        "limit": "1.000",
+        "token": "hive",
+      },
+    }},
+  })
+  assert.True(t, result.Success)
+  assert.LessOrEqual(t, gasUsed, uint(10000000))
+  assert.GreaterOrEqual(t, len(logs), 1)
+  // ...
+}
+```
+
+### Deposit
+
+Añadir fondos a una cuenta en el ledger.
+
+```go
+func TestContract(t *testing.T) {
+  // ...
+  ct.Deposit("hive:someone", 1000, ledgerDb.AssetHive) // deposit 1 HIVE
+  ct.Deposit("hive:someone", 1000, ledgerDb.AssetHbd) // deposit 1 HBD
+  // ...
+}
+```
+
+### Get Balance
+
+Recupera el balance actual de una cuenta.
+
+```go
+func TestContract(t *testing.T) {
+  // ...
+  bal := ct.GetBalance("hive:someone", ledgerDb.AssetHive)
+  assert.Equal(t, int64(1000), bal)
+  // ...
+}
+```
+
+### State Set
+
+Establece el valor de una clave en el almacenamiento de estado del contrato.
+
+```go
+func TestContract(t *testing.T) {
+  // ...
+  ct.StateSet("vsccontractid", "someKey", "hi")
+  // ...
+}
+```
+
+### State Get
+
+Recupera el valor de una clave del almacenamiento de estado del contrato.
+
+```go
+func TestContract(t *testing.T) {
+  // ...
+  val := ct.StateGet("vsccontractid", "someKey")
+  assert.Equal(t, "hi", val)
+  // ...
+}
+```
+
+### State Delete
+
+Elimina el valor de una clave en el almacenamiento de estado del contrato.
+
+```go
+func TestContract(t *testing.T) {
+  // ...
+  ct.StateDelete("vsccontractid", "someKey")
+  assert.Equal(t, "", ct.StateGet("vsccontractid", "someKey"))
+  // ...
+}
+```
