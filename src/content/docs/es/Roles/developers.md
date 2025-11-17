@@ -16,9 +16,9 @@ Gracias a la **interoperabilidad de billeteras**, cualquier dirección de billet
 
 VSC permite a los desarrolladores construir poderosas aplicaciones descentralizadas utilizando **contratos inteligentes basados en WebAssembly (Wasm)**, que son seguros, rápidos y compatibles con múltiples lenguajes de programación. Estos contratos inteligentes operan directamente en la infraestructura descentralizada de VSC, ofreciendo control total y flexibilidad sin puntos centrales de fallo.
 
-## Mapeo de Activos Nativos (Native Asset Mapping)
+## Asignación de Activos Nativos (Native Asset Mapping)
 
-Un avance importante para los desarrolladores en VSC es el **mapeo de activos nativos**. Esto permite que los contratos inteligentes interactúen con los activos nativos (como BTC, ETH, Hive y SOL) **dentro** del entorno del contrato inteligente.
+Un avance importante para los desarrolladores en VSC es la **asignación de activos nativos**. Esto permite que los contratos inteligentes interactúen con los activos nativos (como BTC, ETH, Hive y SOL) **dentro** del entorno del contrato inteligente.
 
 Esta capacidad significa que los desarrolladores pueden construir dApps avanzadas que utilizan activos nativos de manera fluida, ya sean para pagos, juegos, herramientas DeFi o incluso intercambios descentralizados (DEXs). Estas aplicaciones pueden mover y gestionar activos nativos en tiempo real con la misma facilidad, o en muchos casos con mayor facilidad, que los tokens nativos en una única cadena.
 

@@ -8,7 +8,7 @@ sidebar:
 
 Los usuarios de aplicaciones descentralizadas (dApps) son individuos que interactúan directamente con aplicaciones descentralizadas construidas en la red VSC. Estas aplicaciones abarcan desde herramientas de finanzas descentralizadas (DeFi) y servicios de pago hasta juegos, plataformas de NFT, herramientas de remesas y más, todas impulsadas por **contratos inteligentes basados en WebAssembly** sobre una infraestructura segura, sin comisiones y descentralizada.
 
-Lo que distingue a VSC para los usuarios es la experiencia de **activos nativos**. Gracias al **Mapeo de Activos Nativos**, los usuarios pueden interactuar con las dApps utilizando activos reales y nativos como BTC, ETH.
+Lo que distingue a VSC para los usuarios es la experiencia de **activos nativos**. Gracias a la **Asignación de Activos Nativos**, los usuarios pueden interactuar con las dApps utilizando activos reales y nativos como BTC, ETH.
 
 Los usuarios de aplicaciones descentralizadas (dApps) en VSC se benefician de maneras clave:
 

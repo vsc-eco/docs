@@ -6,7 +6,7 @@ sidebar:
 
 *Garantizando la seguridad del protocolo VSC a través del bloqueo (staking) de HIVE y la participación en el consenso.*
 
-Los validadores son responsables de **asegurar la red VSC**, mantener el consenso y validar todos los cambios de estado, incluidos los depósitos, los retiros y las acciones dentro del protocolo como los intercambios (swaps) o las transferencias mapeadas. Ejecutan el software de validador VSC y participan en el mecanismo de consenso mediante el **bloqueo (staking) de tokens HIVE**, lo que alinea sus incentivos con la integridad del sistema.
+Los validadores son responsables de **asegurar la red VSC**, mantener el consenso y validar todos los cambios de estado, incluidos los depósitos, los retiros y las acciones dentro del protocolo como los intercambios (swaps) o las transferencias asignadas. Ejecutan el software de validador VSC y participan en el mecanismo de consenso mediante el **bloqueo (staking) de tokens HIVE**, lo que alinea sus incentivos con la integridad del sistema.
 
 ### Responsabilidades del Validador
 

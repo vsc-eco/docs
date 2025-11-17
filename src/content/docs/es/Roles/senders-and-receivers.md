@@ -4,13 +4,13 @@ sidebar:
   order: 5
 ---
 
-*Transferencia de valor sin comisiones a través de mapeo de activo nativo dentro de VSC.*
+*Transferencia de valor sin comisiones a través de la asignación de activos nativos dentro de VSC.*
 
-Los **remitentes y destinatarios** son usuarios que utilizan VSC para enviar valor **entre direcciones de billeteras en diferentes blockchain que están conectadas a VSC**, como por ejemplo, enviar BTC a una dirección de billetera Ethereum, sin necesidad de utilizar puentes tradicionales, intercambios (swaps) o fondos de liquidez. Todo esto sucede **dentro de VSC**, utilizando su sistema de contabilidad interno y la abstracción de la capa de billetera (wallet-layer abstraction), impulsado por el **mapeo de activo nativo**.
+Los **remitentes y destinatarios** son usuarios que utilizan VSC para enviar valor **entre direcciones de billeteras en diferentes blockchain que están conectadas a VSC**, como por ejemplo, enviar BTC a una dirección de billetera Ethereum, sin necesidad de utilizar puentes tradicionales, intercambios (swaps) o fondos de liquidez. Todo esto sucede **dentro de VSC**, utilizando su sistema de contabilidad interno y la abstracción de la capa de billetera (wallet-layer abstraction), impulsado por la **asignación de activos nativos**.
 
-### Lo que permite el Mapeo de Activo Nativo
+### Lo que permite la Asignación de Activos Nativos
 
-El **mapeo de activo nativo** es el mecanismo de VSC para vincular direcciones de billetera en diferentes blockchains y permitir la transferencia de los respectivos activos nativos entre esas billeteras. Permite a los usuarios:
+La **asignación de activos nativos** es el mecanismo de VSC para vincular direcciones de billetera en diferentes blockchains y permitir la transferencia de los respectivos activos nativos entre esas billeteras. Permite a los usuarios:
 
 - Conectar billeteras de diferentes blockchains (BTC, ETH, SOL, etc.) a VSC.
 - Enviar activos nativos (por ejemplo, BTC) a una dirección de billetera conectada y asociada con otra blockchain (por ejemplo, una billetera ETH).
@@ -23,7 +23,7 @@ El remitente paga una comisión de red única para depositar el activo en VSC; e
 - **Movimiento de valor a nivel de protocolo** – sin puentes o intermediarios externos.
 - **Recibir BTC nativo en una billetera ETH conectado** (y viceversa).
 - **Los usuarios pagan una comisión solo al depositar o retirar fondos de VSC;** todas las transferencias internas entre billeteras conectadas son **sin comisiones**. – las transferencias dentro de VSC son sin comisiones.
-- **Los destinatarios deben conectarse a VSC para acceder a los fondos** – el sistema resuelve automáticamente el depósito a su dirección mapeada.
+- **Los destinatarios deben conectarse a VSC para acceder a los fondos** – el sistema resuelve automáticamente el depósito a su dirección asignada.
 - **Los destinatarios pueden retirar fondos después de completar un intercambio (swap) al activo de su elección**.
 - **Todos los activos permanecen nativos en todo momento**.
 
