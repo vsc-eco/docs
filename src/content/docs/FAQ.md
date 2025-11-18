@@ -20,3 +20,5 @@ Mainnet has launched March 31st 2025.
 
 ## What does VSC stand for?
 Virtual Smart Chain
+
+**Note:** VSC (Virtual Smart Chain) changed its name to **Magi Network**. You can find more information [here](https://peakd.com/vsc/@vsc.network/vsc-is-now-magi-network-rebrand-announcement).
