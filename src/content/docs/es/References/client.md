@@ -9,7 +9,7 @@ sidebar:
 
 # Cliente VSC
 
-Los clientes VSC son librerías que ofrecen un conjunto de envoltorios (wrappers) y capas de abstracción para comunicarse más fácilmente con la red VSC.
+Los clientes VSC son librerías que ofrecen un conjunto de envoltorios *(wrappers)* y capas de abstracción para comunicarse más fácilmente con la red VSC.
 
 ## Cliente VSC de Javascript
 

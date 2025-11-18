@@ -28,7 +28,7 @@ Por ejemplo, una invocación de contrato le mostraría el punto de entrada (o ac
 
 Como nota adicional, cuando una invocación de contrato es exitosa y produce una transacción de salida de contrato, el resultado de la transacción de salida del contrato también se muestra en la transacción de invocación del contrato, ¡lo que permite una experiencia de usuario más fluida!
 
-### Información del testigos (Witness).
+### Información del testigos *(witness)*.
 
 Si alojas un nodo VSC, puedes comprobar si tu nodo está registrado y actualizado en [/witnesses](https://vsc.techcoderx.com/witnesses).
 

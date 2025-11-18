@@ -6,13 +6,13 @@ sidebar:
 
 VSC ofrece a los usuarios una **experiencia sin comisiones** para las interacciones en la cadena al adoptar un sistema similar al **sistema de crédito de recursos (RC) de la blockchain de Hive**, el cual asigna ancho de banda en lugar de cobrar las tarifas de gas tradicionales. Este enfoque elimina las tarifas de gas tradicionales de la experiencia del usuario mientras preserva la descentralización y la integridad de la red. Permite una incorporación y un uso escalables y de baja fricción, adecuados para aplicaciones masivas. La diferencia es que VSC utiliza HBD como base para la distribución de RC, mientras que Hive utiliza HIVE en staking (HP).
 
-## ¿Qué son los créditos de recursos (Resource Credits - RC)?
+## ¿Qué son los créditos de recursos *(Resource Credits - RC)*?
 
 VSC utiliza un modelo de **crédito de recursos (RC)** en lugar de las tarifas de transacción convencionales. Los RC actúan como un sistema interno de asignación de ancho de banda, asegurando el uso justo de la red sin requerir pagos en un token nativo por cada acción.
 
 - Los RC **no son tokens comerciables**.
 - Están **vinculados a la cantidad de HBD** que posee una cuenta.
-- Los RC a menudo son delegados automáticamente a los usuarios por las dApps y otros proyectos asociados a Hive, como VSC, creando una experiencia instantánea sin gas (gasless).
+- Los RC a menudo son delegados automáticamente a los usuarios por las dApps y otros proyectos asociados a Hive, como VSC, creando una experiencia instantánea sin gas *(gasless)*.
 - Cada cuenta de usuario tiene un fondo de RC que **se regenera con el tiempo** a una tasa de aproximadamente el 25% por día, alcanzando su capacidad máxima en unos 4 días si no se utiliza.
 
 Los RC se **consumen** cuando un usuario realiza acciones en la cadena, tales como:

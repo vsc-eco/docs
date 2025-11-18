@@ -20,7 +20,7 @@ Los validadores en la red VSC tienen las siguientes tareas:
 
 ## Arquitectura de seguridad de la bóveda
 
-El sistema de bóvedas VSC gestiona de forma segura los activos digitales de cadena cruzada (cross-chain) utilizando el control de validación descentralizado y la lógica de contratos inteligentes en cadena. Cada bóveda rastrea y gestiona los activos en su respectiva blockchain externa (por ejemplo, las UTXO de Bitcoin) sin depender de un operador central.
+El sistema de bóvedas VSC gestiona de forma segura los activos digitales de cadena cruzada *(cross-chain)* utilizando el control de validación descentralizado y la lógica de contratos inteligentes en cadena. Cada bóveda rastrea y gestiona los activos en su respectiva blockchain externa (por ejemplo, las UTXO de Bitcoin) sin depender de un operador central.
 
 Las medidas de seguridad clave incluyen:
 
@@ -28,7 +28,7 @@ Las medidas de seguridad clave incluyen:
 
 - **Verificación de transacciones:** Las transacciones entrantes y salientes son validadas y confirmadas en la blockchain externa pertinente antes de ser procesadas por la bóveda.
 
-- **Seguridad respaldada por colateral:** Los validadores deben mantener un colateral suficiente. Si el colateral es insuficiente, o si se detecta un comportamiento malicioso, se aplican penalizaciones de confiscación (slashing) y los protocolos de emergencia permiten la retirada segura o la recuperación de activos para proteger a los usuarios.
+- **Seguridad respaldada por colateral:** Los validadores deben mantener un colateral suficiente. Si el colateral es insuficiente, o si se detecta un comportamiento malicioso, se aplican penalizaciones de confiscación *(slashing)* y los protocolos de emergencia permiten la retirada segura o la recuperación de activos para proteger a los usuarios.
 
 - **Instancias de bóveda dedicadas:** Cada blockchain compatible tiene su propia instancia de bóveda dedicada, gestionada de forma independiente por los validadores.
 

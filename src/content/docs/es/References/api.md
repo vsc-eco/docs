@@ -23,7 +23,7 @@ Este documento se centra en las funcionalidades que ofrece la API. Ten en cuenta
 
 Diversas consultas admiten filtros para ayudarte a acotar tu búsqueda. A continuación, se enumeran los ejemplos de datos de entrada para dichos filtros.
 
-## Estado del contrato
+## Contract state
 
 Permite recuperar los datos (IPFS) almacenados por una ejecución de contrato. Te da la capacidad de recuperar datos de ejecuciones de contrato específicas y, por lo tanto, también tienes la posibilidad de inspeccionar ejecuciones pasadas, las cuales ya no representan el estado actual del contrato.
 
@@ -39,7 +39,7 @@ Ejemplo de consulta:
 }
 ```
 
-## Salida del contrato
+## Contract output
 
 Este endpoint te ayuda a encontrar los datos de transacción del `contract output` que necesitas para consultar el estado de la ejecución de tu contrato. Por lo tanto, normalmente estas dos consultas se ejecutan secuencialmente.
 
@@ -70,7 +70,7 @@ Ejemplo de consulta:
 }
 ```
 
-## Buscar transacción
+## Find transaction
 Esta consulta se puede usar para encontrar datos generales de transacciones. Esta consulta, a diferencia de la consulta `contract output`, no se limita a encontrar solo salidas de contrato, sino todo tipo de transacciones (incluidas las no confirmadas).
 
 
@@ -108,7 +108,7 @@ Ejemplo de consulta:
 }
 ```
 
-## Información del nodo local
+## Local node info
 
 Esta consulta se puede usar para determinar la identidad de un nodo.
 
@@ -120,7 +120,7 @@ Esta consulta se puede usar para determinar la identidad de un nodo.
 }
 ```
 
-## Obtener balance de la cuenta
+## Get Account balance
 
 Este endpoint proporciona los balances de la cuenta que están vinculados a la dirección suministrada.
 
@@ -136,7 +136,7 @@ Este endpoint proporciona los balances de la cuenta que están vinculados a la d
 }
 ```
 
-## Enviar transacción V1
+## Submit Transaction V1
 
 Este endpoint se utiliza para enviar transacciones al nodo VSC. Si deseas ingresar transacciones a través de este endpoint, utiliza el [cliente VSC](https://github.com/vsc-eco/client) u obtén inspiración de su base de código.
 

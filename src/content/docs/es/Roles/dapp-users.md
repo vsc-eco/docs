@@ -15,10 +15,10 @@ Los usuarios de aplicaciones descentralizadas (dApps) en VSC se benefician de ma
 - **Propiedad de activos nativos**.
 - **Experiencia sin comisiones:** Una vez que los activos están dentro de VSC, los usuarios pueden moverlos e interactuar con ellos a través de dApps **sin pagar ninguna comisión de red**.
 - **Experiencia de usuario interoperable:** Un usuario con una billetera de ETH puede interactuar sin problemas con aplicaciones que involucren activos basados en Bitcoin o Solana, sin la necesidad de carteras o cadenas adicionales.
-- **Seguro y descentralizado:** Todas las interacciones ocurren en la cadena (on-chain) y están aseguradas por la red de validadores de VSC, lo que elimina la dependencia de servidores centralizados o custodios.
+- **Seguro y descentralizado:** Todas las interacciones ocurren en la cadena *(on-chain)* y están aseguradas por la red de validadores de VSC, lo que elimina la dependencia de servidores centralizados o custodios.
 
 Esto crea una experiencia de usuario fundamentalmente más fluida y poderosa: menos fricción y sin necesidad de gestionar múltiples billeteras para cada cadena de bloques individual.
 
 Las dApps de VSC se comportan como si estuvieras interactuando con una única cadena universal, aunque por debajo estés trabajando con muchos activos nativos diferentes.
 
-En esencia, los usuarios de dApps en VSC obtienen acceso a una **experiencia blockchain de próxima generación:** aplicaciones descentralizadas que son agnósticas a la cadena (chain-agnostic), operación sin comisiones y capaces de manejar activos criptográficos reales y nativos sin problemas.
+En esencia, los usuarios de dApps en VSC obtienen acceso a una **experiencia blockchain de próxima generación:** aplicaciones descentralizadas que son agnósticas a la cadena *(chain-agnostic)*, operación sin comisiones y capaces de manejar activos criptográficos reales y nativos sin problemas.

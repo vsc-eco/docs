@@ -33,7 +33,7 @@ Se ha incluido un contrato de token de ejemplo en el archivo [`examples/token/ma
 ```sh
 cp examples/token/main.go contract
 ```
-El contrato de token cuenta con funciones de acuñación/quema (mint/burn) con límite de suministro (supply cap), transferencia y cambio de propiedad. Actualiza las siguientes constantes al inicio del archivo con los valores deseados:
+El contrato de token cuenta con funciones de acuñación/quema *(mint/burn)* con límite de suministro *(supply cap)*, transferencia y cambio de propiedad. Actualiza las siguientes constantes al inicio del archivo con los valores deseados:
 
 ```go title="main.go"
 const MaxSupply = 1000000
@@ -67,18 +67,18 @@ vsc-contract-deploy -wasmPath build/main-striped.wasm -name "your token name"
 
 ## Inicializar token
 
-Llama a la función `init` desde la dirección propietaria de tu contrato de token, según lo especificado en la constante `Creator`. El cuerpo de la llamada (payload) a contrato no es relevante aquí.
+Llama a la función `init` desde la dirección propietaria de tu contrato de token, según lo especificado en la constante `Creator`. El cuerpo de la llamada *(payload)* a contrato no es relevante aquí.
 
 ## Acuñar tokens
 
-Llama a la función `mint`, donde el cuerpo de la llamada (payload) es la cantidad a acuñar. Los tokens acuñados serán enviados a tu dirección.
+Llama a la función `mint`, donde el cuerpo de la llamada *(payload)* es la cantidad a acuñar. Los tokens acuñados serán enviados a tu dirección.
 
 ## Quemar tokens
 
-Llama a la función `burn`, donde el cuerpo de la llamada (payload) es la cantidad a quemar. Los tokens serán quemados de la dirección que realiza la llamada.
+Llama a la función `burn`, donde el cuerpo de la llamada *(payload)* es la cantidad a quemar. Los tokens serán quemados de la dirección que realiza la llamada.
 
 ## Transferir tokens
 
-Llama a la función `transfer`, donde el cuerpo de la llamada (payload) es una cadena separada por comas de la dirección de destino y la cantidad.
+Llama a la función `transfer`, donde el cuerpo de la llamada *(payload)* es una cadena separada por comas de la dirección de destino y la cantidad.
 
-Por ejemplo, para transferir 10 monedas a `did:pkh:eip155:1:0xtoaddresshere`, el cuerpo de la llamada (payload) debe ser `did:pkh:eip155:1:0xtoaddresshere,10`.
+Por ejemplo, para transferir 10 monedas a `did:pkh:eip155:1:0xtoaddresshere`, el cuerpo de la llamada *(payload)* debe ser `did:pkh:eip155:1:0xtoaddresshere,10`.

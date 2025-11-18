@@ -29,7 +29,7 @@ cd go-vsc-node
 go mod download
 go build -buildvcs=false -o vsc-contract-deploy vsc-node/cmd/contract-deployer
 ```
-Esto generará un ejecutable llamado `vsc-contract-deploy`. Puedes moverlo a tu directorio `PATH` (es decir, `/usr/bin` for Linux or `/usr/local/bin` para macOS).
+Esto generará un ejecutable llamado `vsc-contract-deploy`. Puedes moverlo a tu directorio `PATH` (es decir, `/usr/bin` para Linux o `/usr/local/bin` para macOS).
 
 ---
 
@@ -61,9 +61,9 @@ git clone https://github.com/vsc-eco/go-contract-template
 - go.sum
 </FileTree>
 
-### Contrato "Hola Mundo" (Hello World)
+### Contrato "Hola Mundo" *(Hello World)*
 
-El siguiente contrato demuestra cómo llamar a los métodos del SDK para interactuar con la base de datos del contrato y definir exportaciones WASM para marcar una función como invocable (callable) por cuentas de VSC u otros contratos.
+El siguiente contrato demuestra cómo llamar a los métodos del SDK para interactuar con la base de datos del contrato y definir exportaciones WASM para marcar una función como invocable *(callable)* por cuentas de VSC u otros contratos.
 
 Obtén más información sobre los métodos del SDK de contratos de Go [aquí](/es/references/sdk).
 
@@ -194,7 +194,7 @@ func TestContract(t *testing.T) {
   assert.GreaterOrEqual(t, len(logs), 1)          // asegura que se emitió al menos 1 registro.
 }
 ```
-Obtén más información sobre los métodos proporcionados por las utilidades de prueba de contratos [aquí](/es/references/sdk/#contract-test-utils).
+Obtén más información sobre los métodos proporcionados por las utilidades de prueba de contratos [aquí](/es/references/sdk/#herramientas-de-prueba-de-contratos).
 
 ---
 
@@ -204,7 +204,7 @@ Obtén más información sobre los métodos proporcionados por las utilidades de
 Hay una tarifa de despliegue de **10 HBD** por contrato. Esta se paga con tu saldo en capa 1 (L1).
 </Aside>
 
-En primer lugar, inicializa la configuración del desplegador (deployer):
+En primer lugar, inicializa la configuración del desplegador *(deployer)*:
 
 ```sh
 vsc-contract-deploy -init
@@ -255,7 +255,7 @@ Error in subscription: subscription cancelled
 
 ## Llamar a contrato
 
-Los contratos pueden ser llamados desde capa 1 (L1) utilizando cuentas de Hive o en VSC utilizando cuentas fuera de cadena (off-chain).
+Los contratos pueden ser llamados desde capa 1 (L1) utilizando cuentas de Hive o en VSC utilizando cuentas fuera de cadena *(off-chain)*.
 
 ### Llamar desde capa 1 (L1)
 

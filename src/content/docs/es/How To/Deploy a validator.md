@@ -25,7 +25,7 @@ Requisitos del sistema:
 1. Instalar [Docker](https://docs.docker.com/get-docker/) y [Docker compose v2](https://docs.docker.com/compose/install/).
 2. `git clone https://github.com/vsc-eco/vsc-deployment` Clona este repositorio como un usuario normal (no como root/administrador) en la ubicación deseada. Es crucial asegurarse de que el usuario de Docker tenga permisos de escritura en el directorio donde planeas iniciar el archivo Docker Compose.
 3. `docker compose run init` Inicializar los archivos de configuración
-4. Edita el archivo de configuración ubicado en `./data/config/identityConfig.json` y asegúrate de agregar tu nombre de usuario de Hive y tu clave activa (active key).
+4. Edita el archivo de configuración ubicado en `./data/config/identityConfig.json` y asegúrate de agregar tu nombre de usuario de Hive y tu clave activa *(active key)*.
 4. `docker compose up -d` Inicia los contenedores de Docker. Esto añadirá un servidor GraphQL en el puerto 8080, una instancia de MongoDB en el puerto 27021 y una conexión libp2p en el puerto 10720.
 
 ## Puesta en marcha

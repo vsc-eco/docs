@@ -39,7 +39,7 @@ Los siguientes métodos están dentro del namespace `sdk`. Todos los parámetros
 
 #### Log
 
-Registra un string con fines de depuración (debugging). Los registros emitidos también se adjuntarán al contract output, lo cual puede ser útil para aplicaciones externas (es decir, indexadores).
+Registra un string con fines de depuración *(debugging)*. Los registros emitidos también se adjuntarán al contract output, lo cual puede ser útil para aplicaciones externas (es decir, indexadores).
 
 ```go
 //go:wasmexport entrypoint
@@ -105,7 +105,7 @@ func DumpEnv(a *string) *string {
 
 #### GetEnvKey
 
-Recupera una variable de entorno por clave. La lista de nombres de variables se enumera a [continuación](#env-vars).
+Recupera una variable de entorno por clave. La lista de nombres de variables se enumera a [continuación](#variables-de-entorno).
 
 ```go
 //go:wasmexport dumpEnvKey
@@ -245,8 +245,8 @@ func RevertMe(a *string) *string {
 |`tx.id`|ID de la transacción|
 |`tx.index`|Posición de la transacción en el bloque|
 |`tx.op_index`|Posición de la operación en la transacción|
-|`block.id`|ID del bloque L1 en el que se incluye la transacción. Para las transacciones fuera de la cadena (offchain), esto se refiere a la ID del bloque L1 del bloque VSC en el que se incluyó la transacción.|
-|`block.height`|Número de bloque L1 en el que se incluye la transacción. Para las transacciones fuera de la cadena (offchain), esto se refiere al número de bloque L1 del bloque VSC en el que se incluyó la transacción.|
+|`block.id`|ID del bloque L1 en el que se incluye la transacción. Para las transacciones fuera de la cadena *(offchain)*, esto se refiere a la ID del bloque L1 del bloque VSC en el que se incluyó la transacción.|
+|`block.height`|Número de bloque L1 en el que se incluye la transacción. Para las transacciones fuera de la cadena *(offchain)*, esto se refiere al número de bloque L1 del bloque VSC en el que se incluyó la transacción.|
 |`block.timestamp`|Marca de tiempo de cuándo se incluyó la transacción (es decir, `2025-07-26T14:10:42`).|
 |`msg.sender`|Dirección del remitente de la transacción. Debe ser una dirección de usuario. Si hay múltiples, se devuelve la primera cuenta especificada en `required_auths` o en `required_posting_auths`.|
 |`msg.required_auths`|El campo `required_auths` de la transacción.|

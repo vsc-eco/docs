@@ -39,4 +39,4 @@ El HBD está diseñado para mantener un valor estable, lo que proporciona una ba
 
 - **Profundidad de Liquidez:** Mantener suficiente liquidez de HBD es esencial para garantizar intercambios eficientes y reducir el deslizamiento en todo el ecosistema.
 - **Mantenimiento de la paridad de la moneda estable:** La efectividad de este modelo se basa en que el HBD mantenga su paridad. La blockchain de Hive incluye mecanismos integrados y múltiples salvaguardas diseñadas para monitorear y preservar la estabilidad del HBD a lo largo del tiempo.
-- **Compatibilidad entre cadenas (Cross-Chain):** El soporte para activos de otras blockchains depende del desarrollo y la implementación de bóvedas específicas e integraciones de validadores para cada cadena, lo que permite su emparejamiento seguro con HBD.
+- **Compatibilidad entre cadenas _(Cross-Chain)_:** El soporte para activos de otras blockchains depende del desarrollo y la implementación de bóvedas específicas e integraciones de validadores para cada cadena, lo que permite su emparejamiento seguro con HBD.

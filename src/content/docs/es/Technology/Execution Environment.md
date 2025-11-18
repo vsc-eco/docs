@@ -28,7 +28,7 @@ Esto asegura que la red puede mantener la integridad operativa incluso cuando un
 
 ## Entorno de ejecución de contratos inteligentes
 
-VSC soporta contratos inteligentes compilados a *WebAssembly (WASM)**, lo que permite a los desarrolladores construir lógica en cadena (on-chain) en un formato independiente de la plataforma (platform-agnostic). Los contratos WASM se ejecutan en un entorno aislado que impone:
+VSC soporta contratos inteligentes compilados a **WebAssembly (WASM)**, lo que permite a los desarrolladores construir lógica en cadena *(on-chain)* en un formato independiente de la plataforma *(platform-agnostic)*. Los contratos WASM se ejecutan en un entorno aislado que impone:
 
 - Comportamiento determinista.
 - Límites de stack y memoria.
@@ -41,9 +41,9 @@ Los desarrolladores se benefician de resultados de ejecución consistentes sin n
 Actualmente, VSC soporta el desarrollo de contratos en:
 
 - **Golang:** – Adecuado para contratos de bajo nivel o centrados en el sistema.
-- ~~**AssemblyScript:** Un lenguaje similar a TypeScript con una huella ligera (lightweight footprint) y compatibilidad con WebAssembly.~~
+- ~~**AssemblyScript:** Un lenguaje similar a TypeScript con una huella ligera *(lightweight footprint)* y compatibilidad con WebAssembly.~~
 
-Los contratos pueden ser compilados a WASM y desplegados en la red VSC utilizando SDKs o las herramientas de desarrollo proporcionadas por el protocolo. Apoyar lenguajes familiares y de alto rendimiento reduce la barrera de entrada y el tiempo de implementación (time-to-deploy) para nuevas aplicaciones.
+Los contratos pueden ser compilados a WASM y desplegados en la red VSC utilizando SDKs o las herramientas de desarrollo proporcionadas por el protocolo. Apoyar lenguajes familiares y de alto rendimiento reduce la barrera de entrada y el tiempo de implementación *(time-to-deploy)* para nuevas aplicaciones.
 
 ## Características de ejecución
 

@@ -4,7 +4,7 @@ sidebar:
   order: 10
 ---
 
-VSC en su Capa 2 soporta billeteras compatibles con _ed25519_. Estas se denominan cuentas ligeras (lite accounts) en el contexto de VSC. Se pueden generar de varias maneras. A continuación, se presentan las opciones recomendadas actualmente.
+VSC en su Capa 2 soporta billeteras compatibles con _ed25519_. Estas se denominan cuentas ligeras *(lite accounts)* en el contexto de VSC. Se pueden generar de varias maneras. A continuación, se presentan las opciones recomendadas actualmente.
 
 ## Generador oficial de billeteras
 

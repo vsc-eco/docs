@@ -6,7 +6,7 @@ sidebar:
 
 ## ¿Qué son los proveedores de liquidez?
 
-Los proveedores de liquidez (LPs) son usuarios que añaden tokens a los fondos de liquidez de VSC. Sus contribuciones hacen posible los intercambios entre cadenas (cross-chain swaps) y el comercio descentralizado. A cambio de suministrar activos, los proveedores de liquidez obtienen ingresos por comisiones y pueden ser elegibles para recompensas adicionales. Los proveedores de liquidez son fundamentales para el ecosistema VSC, proporcionando el capital que impulsa los creadores de mercado automatizados (AMM), la liquidación entre cadenas y el enrutamiento eficiente de tokens.
+Los proveedores de liquidez (LPs) son usuarios que añaden tokens a los fondos de liquidez de VSC. Sus contribuciones hacen posible los intercambios entre cadenas *(cross-chain swaps)* y el comercio descentralizado. A cambio de suministrar activos, los proveedores de liquidez obtienen ingresos por comisiones y pueden ser elegibles para recompensas adicionales. Los proveedores de liquidez son fundamentales para el ecosistema VSC, proporcionando el capital que impulsa los creadores de mercado automatizados (AMM), la liquidación entre cadenas y el enrutamiento eficiente de tokens.
 
 A diferencia de los intercambios centralizados, donde unos pocos creadores de mercado controlan la liquidez, VSC abre la puerta para que cualquiera se convierta en un proveedor de liquidez y gane recompensas proporcionando liquidez.
 
@@ -20,7 +20,7 @@ Este diseño proporciona dos beneficios clave:
 
 - Reducción del riesgo de exposición para los proveedores de liquidez, quienes solo necesitan lidiar con un activo volátil.
 
-- Enrutamiento simplificado y estandarizado para los intercambios entre cadenas (cross-chain swaps).
+- Enrutamiento simplificado y estandarizado para los intercambios entre cadenas *(cross-chain swaps)*.
 
 ## Cómo funciona la provisión de liquidez
 
@@ -40,7 +40,7 @@ Una vez depositados:
 - Usted recibe tokens LP que representan su participación en el fondo.
 - Estos tokens pueden ser canjeados en cualquier momento para retirar sus activos subyacentes y los ingresos generados por comisiones.
 
-**Facilitando intercambios (swaps):**
+**Facilitando intercambios *(swaps)*:**
 
 A medida que los usuarios realizan intercambios (por ejemplo, ETH por SOL), su fondo se utiliza para procesar una porción de esa operación. Esto cambia el balance de tokens en el fondo, y usted gana una comisión por suministrar la liquidez utilizada en la transacción.
 
@@ -48,7 +48,7 @@ A medida que los usuarios realizan intercambios (por ejemplo, ETH por SOL), su f
 
 Los proveedores de liquidez (LPs) son recompensado a través de dos mecanismos principales:
 
-**1. Comisiones por intercambio (swap fees)**
+**1. Comisiones por intercambio _(swap fees)_**
 
 Una porción de cada comisión por intercambio se distribuye proporcionalmente a todos los proveedores de liquidez en el fondo.
 
@@ -65,7 +65,7 @@ La liquidez se puede retirar en cualquier momento canjeando (quemando) los token
 
 ## Herramientas para los proveedores de liquidez (LPs)
 
-- **Altera:** Es la interfaz principal de VSC para la provisión de liquidez. A través de Altera, los usuarios pueden monitorizar posiciones, hacer seguimiento del rendimiento (yield) e interactuar directamente con los fondos de liquidez de manera segura e intuitiva. Altera es una interfaz de trading descentralizado con soporte para funciones avanzadas de proveedores de liquidez, análisis e integración de gobernanza.
+- **Altera:** Es la interfaz principal de VSC para la provisión de liquidez. A través de Altera, los usuarios pueden monitorizar posiciones, hacer seguimiento del rendimiento *(yield)* e interactuar directamente con los fondos de liquidez de manera segura e intuitiva. Altera es una interfaz de trading descentralizado con soporte para funciones avanzadas de proveedores de liquidez, análisis e integración de gobernanza.
 
 ## Cómo convertirse en un proveedor de liquidez (LPs) - Paso a paso
 
@@ -75,9 +75,9 @@ La liquidez se puede retirar en cualquier momento canjeando (quemando) los token
 4. **Depositar activos:** Suministre un valor equivalente en USD de ambos activos y confirme su depósito para recibir tokens LP.
 5. **Ganar y monitorea:** Una vez depositada, su liquidez genera ingresos por comisiones de intercambio de forma pasiva. Use Altera para monitorear el rendimiento, las comisiones y la exposición.
 
-## Pérdida temporal (Impermanent loss)
+## Pérdida temporal *(Impermanent loss)*
 
-La pérdida temporal ocurre cuando el precio de los tokens en un fondo de liquidez cambia en comparación con el momento en que usted los depositó. Esto puede causar que su valor de retiro sea inferior a si simplemente hubiera mantenido (holding) los tokens. Las comisiones y las recompensas pueden compensar esta pérdida, pero es importante ser consciente de este riesgo al proveer liquidez.
+La pérdida temporal ocurre cuando el precio de los tokens en un fondo de liquidez cambia en comparación con el momento en que usted los depositó. Esto puede causar que su valor de retiro sea inferior a si simplemente hubiera mantenido *(holding)* los tokens. Las comisiones y las recompensas pueden compensar esta pérdida, pero es importante ser consciente de este riesgo al proveer liquidez.
 
 ## Conclusiones finales
 
