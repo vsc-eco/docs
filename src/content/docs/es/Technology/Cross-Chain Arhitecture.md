@@ -4,27 +4,27 @@ sidebar:
   order: 8
 ---
 
-Esta sección describe cómo VSC se interconecta con blockchains externas, procesa las transacciones entrantes, gestiona las bóvedas y garantiza la seguridad durante las operaciones de cadena cruzada *(Cross-Chain)*.
+Esta sección describe cómo VSC se interconecta con *blockchains* externas, procesa las transacciones entrantes, gestiona las bóvedas y garantiza la seguridad durante las operaciones de cadena cruzada *(Cross-Chain)*.
 
 ## Interfaz con cadenas externas
 
 VSC se interconecta con cadenas externas a través de una combinación de:
 
-- **Clientes ligeros de blockchain.**
+- **Clientes ligeros de _blockchain_.**
 - **Pruebas de conocimiento cero _(Zero-knowledge proofs - ZKPs)_.**
 - **Esquemas de firma umbral (TSS).**
 
-Estos componentes permiten a VSC operar sin confianza *(trustlessly)* y sin custodios centralizados. Esta arquitectura elimina la necesidad de custodios centralizados, permitiendo a los usuarios interactuar con blockchains externas sin renunciar al control de sus activos.
+Estos componentes permiten a VSC operar sin la necesidad de una autoridad central o un tercero de confianza *(trustlessly)* y sin custodios centralizados. Esta arquitectura elimina la necesidad de custodios centralizados, permitiendo a los usuarios interactuar con *blockchains* externas sin renunciar al control de sus activos.
 
 ## Flujo de transacciones entrantes
 
 Las transacciones entrantes de cadenas externas se procesan de la siguiente manera:
 
 1. **Los retransmisores _(relays)_** monitorean e indexan eventos o transacciones en las cadenas compatibles.
-2. Estas transacciones son **transmitidas a la red VSC**, donde son validadas utilizando el cliente ligero de blockchain apropiado.
+2. Estas transacciones son **transmitidas a la red VSC**, donde son validadas utilizando el cliente ligero de *blockchain* apropiado.
 3. Una vez validada, la transacción desencadena una operación en VSC, como por ejemplo:
 
-   - La acuñación de un token *(Minting)*.
+   - La acuñación de un *token* *(Minting)*.
    - La ejecución de un intercambio *(swap)*.
    - La realización de una llamada a contrato *(contract call)*.
 

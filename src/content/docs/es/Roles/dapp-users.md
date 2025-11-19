@@ -21,4 +21,4 @@ Esto crea una experiencia de usuario fundamentalmente más fluida y poderosa: me
 
 Las dApps de VSC se comportan como si estuvieras interactuando con una única cadena universal, aunque por debajo estés trabajando con muchos activos nativos diferentes.
 
-En esencia, los usuarios de dApps en VSC obtienen acceso a una **experiencia blockchain de próxima generación:** aplicaciones descentralizadas que son agnósticas a la cadena *(chain-agnostic)*, operación sin comisiones y capaces de manejar activos criptográficos reales y nativos sin problemas.
+En esencia, los usuarios de dApps en VSC obtienen acceso a una **experiencia _blockchain_ de próxima generación:** aplicaciones descentralizadas que son agnósticas a la cadena *(chain-agnostic)*, operación sin comisiones y capaces de manejar activos criptográficos reales y nativos sin problemas.

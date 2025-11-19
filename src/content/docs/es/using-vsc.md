@@ -18,13 +18,13 @@ En VSC, los fondos de liquidez están diseñados para emparejar un activo volát
 
 ## Creación y emparejamiento del fondo de liquidez (LP)
 
-Todo fondo de liquidez en VSC implica emparejar un activo volátil (como BTC, ETH, SOL) con **HBD**. Por ejemplo, un fondo de liquidez **BTC/HBD** contendría tanto tokens BTC como HBD. Al proporcionar liquidez a este fondo, los proveedores de liquidez (LPs) depositan valores iguales de ambos activos (por ejemplo, una cantidad de BTC y una cantidad equivalente de HBD) en el fondo.
+Todo fondo de liquidez en VSC implica emparejar un activo volátil (como BTC, ETH, SOL) con **HBD**. Por ejemplo, un fondo de liquidez **BTC/HBD** contendría tanto *tokens* BTC como HBD. Al proporcionar liquidez a este fondo, los proveedores de liquidez (LPs) depositan valores iguales de ambos activos (por ejemplo, una cantidad de BTC y una cantidad equivalente de HBD) en el fondo.
 
 ## El rol de HBD
 
-**HBD**, la stablecoin de VSC, funciona como el **activo base** en todos los fondos de liquidez. Esto significa que cada par de liquidez incluye a **HBD** como uno de los activos.
+**HBD**, la *stablecoin* de VSC, funciona como el **activo base** en todos los fondos de liquidez. Esto significa que cada par de liquidez incluye a **HBD** como uno de los activos.
 
-El rol de HBD como stablecoin mitiga los riesgos asociados a la volatilidad. Dado que HBD está respaldado algorítmicamente, los proveedores de liquidez (LPs) están expuestos a una volatilidad de un solo lado - la del activo volátil en el par (por ejemplo, BTC, ETH, HIVE). Esto reduce la complejidad de cubrirse *(hedging)* contra múltiples activos volátiles.
+El rol de HBD como *stablecoin* mitiga los riesgos asociados a la volatilidad. Dado que HBD está respaldado algorítmicamente, los proveedores de liquidez (LPs) están expuestos a una volatilidad de un solo lado - la del activo volátil en el par (por ejemplo, BTC, ETH, HIVE). Esto reduce la complejidad de cubrirse *(hedging)* contra múltiples activos volátiles.
 
 ## Algoritmo del creador de mercado automatizado (AMM)
 
@@ -42,6 +42,6 @@ Para participar en los mecanismos de validación y seguridad de VSC, los usuario
 
 - **Ejecutar un Nodo:** Para convertirse en un validador en la red descentralizada de VSC, los usuarios deben ejecutar un nodo que participe activamente en la verificación de transacciones y en la seguridad de los activos bloqueados en la plataforma. Ejecutar un nodo contribuye al sistema de validación descentralizada de VSC y garantiza el funcionamiento correcto del protocolo.
 
-- **Bloquear *(Staking)* HIVE:** Se requiere que los validadores mantengan bloqueado *(stake)* un mínimo de **2.000 tokens HIVE** como garantía. Esta garantía se utiliza para asegurar la red e incentivar el comportamiento honesto. Los validadores que actúen de forma maliciosa o no cumplan con sus obligaciones *(duties)* pueden perder parte del sus HIVE bloqueados.
+- **Bloquear *(Staking)* HIVE:** Se requiere que los validadores mantengan bloqueado *(stake)* un mínimo de **2.000 _tokens_ HIVE** como garantía. Esta garantía se utiliza para asegurar la red e incentivar el comportamiento honesto. Los validadores que actúen de forma maliciosa o no cumplan con sus obligaciones *(duties)* pueden perder parte del sus HIVE bloqueados.
 
-- **Interacción con VSC (ALTERA):** Altera es la primera dApp (aplicación descentralizada) de VSC, una plataforma para gestionar activos e intercambios entre cadenas *(cross-chain swaps)* dentro de VSC. Permite a los usuarios llevar a cabo la gestión de activos, ejecutar intercambios entre cadenas e interactuar con el ecosistema VSC. Altera es compatible con transacciones y seguimiento de activos a través de múltiples blockchains, proporcionando una interfaz unificada que simplifica las actividades de finanzas descentralizadas (DeFi) sin requerir que los usuarios gestionen los detalles técnicos de cada blockchain individual.
+- **Interacción con VSC (ALTERA):** Altera es la primera dApp (aplicación descentralizada) de VSC, una plataforma para gestionar activos e intercambios entre cadenas *(cross-chain swaps)* dentro de VSC. Permite a los usuarios llevar a cabo la gestión de activos, ejecutar intercambios entre cadenas e interactuar con el ecosistema VSC. Altera es compatible con transacciones y seguimiento de activos a través de múltiples *blockchains*, proporcionando una interfaz unificada que simplifica las actividades de finanzas descentralizadas (DeFi) sin requerir que los usuarios gestionen los detalles técnicos de cada *blockchain* individual.

@@ -24,7 +24,7 @@ Al hacer clic en los hashes de transacción en varias partes del explorador de b
 
 Dependiendo del tipo de transacción, esta expone diversa información que es importante en el contexto actual.
 
-Por ejemplo, una invocación de contrato le mostraría el punto de entrada (o acción del contrato) que se ejecutó, así como los parámetros (o el cuerpo de la llamada - payload).
+Por ejemplo, una invocación de contrato le mostraría el punto de entrada (o acción del contrato) que se ejecutó, así como los parámetros (o el cuerpo de la llamada - *payload*).
 
 Como nota adicional, cuando una invocación de contrato es exitosa y produce una transacción de salida de contrato, el resultado de la transacción de salida del contrato también se muestra en la transacción de invocación del contrato, ¡lo que permite una experiencia de usuario más fluida!
 

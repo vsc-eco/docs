@@ -9,12 +9,12 @@ import { Aside } from '@astrojs/starlight/components'
 El SDK de VSC es una librería que abstrae diversas funcionalidades que son útiles en el contexto de escribir un contrato inteligente VSC.
 
 <Aside type="tip" title="Dato útil">
-También ofrece acceso a la capa de base de datos del contrato inteligente al namespaces de nombres e interfaces. En la etapa de ejecución del contrato, las invocaciones de dichas interfaces se traducen en llamadas generalizadas al nodo VSC. Esto garantiza que dichas funcionalidades sean iguales independientemente del lenguaje de implementación del SDK.
+También ofrece acceso a la capa de base de datos del contrato inteligente al *namespaces* de nombres e interfaces. En la etapa de ejecución del contrato, las invocaciones de dichas interfaces se traducen en llamadas generalizadas al nodo VSC. Esto garantiza que dichas funcionalidades sean iguales independientemente del lenguaje de implementación del SDK.
 </Aside>
 
 ## SDK de contrato en Go
 
-El [SDK de contrato en Go](https://github.com/vsc-eco/go-contract-template) implementa runtime y las funciones de SDK necesarias para el entorno de contratos inteligentes VSC.
+El [SDK de contrato en Go](https://github.com/vsc-eco/go-contract-template) implementa *runtime* y las funciones de SDK necesarias para el entorno de contratos inteligentes VSC.
 
 ### Ejemplo de uso
 
@@ -35,11 +35,11 @@ func Entrypoint(a *string) *string {
 
 ### Métodos SDK
 
-Los siguientes métodos están dentro del namespace `sdk`. Todos los parámetros y tipos de retorno son de tipo `*string`.
+Los siguientes métodos están dentro del *namespace* `sdk`. Todos los parámetros y tipos de retorno son de tipo `*string`.
 
 #### Log
 
-Registra un string con fines de depuración *(debugging)*. Los registros emitidos también se adjuntarán al contract output, lo cual puede ser útil para aplicaciones externas (es decir, indexadores).
+Registra un *string* con fines de depuración *(debugging)*. Los registros emitidos también se adjuntarán al *contract output*, lo cual puede ser útil para aplicaciones externas (es decir, indexadores).
 
 ```go
 //go:wasmexport entrypoint
@@ -252,7 +252,7 @@ func RevertMe(a *string) *string {
 |`msg.required_auths`|El campo `required_auths` de la transacción.|
 |`msg.required_posting_auths`|El campo `required_posting_auths` de la transacción.|
 |`msg.caller`|La dirección que está llamando al contrato. Puede ser una ID de contrato o una dirección de usuario.|
-|`intents`|Lista de intents pasadas a la transacción (es decir, asignación de tokens).|
+|`intents`|Lista de *intents* pasadas a la transacción (es decir, asignación de *tokens*).|
 
 ## Códigos de error
 
@@ -260,7 +260,7 @@ func RevertMe(a *string) *string {
 |-|-|
 |`runtime_error`|Error genérico del tiempo de ejecución WASM.|
 |`runtime_abort`|Ejecución de la transacción abortada en tiempo de ejecución.|
-|`ic_invalid_payload`|Payload de la llamada entre contratos no válida.|
+|`ic_invalid_payload`|*Payload* de la llamada entre contratos no válida.|
 |`ic_contract_not_found`|El contrato llamado por otro contrato no existe.|
 |`ic_contract_get_error`|Ocurrió un error al obtener la información del contrato durante la llamada entre contratos.|
 |`ic_code_fetch_error`|Ocurrió un error al obtener el código del contrato durante la llamada entre contratos.|
@@ -270,7 +270,7 @@ func RevertMe(a *string) *string {
 |`sdk_error`|Error genérico de llamada al SDK.|
 |`missing_required_auth`|Falta la autoridad requerida.|
 |`env_var_error`|Error al serializar o analizar las variables de entorno.|
-|`ledger_error`|Error al ejecutar la transferencia de tokens (es decir, debido a balance insuficiente).|
+|`ledger_error`|Error al ejecutar la transferencia de *tokens* (es decir, debido a balance insuficiente).|
 |`ledger_intent_error`|Faltan intenciones o se intenta retirar saldos por encima del límite especificado.|
 |`wasm_init_error`|Error al inicializar el contexto de ejecución WASM.|
 |`wasm_ret_error`|La llamada al contrato no devolvió exactamente un valor.|

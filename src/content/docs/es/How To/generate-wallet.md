@@ -8,7 +8,7 @@ VSC en su Capa 2 soporta billeteras compatibles con _ed25519_. Estas se denomina
 
 ## Generador oficial de billeteras
 
-La forma oficial y recomendada de generar una cuenta ligera es a través del repositorio del generador de carteras.
+La forma oficial y recomendada de generar una cuenta ligera es a través del repositorio del generador de billeteras.
 
 Está basado en NodeJS y es bastante ligero.
 

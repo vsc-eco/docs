@@ -17,7 +17,7 @@ Esta URL se utiliza para consultas en el código, pero también se puede acceder
 
 Tenemos una API pública, accesible para todos en [https://api.vsc.eco/api/v1/graphql](https://api.vsc.eco/api/v1/graphql).
 
-Este documento se centra en las funcionalidades que ofrece la API. Ten en cuenta que el estado de la API cambia frecuentemente en estas etapas tempranas de desarrollo, por lo que este documento podría no estar actualizado. Si una consulta no funciona o crees que falta una característica por completo, ¡no dudes en contactar al equipo de desarrollo de VSC en [Discord](https://discord.gg/a8eXS7TC)!
+Este documento se centra en las funcionalidades que ofrece la API. Ten en cuenta que el estado de la API cambia frecuentemente en estas etapas tempranas de desarrollo, por lo que este documento podría no estar actualizado. Si una consulta no funciona o crees que falta una característica por completo, ¡no dudes en contactar al equipo de desarrollo de VSC en [Discord](http://discord.gg/yvGXZsQTU6)!
 
 ## Opciones de filtro
 
@@ -41,9 +41,9 @@ Ejemplo de consulta:
 
 ## Contract output
 
-Este endpoint te ayuda a encontrar los datos de transacción del `contract output` que necesitas para consultar el estado de la ejecución de tu contrato. Por lo tanto, normalmente estas dos consultas se ejecutan secuencialmente.
+Este *endpoint* te ayuda a encontrar los datos de transacción del `contract output` que necesitas para consultar el estado de la ejecución de tu contrato. Por lo tanto, normalmente estas dos consultas se ejecutan secuencialmente.
 
-Generalmente, este endpoint se consulta utilizando las opciones de filtro disponibles. Sin ellas, solo devuelve las últimas salidas de contrato, lo cual no es una consulta fiable para obtener los resultados de contrato que te interesan.
+Generalmente, este *endpoint* se consulta utilizando las opciones de filtro disponibles. Sin ellas, solo devuelve las últimas salidas de contrato, lo cual no es una consulta fiable para obtener los resultados de contrato que te interesan.
 
 Filtros admitidos
 
@@ -122,7 +122,7 @@ Esta consulta se puede usar para determinar la identidad de un nodo.
 
 ## Get Account balance
 
-Este endpoint proporciona los balances de la cuenta que están vinculados a la dirección suministrada.
+Este *endpoint* proporciona los balances de la cuenta que están vinculados a la dirección suministrada.
 
 ```txt
 {
@@ -138,8 +138,8 @@ Este endpoint proporciona los balances de la cuenta que están vinculados a la d
 
 ## Submit Transaction V1
 
-Este endpoint se utiliza para enviar transacciones al nodo VSC. Si deseas ingresar transacciones a través de este endpoint, utiliza el [cliente VSC](https://github.com/vsc-eco/client) u obtén inspiración de su base de código.
+Este *endpoint* se utiliza para enviar transacciones al nodo VSC. Si deseas ingresar transacciones a través de este *endpoint*, utiliza el [cliente VSC](https://github.com/vsc-eco/client) u obtén inspiración de su base de código.
 
-## Otros endpoints
+## Otros *endpoints*
 
-Los otros endpoints disponibles están dirigidos principalmente a la operación del nodo y a usuarios avanzados de la red VSC. No se utilizan comúnmente en la operación normal. Si tienes preguntas sobre estos endpoints, consulta a los desarrolladores de VSC.
+Los otros *endpoints* disponibles están dirigidos principalmente a la operación del nodo y a usuarios avanzados de la red VSC. No se utilizan comúnmente en la operación normal. Si tienes preguntas sobre estos *endpoints*, consulta a los desarrolladores de VSC.

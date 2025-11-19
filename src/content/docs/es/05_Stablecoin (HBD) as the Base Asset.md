@@ -27,7 +27,7 @@ El uso de HBD como intermediario universal permite intercambios de activos de fo
 
 ### Estabilidad y previsibilidad
 
-El HBD está diseñado para mantener un valor estable, lo que proporciona una base predecible para los fondos de liquidez. Esta estabilidad reduce la exposición a las perturbaciones de volatilidad que se observan a menudo en los sistemas que utilizan tokens volátiles como pares base, protegiendo a los proveedores de liquidez y a los traders de las fluctuaciones repentinas de precios.
+El HBD está diseñado para mantener un valor estable, lo que proporciona una base predecible para los fondos de liquidez. Esta estabilidad reduce la exposición a las perturbaciones de volatilidad que se observan a menudo en los sistemas que utilizan *tokens* volátiles como pares base, protegiendo a los proveedores de liquidez y a los traders de las fluctuaciones repentinas de precios.
 
 - **Reducción de la fragmentación del fondo:** Emparejar activos con HBD disminuye el número de fondos de liquidez necesarios, lo que puede ayudar a concentrar la liquidez y mejorar la eficiencia del capital.
 
@@ -38,5 +38,5 @@ El HBD está diseñado para mantener un valor estable, lo que proporciona una ba
 ## Consideraciones
 
 - **Profundidad de Liquidez:** Mantener suficiente liquidez de HBD es esencial para garantizar intercambios eficientes y reducir el deslizamiento en todo el ecosistema.
-- **Mantenimiento de la paridad de la moneda estable:** La efectividad de este modelo se basa en que el HBD mantenga su paridad. La blockchain de Hive incluye mecanismos integrados y múltiples salvaguardas diseñadas para monitorear y preservar la estabilidad del HBD a lo largo del tiempo.
-- **Compatibilidad entre cadenas _(Cross-Chain)_:** El soporte para activos de otras blockchains depende del desarrollo y la implementación de bóvedas específicas e integraciones de validadores para cada cadena, lo que permite su emparejamiento seguro con HBD.
+- **Mantenimiento de la paridad de la moneda estable:** La efectividad de este modelo se basa en que el HBD mantenga su paridad. La *blockchain* de Hive incluye mecanismos integrados y múltiples salvaguardas diseñadas para monitorear y preservar la estabilidad del HBD a lo largo del tiempo.
+- **Compatibilidad entre cadenas _(Cross-Chain)_:** El soporte para activos de otras *blockchains* depende del desarrollo y la implementación de bóvedas específicas e integraciones de validadores para cada cadena, lo que permite su emparejamiento seguro con HBD.

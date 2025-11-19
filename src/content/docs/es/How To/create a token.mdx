@@ -6,7 +6,7 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components'
 
-Este tutorial describe el proceso de creación de un token fungible básico en VSC.
+Este tutorial describe el proceso de creación de un *token* fungible básico en VSC.
 
 <Aside type="note" title="Lectura previa">
 Esta guía asume que has leído la guía de desarrollo de contratos inteligentes [aquí](/es/how-to/smart-contract-development).
@@ -22,18 +22,18 @@ git clone https://github.com/vsc-eco/go-contract-template your-token
 cd your-token
 ```
 
-## Escribe tu contrato de token
+## Escribe tu contrato de *token*
 
 <Aside type="caution">
-La especificación para definir los contratos de token de VSC no es definitiva.
+La especificación para definir los contratos de *token* de VSC no es definitiva.
 </Aside>
 
-Se ha incluido un contrato de token de ejemplo en el archivo [`examples/token/main.go`](https://github.com/vsc-eco/go-contract-template/blob/main/examples/token/main.go). Puedes copiar este archivo a `contract/main.go` para usarlo como punto de partida.
+Se ha incluido un contrato de *token* de ejemplo en el archivo [`examples/token/main.go`](https://github.com/vsc-eco/go-contract-template/blob/main/examples/token/main.go). Puedes copiar este archivo a `contract/main.go` para usarlo como punto de partida.
 
 ```sh
 cp examples/token/main.go contract
 ```
-El contrato de token cuenta con funciones de acuñación/quema *(mint/burn)* con límite de suministro *(supply cap)*, transferencia y cambio de propiedad. Actualiza las siguientes constantes al inicio del archivo con los valores deseados:
+El contrato de *token* cuenta con funciones de acuñación/quema *(mint/burn)* con límite de suministro *(supply cap)*, transferencia y cambio de propiedad. Actualiza las siguientes constantes al inicio del archivo con los valores deseados:
 
 ```go title="main.go"
 const MaxSupply = 1000000
@@ -43,12 +43,12 @@ const Creator = "hive:vaultec.vsc"
 ```
 
 <Aside type="note">
-La dirección del `Creator` será el propietario inicial de tu contrato de token. Necesitarás tener acceso a esta cuenta para inicializar tu token y acuñar nuevos tokens.
+La dirección del `Creator` será el propietario inicial de tu contrato de *token*. Necesitarás tener acceso a esta cuenta para inicializar tu *token* y acuñar nuevos *tokens*.
 </Aside>
 
-## Desplegar token
+## Desplegar *token*
 
-Compila tu contrato de token:
+Compila tu contrato de *token*:
 
 ```sh
 tinygo build -gc=custom -scheduler=none -panic=trap -no-debug -target=wasm-unknown -o build/main.wasm contract/main.go
@@ -65,19 +65,19 @@ vsc-contract-deploy -init
 vsc-contract-deploy -wasmPath build/main-striped.wasm -name "your token name"
 ```
 
-## Inicializar token
+## Inicializar *token*
 
-Llama a la función `init` desde la dirección propietaria de tu contrato de token, según lo especificado en la constante `Creator`. El cuerpo de la llamada *(payload)* a contrato no es relevante aquí.
+Llama a la función `init` desde la dirección propietaria de tu contrato de *token*, según lo especificado en la constante `Creator`. El cuerpo de la llamada *(payload)* a contrato no es relevante aquí.
 
-## Acuñar tokens
+## Acuñar *tokens*
 
 Llama a la función `mint`, donde el cuerpo de la llamada *(payload)* es la cantidad a acuñar. Los tokens acuñados serán enviados a tu dirección.
 
-## Quemar tokens
+## Quemar *tokens*
 
-Llama a la función `burn`, donde el cuerpo de la llamada *(payload)* es la cantidad a quemar. Los tokens serán quemados de la dirección que realiza la llamada.
+Llama a la función `burn`, donde el cuerpo de la llamada *(payload)* es la cantidad a quemar. Los *tokens* serán quemados de la dirección que realiza la llamada.
 
-## Transferir tokens
+## Transferir *tokens*
 
 Llama a la función `transfer`, donde el cuerpo de la llamada *(payload)* es una cadena separada por comas de la dirección de destino y la cantidad.
 

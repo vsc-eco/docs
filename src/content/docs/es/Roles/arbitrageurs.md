@@ -13,6 +13,6 @@ Los beneficios clave incluyen:
 
 - **Oportunidades entre cadenas:** Obtener ganancias de las diferencias de precio a través de múltiples cadenas conectadas a VSC.
 - **Comercio de activos nativos:** Comerciar con activos nativos reales (por ejemplo, BTC, ETH).
-- **Descentralizado y seguro:** Operar en un entorno sin confianza y asegurado por validadores, garantizando la seguridad y transparencia de la operación.
+- **Descentralizado y seguro:** Operar en un entorno sin la necesidad de una autoridad central o un tercero de confianza *(trustless)* y asegurado por validadores, garantizando la seguridad y transparencia de la operación.
 
 Los arbitrajistas ayudan a mantener el equilibrio de precios a lo largo del ecosistema VSC al actuar sobre las ineficiencias del mercado, impulsando la liquidez y la estabilidad.

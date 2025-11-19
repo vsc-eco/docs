@@ -6,14 +6,14 @@ sidebar:
 
 *Transferencia de valor sin comisiones a través de la asignación de activos nativos dentro de VSC.*
 
-Los **remitentes y destinatarios** son usuarios que utilizan VSC para enviar valor **entre direcciones de billeteras en diferentes blockchain que están conectadas a VSC**, como por ejemplo, enviar BTC a una dirección de billetera Ethereum, sin necesidad de utilizar puentes *(bridge)s* tradicionales, intercambios *(swaps)* o fondos de liquidez. Todo esto sucede **dentro de VSC**, utilizando su sistema de contabilidad interno y la abstracción de la capa de billetera *(wallet-layer abstraction)*, impulsado por la **asignación de activos nativos**.
+Los **remitentes y destinatarios** son usuarios que utilizan VSC para enviar valor **entre direcciones de billeteras en diferentes _blockchain_ que están conectadas a VSC**, como por ejemplo, enviar BTC a una dirección de billetera Ethereum, sin necesidad de utilizar puentes *(bridges)* tradicionales, intercambios *(swaps)* o fondos de liquidez. Todo esto sucede **dentro de VSC**, utilizando su sistema de contabilidad interno y la abstracción de la capa de billetera *(wallet-layer abstraction)*, impulsado por la **asignación de activos nativos**.
 
 ### Lo que permite la Asignación de Activos Nativos
 
-La **asignación de activos nativos** es el mecanismo de VSC para vincular direcciones de billetera en diferentes blockchains y permitir la transferencia de los respectivos activos nativos entre esas billeteras. Permite a los usuarios:
+La **asignación de activos nativos** es el mecanismo de VSC para vincular direcciones de billetera en diferentes *blockchains* y permitir la transferencia de los respectivos activos nativos entre esas billeteras. Permite a los usuarios:
 
-- Conectar billeteras de diferentes blockchains (BTC, ETH, SOL, etc.) a VSC.
-- Enviar activos nativos (por ejemplo, BTC) a una dirección de billetera conectada y asociada con otra blockchain (por ejemplo, una billetera ETH).
+- Conectar billeteras de diferentes *blockchains* (BTC, ETH, SOL, etc.) a VSC.
+- Enviar activos nativos (por ejemplo, BTC) a una dirección de billetera conectada y asociada con otra *blockchain* (por ejemplo, una billetera ETH).
 - Recibir activos nativos.
 
 El remitente paga una comisión de red única para depositar el activo en VSC; el protocolo gestiona el cambio en el libro de contabilidad interno, y el destinatario puede enviar ese activo a cualquier otra dirección de billetera conectada a VSC.
