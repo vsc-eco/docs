@@ -1,0 +1,84 @@
+---
+title: Crear un Token
+sidebar:
+  order: 12
+---
+
+import { Aside } from '@astrojs/starlight/components'
+
+Este tutorial describe el proceso de creación de un *token* fungible básico en VSC.
+
+<Aside type="note" title="Lectura previa">
+Esta guía asume que has leído la guía de desarrollo de contratos inteligentes [aquí](/es/how-to/smart-contract-development).
+
+</Aside>
+
+## Configuración
+
+Clona la plantilla del contrato Go:
+
+```sh
+git clone https://github.com/vsc-eco/go-contract-template your-token
+cd your-token
+```
+
+## Escribe tu contrato de *token*
+
+<Aside type="caution">
+La especificación para definir los contratos de *token* de VSC no es definitiva.
+</Aside>
+
+Se ha incluido un contrato de *token* de ejemplo en el archivo [`examples/token/main.go`](https://github.com/vsc-eco/go-contract-template/blob/main/examples/token/main.go). Puedes copiar este archivo a `contract/main.go` para usarlo como punto de partida.
+
+```sh
+cp examples/token/main.go contract
+```
+El contrato de *token* cuenta con funciones de acuñación/quema *(mint/burn)* con límite de suministro *(supply cap)*, transferencia y cambio de propiedad. Actualiza las siguientes constantes al inicio del archivo con los valores deseados:
+
+```go title="main.go"
+const MaxSupply = 1000000
+const Precision = 3
+const Symbol = "TOKEN"
+const Creator = "hive:vaultec.vsc"
+```
+
+<Aside type="note">
+La dirección del `Creator` será el propietario inicial de tu contrato de *token*. Necesitarás tener acceso a esta cuenta para inicializar tu *token* y acuñar nuevos *tokens*.
+</Aside>
+
+## Desplegar *token*
+
+Compila tu contrato de *token*:
+
+```sh
+tinygo build -gc=custom -scheduler=none -panic=trap -no-debug -target=wasm-unknown -o build/main.wasm contract/main.go
+wasm-tools strip -o build/main-striped.wasm build/main.wasm
+```
+
+A continuación, despliegue el contrato:
+
+```sh
+# If not done already, init config and fill in deployer active key
+vsc-contract-deploy -init
+
+# Deploy token
+vsc-contract-deploy -wasmPath build/main-striped.wasm -name "your token name"
+```
+
+## Inicializar *token*
+
+Llama a la función `init` desde la dirección propietaria de tu contrato de *token*, según lo especificado en la constante `Creator`. El cuerpo de la llamada *(payload)* a contrato no es relevante aquí.
+
+## Acuñar *tokens*
+
+Llama a la función `mint`, donde el cuerpo de la llamada *(payload)* es la cantidad a acuñar. Los tokens acuñados serán enviados a tu dirección.
+
+## Quemar *tokens*
+
+Llama a la función `burn`, donde el cuerpo de la llamada *(payload)* es la cantidad a quemar. Los *tokens* serán quemados de la dirección que realiza la llamada.
+
+## Transferir *tokens*
+
+Llama a la función `transfer`, donde el cuerpo de la llamada *(payload)* es una cadena separada por comas de la dirección de destino y la cantidad.
+
+Por ejemplo, para transferir 10 monedas a `did:pkh:eip155:1:0xtoaddresshere`, el cuerpo de la llamada *(payload)* debe ser `did:pkh:eip155:1:0xtoaddresshere,10`.
