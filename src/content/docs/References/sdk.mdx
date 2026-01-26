@@ -210,6 +210,52 @@ func ContractCall(a *string) *string {
 }
 ```
 
+#### TSS Create Key
+
+Request a TSS key to be created. Algo must be either ecdsa or eddsa.
+
+Returns `created` upon successful request, or `already_exists` if the key already exists.
+
+```go
+//go:wasmexport tssCreateKey
+func TssCreateKey(a *string) *string {
+  // ...
+  status := sdk.TssCreateKey("key id", "ecdsa")
+  // ...
+}
+```
+
+#### TSS Get Key
+
+Get details of a TSS key. Returns a comma-separated string consists of status, public key and algo.
+
+Status may be `null`, `created`, `active` or `deleted`.
+
+```go
+//go:wasmexport tssGetKey
+func TssGetKey(a *string) *string {
+  // ...
+  key := sdk.TssGetKey("key id")
+  // ...
+}
+```
+
+#### TSS Sign Key
+
+Request a digest to be signed by the TSS key. The key ID must exist and in `active` status.
+
+The string returned may be `ok` or `fail`.
+
+```go
+//go:wasmexport tssSignKey
+func TssSignKey(a *string) *string {
+  // ...
+  digest := []byte{} // must be 32-bytes in length
+  status := sdk.TssSignKey("key id", digest)
+  // ...
+}
+```
+
 #### Abort
 
 Abort contract execution and revert transaction.
@@ -331,12 +377,12 @@ func TestContract(t *testing.T) {
 
 ### Call Contract
 
-Executes a contract call transaction. Returns the call result, gas used and logs emitted.
+Executes a contract call transaction. Returns the call result consisting execution status, error symbol and message (if any), return value, RC used, WASM gas used, logs emitted and state diff summary.
 
 ```go
 func TestContract(t *testing.T) {
   // ...
-  result, gasUsed, logs := ct.Call(stateEngine.TxVscCallContract{
+  result := ct.Call(stateEngine.TxVscCallContract{
       Self: stateEngine.TxSelf{
       TxId:                 "sometxid",
       BlockId:              "abcdef",
@@ -359,8 +405,18 @@ func TestContract(t *testing.T) {
     }},
   })
   assert.True(t, result.Success)
-  assert.LessOrEqual(t, gasUsed, uint(10000000))
-  assert.GreaterOrEqual(t, len(logs), 1)
+  assert.LessOrEqual(t, result.RcUsed, uint(100))
+  assert.LessOrEqual(t, result.GasUsed, uint(10000000))
+
+  // at least one log emitted
+  assert.GreaterOrEqual(t, len(result.Logs[contractId].Logs), 1)
+
+  // value of someKey changed from oldvalue to newvalue
+  assert.Equal(t, "oldvalue", string(result.StateDiff[contractId].KeyDiff["someKey"].Previous))
+  assert.Equal(t, "newvalue", string(result.StateDiff[contractId].KeyDiff["someKey"].Current))
+
+  // deleted value from deletethis key
+  assert.True(t, result.StateDiff[contractId].Deletions["deletethis"])
   // ...
 }
 ```
