@@ -6,7 +6,7 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components'
 
-This tutorial describes the process of creating a basic fungible token on VSC.
+This tutorial describes the process of creating a basic fungible token on Magi.
 
 <Aside type="note" title="Prior Reading">
 This guide assumes that you have read the smart contract development guide [here](/how-to/smart-contract-development).
@@ -14,44 +14,19 @@ This guide assumes that you have read the smart contract development guide [here
 
 ## Setup
 
-Clone the Go contract template:
+Clone the Magi token contract template:
 
 ```sh
-git clone https://github.com/vsc-eco/go-contract-template your-token
+git clone https://github.com/vsc-eco/magi_token_contract your-token
 cd your-token
 ```
-
-## Write Your Token Contract
-
-<Aside type="caution">
-The specification for defining VSC token contracts are not final.
-</Aside>
-
-An example token contract has been included in [`examples/token/main.go`](https://github.com/vsc-eco/go-contract-template/blob/main/examples/token/main.go) file. You may copy this file into `contract/main.go` to use as a starting point.
-
-```sh
-cp examples/token/main.go contract
-```
-
-The token contract features mint/burn with supply cap, transfer and change ownership functions. Update the following constants at the top of the file to your desired values:
-
-```go title="main.go"
-const MaxSupply = 1000000
-const Precision = 3
-const Symbol = "TOKEN"
-const Creator = "hive:vaultec.vsc"
-```
-
-<Aside type="note">
-The `Creator` address will be the initial owner of your token contract. You will need to have access to this account to initialize your token and mint new tokens.
-</Aside>
 
 ## Deploy Token
 
 Compile your token contract:
 
 ```sh
-tinygo build -gc=custom -scheduler=none -panic=trap -no-debug -target=wasm-unknown -o build/main.wasm contract/main.go
+tinygo build -gc=custom -scheduler=none -panic=trap -no-debug -target=wasm-unknown -o build/main.wasm ./contract
 wasm-tools strip -o build/main-striped.wasm build/main.wasm
 ```
 
@@ -59,26 +34,42 @@ Then deploy the contract:
 
 ```sh
 # If not done already, init config and fill in deployer active key
-vsc-contract-deploy -init
+contract-deployer -init
 
 # Deploy token
-vsc-contract-deploy -wasmPath build/main-striped.wasm -name "your token name"
+contract-deployer -wasmPath build/main-striped.wasm -name "your token name"
 ```
 
 ## Initialize Token
 
-Call the `init` function from your token contract owner address as specified in the `Creator` constant. The contract call payload does not matter here.
+Call the `init` function from your token contract owner address (contract deployer if not specified) with the following payload:
+
+```json
+{"name":"Token Name","symbol":"TKN","decimals":3,"maxSupply":1000000000}
+```
 
 ## Mint Tokens
 
-Call the `mint` function where payload is the amount to mint. The tokens minted will be sent to your address.
+Call the `mint` function from the token owner address with the below payload. The tokens minted will be sent to your address.
+
+```json
+{"amount":1000}
+```
 
 ## Burn Tokens
 
-Call the `burn` function where payload is the amount to burn. The tokens will be burnt from the caller address.
+Call the `burn` function with the below payload. The tokens will be burnt from the caller address.
+
+```json
+{"amount":500}
+```
 
 ## Transfer Tokens
 
-Call the `transfer` function where payload is a comma-separated string of destination address and amount.
+Call the `transfer` function with the below payload specifying the destination address and amount.
 
-For example, to transfer 10 coins to `did:pkh:eip155:1:0xtoaddresshere`, the payload shall be `did:pkh:eip155:1:0xtoaddresshere,10`.
+```json
+{"to":"hive:recipient","amount":100}
+```
+
+For more details on Magi token standards, please refer to the [README](https://github.com/vsc-eco/magi_token-contract/blob/main/readme.md).
