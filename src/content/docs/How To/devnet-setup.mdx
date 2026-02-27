@@ -1,0 +1,105 @@
+---
+title: Setup a development testnet
+sidebar:
+  order: 20
+---
+
+import { Aside, FileTree } from '@astrojs/starlight/components'
+
+This is a guide on setting up a local development testnet (aka devnet) for testing protocol changes or contracts in a live environment. Devnets are short lived in nature and can be reset easily.
+
+## Hive testnet
+
+This is just a standard [haf_api_node](https://gitlab.syncad.com/hive/haf_api_node) deployment with the exception of using the HAF testnet image.
+
+1. Clone the `haf_api_node` repository and make a copy of `.env` file.
+
+```sh
+git clone https://gitlab.syncad.com/hive/haf_api_node
+cd haf_api_node
+cp .env.example .env
+```
+
+2. Locate and modify the following in the `.env` file:
+
+```sh
+# required profiles
+COMPOSE_PROFILES="core,hafah,servers"
+
+# use the prebuilt testnet HAF image
+HAF_IMAGE=registry.gitlab.syncad.com/hive/haf/testnet
+
+# swagger hostname (replace YOUR_HOSTNAME)
+PUBLIC_HOSTNAME="YOUR_HOSTNAME"
+
+# caddy sites (read description in the .env file for info)
+CADDY_SITES="http://"
+```
+
+Optionally update `ZPOOL`, `TOP_LEVEL_DATASET` and `ZPOOL_MOUNT_POINT` to your desired directory.
+
+3. Create the folders.
+
+```sh
+sudo ./create_directories.sh
+```
+
+4. Copy the `config.ini` and `pgtune.conf` files from [here](https://github.com/techcoderx/hiverpc-resources/tree/main/testnet) into the dataset folder and `haf_postgresql_conf.d` folder respectively.
+
+<Aside type="note">
+These files include the default settings and key required to get block production working.
+</Aside>
+
+Using the default values for example:
+
+<FileTree>
+- haf-pool
+  - haf-datadir
+    - config.ini
+    - haf_postgresql_conf.d
+      - pgtune.conf
+</FileTree>
+
+5. Start the Hive testnet.
+
+```sh
+docker compose up -d
+```
+
+To reset the Hive testnet, delete the HAF data directory and repeat from step 3 to 5 above.
+
+## Magi testnet
+
+1. Clone and compile Magi node executables.
+
+```sh
+git clone https://github.com/vsc-eco/go-vsc-node
+cd go-vsc-node
+go mod download
+make
+```
+
+2. Run the devnet setup script. Run `-help` to view more options.
+
+```sh
+./build/devnet-setup -db-url 'mongodb://db:27017' -data-dir ./data/devnet -hive-urls 'http://haftestnodeip:80' -nodes 5 -p2p-host /dns4/magi-\? -drop-db
+```
+
+<Aside type="tip">
+Use the `?` placeholder in `-p2p-host` to refer to the nth instance, particularly useful for running them in a Docker compose.
+</Aside>
+
+3. Start all devnet nodes.
+
+```sh
+# Outside docker: run this for every node
+./build/magid -network devnet -data-dir ./data/devnet/data-1
+```
+
+4. Broadcast the genesis election using one of the instances (shut down the instance's magid first).
+
+```sh
+./build/genesis-elector -network devnet -data-dir ./data/devnet/data-5
+```
+
+To reset the Magi testnet, reset the Hive testnet first then repeat step 2 to 4.
