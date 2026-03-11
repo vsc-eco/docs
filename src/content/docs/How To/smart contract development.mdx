@@ -27,10 +27,10 @@ These are used to test and deploy smart contracts.
 git clone https://github.com/vsc-eco/go-vsc-node
 cd go-vsc-node
 go mod download
-go build -buildvcs=false -o vsc-contract-deploy vsc-node/cmd/contract-deployer
+make contract-deployer
 ```
 
-This will generate an executable named `vsc-contract-deploy`. You may move it to your `PATH` directory (i.e. `/usr/bin` for Linux or `/usr/local/bin` for macOS).
+This will generate an executable named `contract-deployer` in the `build` folder. You may move it to your `PATH` directory (i.e. `/usr/bin` for Linux or `/usr/local/bin` for macOS).
 
 ---
 
@@ -98,14 +98,14 @@ func GetString(a *string) *string {
 To compile your contract:
 
 ```sh
-tinygo build -gc=custom -scheduler=none -panic=trap -no-debug -target=wasm-unknown -o artifacts/main.wasm contract/main.go
+tinygo build -gc=custom -scheduler=none -panic=trap -no-debug -target=wasm-unknown -o artifacts/main.wasm ./contract
 ```
 
 <Aside type="tip">
 For the best chance of successful contract source code verification on block explorers, compile your contract using Docker:
 ```sh
-docker pull tinygo/tinygo:0.39.0
-docker run --rm -v $(pwd):/home/tinygo tinygo/tinygo:0.39.0 tinygo build -gc=custom -scheduler=none -panic=trap -no-debug -target=wasm-unknown -o artifacts/main.wasm contract/main.go
+docker pull tinygo/tinygo:0.40.1
+docker run --rm -v $(pwd):/home/tinygo tinygo/tinygo:0.40.1 tinygo build -gc=custom -scheduler=none -panic=trap -no-debug -target=wasm-unknown -o artifacts/main.wasm ./contract
 ```
 </Aside>
 
