@@ -5,13 +5,13 @@ sidebar:
 ---
 
 
-VSC employs Hive Backed Dollars (HBD), an algorithmic stablecoin, as the base asset in all liquidity pools. This design standardizes routing paths, simplifies liquidity provisioning, and reduces risk exposure due to all pools only having **1-sided volatility**. By using HBD as the common pair, liquidity providers are only exposed to the performance of their chosen volatile asset paired with HBD. This results in a portfolio that reflects the performance of the single volatile asset rather than multiple sources of price volatility, improving predictability and risk management.
+Magi employs Hive Backed Dollars (HBD), an algorithmic stablecoin, as the base asset in all liquidity pools. This design standardizes routing paths, simplifies liquidity provisioning, and reduces risk exposure due to all pools only having **1-sided volatility**. By using HBD as the common pair, liquidity providers are only exposed to the performance of their chosen volatile asset paired with HBD. This results in a portfolio that reflects the performance of the single volatile asset rather than multiple sources of price volatility, improving predictability and risk management.
 
 ## Design Rationale
 
 ### Simplified Liquidity Provisioning
 
-By pairing every asset against HBD, VSC reduces the complexity of liquidity provisioning. Liquidity providers only need to supply HBD and one other asset, lowering the barrier to entry and concentrating liquidity more effectively.
+By pairing every asset against HBD, Magi reduces the complexity of liquidity provisioning. Liquidity providers only need to supply HBD and one other asset, lowering the barrier to entry and concentrating liquidity more effectively.
 
 ### Efficient Routing
 

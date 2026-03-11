@@ -6,13 +6,13 @@ sidebar:
 
 ## What Are Liquidity Providers?
 
-Liquidity Providers (LPs) are users who add tokens to VSC’s liquidity pools. Their contributions make cross-chain swaps and decentralized trading possible. In return for supplying assets, LPs earn fees and may be eligible for additional rewards. LPs are fundamental to the VSC ecosystem, providing the capital that powers Automated Market Makers (AMMs), cross-chain settlement, and efficient token routing.
+Liquidity Providers (LPs) are users who add tokens to Magi’s liquidity pools. Their contributions make cross-chain swaps and decentralized trading possible. In return for supplying assets, LPs earn fees and may be eligible for additional rewards. LPs are fundamental to the Magi ecosystem, providing the capital that powers Automated Market Makers (AMMs), cross-chain settlement, and efficient token routing.
 
-Unlike centralized exchanges where a few market makers control liquidity, VSC opens the door for anyone to become an LP and earn rewards by providing liquidity.
+Unlike centralized exchanges where a few market makers control liquidity, Magi opens the door for anyone to become an LP and earn rewards by providing liquidity.
 
-## The Role of LPs in VSC
+## The Role of LPs in Magi
 
-In VSC, LPs contribute liquidity to dual-asset pools - always with HBD (Hive Backed Dollars) on one side. Each pool pairs a volatile asset (such as BTC, ETH, Hive or SOL) with HBD.
+In Magi, LPs contribute liquidity to dual-asset pools - always with HBD (Hive Backed Dollars) on one side. Each pool pairs a volatile asset (such as BTC, ETH, Hive or SOL) with HBD.
 
 For example, the BTC/HBD pool consists of Bitcoin and HBD. When users want to swap BTC to ETH, the protocol routes through HBD (BTC → HBD → ETH), which simplifies routing logic.
 
@@ -53,7 +53,7 @@ A portion of every swap fee is distributed proportionally to all LPs in the pool
 
 **2. Incentive Programs**
 
-VSC may also introduce additional rewards in the form of governance tokens or protocol incentives to encourage deeper liquidity in key pools.
+Magi may also introduce additional rewards in the form of governance tokens or protocol incentives to encourage deeper liquidity in key pools.
 
 ## Withdrawing Liquidity
 
@@ -64,7 +64,7 @@ Liquidity can be withdrawn at any time by redeeming (burning) LP tokens. Upon wi
 
 ## Tools for LPs
 
-- **Altera**: VSC’s primary interface for liquidity provision. Through Altera, users can monitor positions, track yield, and interact directly with liquidity pools in a secure and intuitive way.Altera is a decentralized trading interface with support for advanced LP features, analytics, and governance integration.
+- **Altera**: Magi’s primary interface for liquidity provision. Through Altera, users can monitor positions, track yield, and interact directly with liquidity pools in a secure and intuitive way.Altera is a decentralized trading interface with support for advanced LP features, analytics, and governance integration.
 
 ## How to Become an LP – Step by Step
 
@@ -79,7 +79,7 @@ Impermanent loss occurs when the price of tokens in a liquidity pool changes com
 
 ## Final Thoughts
 
-Providing liquidity on VSC is a core way to participate in and support the network. With single-sided volatility exposure and the stability of HBD in every pool, VSC offers a more predictable and risk-managed LP experience than many traditional AMMs.
+Providing liquidity on Magi is a core way to participate in and support the network. With single-sided volatility exposure and the stability of HBD in every pool, Magi offers a more predictable and risk-managed LP experience than many traditional AMMs.
 
-Whether you’re seeking passive income, a more diversified exposure to crypto markets, or a way to contribute to decentralized infrastructure, LPing on VSC is designed to be open, secure, and rewarding.
+Whether you’re seeking passive income, a more diversified exposure to crypto markets, or a way to contribute to decentralized infrastructure, LPing on Magi is designed to be open, secure, and rewarding.
 

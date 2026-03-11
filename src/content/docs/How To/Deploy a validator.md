@@ -1,17 +1,17 @@
 ---
-title: How to Deploy a VSC Validator Node
+title: How to Deploy a Magi Validator Node
 sidebar:
   order: 9
 ---
 
-This repository hosts the Docker Compose file necessary for deploying the VSC node.
+This repository hosts the Docker Compose file necessary for deploying the Magi node.
 
 
 ## Prerequisites
 
 Requirements:
 - Hive account (100HP minimum for RCs)
-- 2000 Hive bonded to your VSC node (required for participating in consensus)
+- 2000 Hive bonded to your Magi node (required for participating in consensus)
 - Technical knowledge of using a command line interface
 - Docker and docker-compose installed. Please see [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/) for installation guide for docker. 
 

@@ -5,7 +5,7 @@ sidebar:
 ---
 
 
-VSC on its layer 2 supports _ed25519_ compatible wallets. Those are called lite accounts in the context of VSC. They can be generated in various ways. Below you have the current recommended options.
+Magi on its layer 2 supports _ed25519_ compatible wallets. Those are called lite accounts in the context of Magi. They can be generated in various ways. Below you have the current recommended options.
 
 ## Official wallet generator
 
