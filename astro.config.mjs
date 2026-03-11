@@ -6,6 +6,11 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Magi Documentation",
+      logo: {
+        src: "./src/assets/magi-logo.svg",
+        alt: "Magi logo",
+      },
+      favicon: "/favicon.svg",
       social: [
         { icon: "github", label: "GitHub", href: "https://github.com/vsc-eco" },
       ],
