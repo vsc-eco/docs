@@ -5,13 +5,13 @@ sidebar:
 ---
 
 
-This section outlines the operational responsibilities of validators within the VSC network and details the security architecture of the vault system.
+This section outlines the operational responsibilities of validators within the Magi network and details the security architecture of the vault system.
 
 ## Validator Roles and Responsibilities
 
-Validators in the VSC network are tasked with:
+Validators in the Magi network are tasked with:
 
-- **Transaction Processing**: Validators receive and process transactions, executing the associated smart contract logic within the VSC runtime environment.
+- **Transaction Processing**: Validators receive and process transactions, executing the associated smart contract logic within the Magi runtime environment.
 
 - **State Management**: Post-execution, validators update the local state to reflect the outcomes of processed transactions.
 
@@ -25,7 +25,7 @@ Validators in the VSC network are tasked with:
 
 
 
-The VSC vault system securely manages cross-chain digital assets by using decentralized validator control and on-chain smart contract logic. Each vault tracks and manages assets on its respective external blockchain (e.g., Bitcoin UTXOs) without relying on a central operator.
+The Magi vault system securely manages cross-chain digital assets by using decentralized validator control and on-chain smart contract logic. Each vault tracks and manages assets on its respective external blockchain (e.g., Bitcoin UTXOs) without relying on a central operator.
 
 Key security measures include:
 
@@ -37,19 +37,19 @@ Key security measures include:
 
 - **Dedicated Vault Instances**: Each supported blockchain has its own dedicated vault instance managed independently by validators.
 
-These mechanisms ensure the integrity, security, and reliability of assets stored and transacted through VSC vaults.
+These mechanisms ensure the integrity, security, and reliability of assets stored and transacted through Magi vaults.
 
 
- These security features collectively safeguard the assets managed within the VSC vault, aligning with best practices for digital asset management.
+ These security features collectively safeguard the assets managed within the Magi vault, aligning with best practices for digital asset management.
 
 ## Validator Onboarding and Maintenance
 
-To become an active validator in the VSC network, entities must:
+To become an active validator in the Magi network, entities must:
 
 1. **Registration**: Submit a validator registration request, providing necessary identification and compliance information.
 
-2. **Infrastructure Setup**: Deploy and configure the validator node software in accordance with the specifications outlined in the VSC documentation.
+2. **Infrastructure Setup**: Deploy and configure the validator node software in accordance with the specifications outlined in the Magi documentation.
 
 3. **Continuous Operation**: Maintain the validator node, ensuring high availability, timely software updates, and adherence to performance benchmarks.
 
- Detailed procedures and requirements for validator onboarding and maintenance are specified in the VSC validator documentation.
+ Detailed procedures and requirements for validator onboarding and maintenance are specified in the Magi validator documentation.

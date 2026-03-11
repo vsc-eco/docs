@@ -6,15 +6,15 @@ sidebar:
 
 import { Aside } from '@astrojs/starlight/components'
 
-The VSC SDK is a library that abstract away various functionalities that are useful in the context of writing a VSC smart contract.
+The Magi SDK is a library that abstract away various functionalities that are useful in the context of writing a Magi smart contract.
 
 <Aside type="tip" title="Nice To Know">
-They also serve access to the smart contract's database layer by exposing namespaces and interfaces. At the stage of the contract execution, invocations of such interfaces are translated to generalized calls of the VSC node. Thereby ensuring that those functionalities are equal regardless of the language implementation of the SDK.
+They also serve access to the smart contract's database layer by exposing namespaces and interfaces. At the stage of the contract execution, invocations of such interfaces are translated to generalized calls of the Magi node. Thereby ensuring that those functionalities are equal regardless of the language implementation of the SDK.
 </Aside>
 
 ## Go Contract SDK
 
-The [Go contract SDK](https://github.com/vsc-eco/go-contract-template) implements the necessary runtime and SDK functions for the VSC smart contract environment.
+The [Go contract SDK](https://github.com/vsc-eco/go-contract-template) implements the necessary runtime and SDK functions for the Magi smart contract environment.
 
 ### Example Usage
 
@@ -118,7 +118,7 @@ func DumpEnvKey(a *string) *string {
 
 #### GetBalance
 
-Retrieve the balance of any VSC account or contract.
+Retrieve the balance of any Magi account or contract.
 
 ```go
 //go:wasmexport getBalance
@@ -291,8 +291,8 @@ func RevertMe(a *string) *string {
 |`tx.id`|ID of the transaction|
 |`tx.index`|Transaction position in block|
 |`tx.op_index`|Operation position in transaction|
-|`block.id`|L1 block ID in which the transaction is included in. For offchain transactions, this refers to the L1 block ID of the VSC block in which the transaction was included in.|
-|`block.height`|L1 block number in which the transaction is included in. For offchain transactions, this refers to the L1 block number of the VSC block in which the transaction was included in.|
+|`block.id`|L1 block ID in which the transaction is included in. For offchain transactions, this refers to the L1 block ID of the Magi block in which the transaction was included in.|
+|`block.height`|L1 block number in which the transaction is included in. For offchain transactions, this refers to the L1 block number of the Magi block in which the transaction was included in.|
 |`block.timestamp`|Timestamp of when the transaction was included in (i.e. `2025-07-26T14:10:42`).|
 |`msg.sender`|Address of the transaction sender. This must be a user address. If there are multiple, the first account specified in `required_auths` or `required_posting_auths` is returned.|
 |`msg.required_auths`|The `required_auths` field of the transaction.|

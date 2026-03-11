@@ -6,7 +6,7 @@ sidebar:
 
 import { Aside, FileTree, Tabs, TabItem } from '@astrojs/starlight/components'
 
-This is a brief overview of VSC smart contract development with Go.
+This is a brief overview of Magi smart contract development with Go.
 
 ## Environment Setup
 
@@ -64,7 +64,7 @@ git clone https://github.com/vsc-eco/go-contract-template
 
 ### Hello World Contract
 
-The below contract demonstrates calling SDK methods to interact with the contract database and defining WASM exports to mark a function as callable by VSC accounts or other contracts.
+The below contract demonstrates calling SDK methods to interact with the contract database and defining WASM exports to mark a function as callable by Magi accounts or other contracts.
 
 Find out more about the Go contract SDK methods [here](/references/sdk).
 
@@ -223,7 +223,7 @@ This will generate some config files in `data/config` folder in your current dir
 }
 ```
 
-Then deploy your contract to VSC:
+Then deploy your contract to Magi:
 
 ```sh
 vsc-contract-deploy -wasmPath artifacts/main-striped.wasm -name "my first contract"
@@ -257,7 +257,7 @@ Error in subscription: subscription cancelled
 
 ## Call Contract
 
-Contracts may be called from L1 using Hive accounts or on VSC using offchain accounts.
+Contracts may be called from L1 using Hive accounts or on Magi using offchain accounts.
 
 ### Call From L1
 

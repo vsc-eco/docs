@@ -5,7 +5,7 @@ sidebar:
 ---
 
 
-The VSC network supports various account types for authentication.
+The Magi network supports various account types for authentication.
 
 ## DID | Private/ Public key
 
@@ -15,7 +15,7 @@ For a tutorial on how to generate such keys, please take a look at [this documen
 
 ## HIVE
 
-You can directly use your [HIVE](https://hive.io/) account to communicate with the VSC network.
+You can directly use your [HIVE](https://hive.io/) account to communicate with the Magi network.
 
 To register a HIVE account, you need someone with an existing account to invite you to the network.  
 

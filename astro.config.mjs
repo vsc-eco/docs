@@ -5,7 +5,7 @@ export default defineConfig({
   site: "https://docs.magi.eco",
   integrations: [
     starlight({
-      title: "VSC Documentation",
+      title: "Magi Documentation",
       social: [
         { icon: "github", label: "GitHub", href: "https://github.com/vsc-eco" },
       ],

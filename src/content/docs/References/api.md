@@ -5,21 +5,21 @@ sidebar:
 ---
 
 
-## NOTE: THIS SECTION HAS NOT BEEN UPDATED FOR MAINNET VSC (PROCEED WITH CAUTION)
+## NOTE: THIS SECTION HAS NOT BEEN UPDATED FOR MAINNET Magi (PROCEED WITH CAUTION)
 
 # API documentation
 
 
 
-The VSC API can be used to retrieve various kinds of information about the VSC network. It is the core building block when it comes to creating applications on top of VSC.
+The Magi API can be used to retrieve various kinds of information about the Magi network. It is the core building block when it comes to creating applications on top of Magi.
 
-Based on GraphQL it provides flexible options to retrieve data. It lets _you_ define the data structure you want to receive. You can read more about GraphQL [here](https://graphql.org/learn/). It is activated per default on all VSC nodes under the path `NODE_IP:1337/api/v1/graphql`.
+Based on GraphQL it provides flexible options to retrieve data. It lets _you_ define the data structure you want to receive. You can read more about GraphQL [here](https://graphql.org/learn/). It is activated per default on all Magi nodes under the path `NODE_IP:1337/api/v1/graphql`.
 
 This url is used for queries in the code, but can also be accessed in the browser (GraphiQL explorer).
 
 We have a public API, accessible to everyone under [https://api.vsc.eco/api/v1/graphql](https://api.vsc.eco/api/v1/graphql). 
 
-This document focuses on the functionalities the API offers, be aware that the state of the API changes frequently in these early stages of development so this document might not be up to date. If a query doesn't work or you think a feature is missing entirely, feel free to contact the VSC dev team on [discord](https://discord.gg/a8eXS7TC)!
+This document focuses on the functionalities the API offers, be aware that the state of the API changes frequently in these early stages of development so this document might not be up to date. If a query doesn't work or you think a feature is missing entirely, feel free to contact the Magi dev team on [discord](https://discord.gg/a8eXS7TC)!
 
 ## Filter options
 
@@ -29,7 +29,7 @@ Various queries support filters to help you enclose your search. The sample inpu
 
 Allows you to retrieve the (IPFS) data stored by a contract execution. It allows you to retrieve data from specific contract executions, therefore you also have the ability to inspect past executions, which don't represent the current state of the contract anymore.
 
-As an input it takes the id of the `contract output` (a type of VSC transaction). You can find the id's for example [in the block explorer](https://vsc.techcoderx.com/block-by-hash/bafyreigzaqrifacmjw4ecwt2jolu46ommphf3wcow22tjg7fodem7gheoa)(the one transaction).
+As an input it takes the id of the `contract output` (a type of Magi transaction). You can find the id's for example [in the block explorer](https://vsc.techcoderx.com/block-by-hash/bafyreigzaqrifacmjw4ecwt2jolu46ommphf3wcow22tjg7fodem7gheoa)(the one transaction).
 
 Example query:
 ```txt
@@ -138,8 +138,8 @@ The endpoint serves account balances that are tied to the supplied address.
 
 ## Submit Transaction V1
 
-This endpoint is used to submit transactions to the VSC node. If you want to ingest transactions over this endpoint, please use the [VSC client](https://github.com/vsc-eco/client) or get inspiration from it's codebase.
+This endpoint is used to submit transactions to the Magi node. If you want to ingest transactions over this endpoint, please use the [Magi client](https://github.com/vsc-eco/client) or get inspiration from it's codebase.
 
 ## Other endpoints
 
-The other available endpoints are mainly directed at node operation and power-users of the VSC network. They are not commonly used in normal operation. If you have questions in regards to those endpoints, please consult the VSC devs.
+The other available endpoints are mainly directed at node operation and power-users of the Magi network. They are not commonly used in normal operation. If you have questions in regards to those endpoints, please consult the Magi devs.
