@@ -259,33 +259,4 @@ Error in subscription: subscription cancelled
 
 Contracts may be called from L1 using Hive accounts or on Magi using offchain accounts.
 
-### Call From L1
-
-Contract invokation from L1 involves sending a `custom_json_operation` with `vsc.call` as its ID and the following JSON format:
-
-```json
-{
-  "net_id": "vsc-mainnet",
-  "contract_id": "vsc1...",
-  "action": "methodName",
-  "payload": "your payload string here",
-  "rc_limit": 2000,
-  "intents": []
-}
-```
-
-An example transaction may be seen [here](https://hivehub.dev/tx/8e384c116bdc6c585340a36ba29bdd67652358c2).
-
-### Intents
-
-A contract call transaction may include a list of `intents` which authorizes the contract to spend up to a specific amount of assets from your account. For example, an intent of 1 HIVE allowance may be specified as follows:
-
-```json
-{
-  "type": "transfer.allow",
-  "args": {
-    "limit": "1.000",
-    "token": "hive"
-  }
-}
-```
+To call your contract, navigate to the contract page on [Magi Blocks](https://vsc.techcoderx.com) by pasting your contract ID in the search bar, then click on the Call Contract tab to connect your wallet and fill up the contract call details.

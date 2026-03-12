@@ -8,10 +8,9 @@ sidebar:
 
 No, Magi uses the native Hive tokens for all transactions on the network. We plan to launch a token once the project is self sustainable via a fair launch.
 
-## When will I be able to deploy my token on Magi?
+## How do I deploy my token on Magi?
 
-We do not have a specific timeline for this.
-Once first HBD pools are launched Q3-Q4 2025 we will define public token standard(s) and create a reference implementation for each of those standard(s).
+Please refer to the guide [here](/how-to/create-a-token) to deploy a token.
 
 ## How do smart contracts work on Magi?
 
@@ -20,7 +19,3 @@ Magi uses WebAssembly (or WASM) to power it's smart contracts. WASM enables deve
 ## When is mainnet launch?
 
 Mainnet has launched March 31st 2025.
-
-## What does Magi stand for?
-
-Virtual Smart Chain
