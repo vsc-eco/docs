@@ -1,0 +1,138 @@
+---
+title: Node Configuration
+sidebar:
+  order: 25
+---
+
+Magi nodes may be configured through a set of JSON files located in the `config/` directory of the node's data directory. These files are created automatically when running the node with the `-init` flag.
+
+## Database
+
+Configures the MongoDB connection used by the node.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `DbURI` | string | `mongodb://localhost:27017` | MongoDB connection URI |
+| `DbName` | string | `go-vsc` | Name of the database |
+
+```json title="dbConfig.json"
+{
+  "DbURI": "mongodb://localhost:27017",
+  "DbName": "go-vsc"
+}
+```
+
+## GraphQL
+
+Configures the GraphQL API server.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `HostAddr` | string | `0.0.0.0:8080` | Host address and port to bind the GraphQL server to |
+| `MaxComplexity` | int | `10000` | Maximum query complexity allowed per request. Requests exceeding this limit are rejected |
+
+```json title="gqlConfig.json"
+{
+  "HostAddr": "0.0.0.0:8080",
+  "MaxComplexity": 10000
+}
+```
+
+The GraphQL sandbox is available at `http://<HostAddr>/sandbox` when the node is running.
+
+## Hive
+
+Configures the Hive API endpoints used for block streaming and transaction broadcasting.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `HiveURIs` | string[] | See below | List of Hive API node URLs. The node will use these endpoints for reading Hive blockchain data |
+
+```json title="hiveConfig.json"
+{
+  "HiveURIs": [
+    "https://api.hive.blog",
+    "https://techcoderx.com",
+    "https://hive-api.3speak.tv",
+    "https://api.openhive.network",
+    "https://api.deathwing.me"
+  ]
+}
+```
+
+## Identity
+
+Configures the node's cryptographic identity and Hive account credentials.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `HiveUsername` | string | *(empty)* | Hive account username for the witness |
+| `HiveActiveKey` | string | *(empty)* | Hive account active key in WIF format, used for signing transactions on the Hive blockchain |
+| `BlsPrivKeySeed` | string | *(generated)* | BLS private key seed used for threshold signatures. Generated automatically on `-init` |
+| `Libp2pPrivKey` | string | *(generated)* | libp2p private key for P2P network identity. Generated automatically on `-init` |
+
+```json title="identityConfig.json"
+{
+  "BlsPrivKeySeed": "<generated>",
+  "HiveActiveKey": "ADD_YOUR_PRIVATE_WIF",
+  "HiveUsername": "ADD_YOUR_USERNAME",
+  "Libp2pPrivKey": "<generated>"
+}
+```
+
+:::caution
+`HiveActiveKey` and the generated private keys are sensitive. Do not share or commit this file.
+:::
+
+## Oracle
+
+Configures external chain RPC connections used by the oracle module.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `Chains` | object | Map of chain identifiers to their RPC configuration |
+| `Chains.<ID>.RpcHost` | string | RPC host and port for the chain (e.g. `bitcoind:48332`) |
+| `Chains.<ID>.RpcUser` | string | RPC username |
+| `Chains.<ID>.RpcPass` | string | RPC password |
+
+```json title="oracleConfig.json"
+{
+  "Chains": {
+    "BTC": {
+      "RpcHost": "bitcoind:48332",
+      "RpcUser": "vsc-node-user",
+      "RpcPass": "vsc-node-pass"
+    }
+  }
+}
+```
+
+Currently `BTC` is the only supported chain identifier.
+
+## P2P
+
+Configures the libp2p networking layer.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `Port` | int | `10720` | TCP port to listen on for P2P connections |
+| `ServerMode` | bool | `false` | When `true`, runs the Kademlia DHT in server mode, making this node reachable for peer discovery. Recommended for nodes with a stable public IP |
+| `AllowPrivate` | bool | `false` | When `true`, allows connections to and announcement of private/LAN IP addresses. Useful for local devnets |
+| `Bootnodes` | string[] | `[]` | List of bootstrap peer multiaddresses used for initial peer discovery. If empty, the node falls back to the built-in default bootnodes |
+| `AnnounceAddrs` | string[] | `[]` | Explicit multiaddresses to announce to the network. When set, overrides automatic address detection |
+
+```json title="p2pConfig.json"
+{
+  "Port": 10720,
+  "ServerMode": false,
+  "AllowPrivate": false,
+  "Bootnodes": [],
+  "AnnounceAddrs": []
+}
+```
+
+Bootnodes are specified as libp2p multiaddresses, for example:
+
+```
+/ip4/1.2.3.4/tcp/10720/p2p/12D3KooW...
+```
