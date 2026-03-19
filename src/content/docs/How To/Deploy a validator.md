@@ -1,5 +1,5 @@
 ---
-title: How to Deploy a Magi Validator Node
+title: Run a validator node
 sidebar:
   order: 9
 ---
