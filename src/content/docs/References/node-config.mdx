@@ -10,10 +10,10 @@ Magi nodes may be configured through a set of JSON files located in the `config/
 
 Configures the MongoDB connection used by the node.
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `DbURI` | string | `mongodb://localhost:27017` | MongoDB connection URI |
-| `DbName` | string | `go-vsc` | Name of the database |
+| Field    | Type   | Default                     | Description            |
+| -------- | ------ | --------------------------- | ---------------------- |
+| `DbURI`  | string | `mongodb://localhost:27017` | MongoDB connection URI |
+| `DbName` | string | `go-vsc`                    | Name of the database   |
 
 ```json title="dbConfig.json"
 {
@@ -26,10 +26,10 @@ Configures the MongoDB connection used by the node.
 
 Configures the GraphQL API server.
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `HostAddr` | string | `0.0.0.0:8080` | Host address and port to bind the GraphQL server to |
-| `MaxComplexity` | int | `10000` | Maximum query complexity allowed per request. Requests exceeding this limit are rejected |
+| Field           | Type   | Default        | Description                                                                              |
+| --------------- | ------ | -------------- | ---------------------------------------------------------------------------------------- |
+| `HostAddr`      | string | `0.0.0.0:8080` | Host address and port to bind the GraphQL server to                                      |
+| `MaxComplexity` | int    | `10000`        | Maximum query complexity allowed per request. Requests exceeding this limit are rejected |
 
 ```json title="gqlConfig.json"
 {
@@ -44,8 +44,8 @@ The GraphQL sandbox is available at `http://<HostAddr>/sandbox` when the node is
 
 Configures the Hive API endpoints used for block streaming and transaction broadcasting.
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
+| Field      | Type     | Default   | Description                                                                                    |
+| ---------- | -------- | --------- | ---------------------------------------------------------------------------------------------- |
 | `HiveURIs` | string[] | See below | List of Hive API node URLs. The node will use these endpoints for reading Hive blockchain data |
 
 ```json title="hiveConfig.json"
@@ -64,12 +64,12 @@ Configures the Hive API endpoints used for block streaming and transaction broad
 
 Configures the node's cryptographic identity and Hive account credentials.
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `HiveUsername` | string | *(empty)* | Hive account username for the witness |
-| `HiveActiveKey` | string | *(empty)* | Hive account active key in WIF format, used for signing transactions on the Hive blockchain |
-| `BlsPrivKeySeed` | string | *(generated)* | BLS private key seed used for threshold signatures. Generated automatically on `-init` |
-| `Libp2pPrivKey` | string | *(generated)* | libp2p private key for P2P network identity. Generated automatically on `-init` |
+| Field            | Type   | Default       | Description                                                                                 |
+| ---------------- | ------ | ------------- | ------------------------------------------------------------------------------------------- |
+| `HiveUsername`   | string | _(empty)_     | Hive account username for the witness                                                       |
+| `HiveActiveKey`  | string | _(empty)_     | Hive account active key in WIF format, used for signing transactions on the Hive blockchain |
+| `BlsPrivKeySeed` | string | _(generated)_ | BLS private key seed used for threshold signatures. Generated automatically on `-init`      |
+| `Libp2pPrivKey`  | string | _(generated)_ | libp2p private key for P2P network identity. Generated automatically on `-init`             |
 
 ```json title="identityConfig.json"
 {
@@ -88,12 +88,12 @@ Configures the node's cryptographic identity and Hive account credentials.
 
 Configures external chain RPC connections used by the oracle module.
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `Chains` | object | Map of chain identifiers to their RPC configuration |
+| Field                 | Type   | Description                                             |
+| --------------------- | ------ | ------------------------------------------------------- |
+| `Chains`              | object | Map of chain identifiers to their RPC configuration     |
 | `Chains.<ID>.RpcHost` | string | RPC host and port for the chain (e.g. `bitcoind:48332`) |
-| `Chains.<ID>.RpcUser` | string | RPC username |
-| `Chains.<ID>.RpcPass` | string | RPC password |
+| `Chains.<ID>.RpcUser` | string | RPC username                                            |
+| `Chains.<ID>.RpcPass` | string | RPC password                                            |
 
 ```json title="oracleConfig.json"
 {
@@ -113,13 +113,13 @@ Currently `BTC` is the only supported chain identifier.
 
 Configures the libp2p networking layer.
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `Port` | int | `10720` | TCP port to listen on for P2P connections |
-| `ServerMode` | bool | `false` | When `true`, runs the Kademlia DHT in server mode, making this node reachable for peer discovery. Recommended for nodes with a stable public IP |
-| `AllowPrivate` | bool | `false` | When `true`, allows connections to and announcement of private/LAN IP addresses. Useful for local devnets |
-| `Bootnodes` | string[] | `[]` | List of bootstrap peer multiaddresses used for initial peer discovery. If empty, the node falls back to the built-in default bootnodes |
-| `AnnounceAddrs` | string[] | `[]` | Explicit multiaddresses to announce to the network. When set, overrides automatic address detection |
+| Field           | Type     | Default | Description                                                                                                                                                                      |
+| --------------- | -------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Port`          | int      | `10720` | TCP port to listen on for P2P connections                                                                                                                                        |
+| `ServerMode`    | bool     | `false` | When `true`, runs the Kademlia DHT in server mode, making this node reachable for peer discovery. Recommended for nodes with a stable public IP                                  |
+| `AllowPrivate`  | bool     | `false` | When `true`, allows connections to and announcement of private/LAN IP addresses. Useful for local devnets                                                                        |
+| `Bootnodes`     | string[] | `[]`    | List of bootstrap peer multiaddresses used for initial peer discovery. If empty, the node falls back to the built-in default bootnodes                                           |
+| `AnnounceAddrs` | string[] | `[]`    | Explicit multiaddresses to announce to the network. When set, overrides automatic address detection. If running in a container, this is required in order to participate in P2P. |
 
 ```json title="p2pConfig.json"
 {
