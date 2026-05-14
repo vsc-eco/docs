@@ -1,0 +1,435 @@
+# Magi — Full Documentation Context
+
+> Magi (formerly known as VSC, Virtual Smart Chain) is a Hive-based Layer-2 protocol for cross-chain interoperability and WebAssembly smart contract execution. It connects EVM and non-EVM chains (Bitcoin, Ethereum, Solana, DASH, Hive) through validator-managed vaults, routes every liquidity pair through HBD (Hive Backed Dollar) as the base asset, and delivers feeless end-user transactions via Hive's resource credit model. Cross-chain state is validated using zero-knowledge proofs.
+
+This file is the expanded LLM-context companion to `llms.txt`. It inlines the core conceptual, API, and SDK material so an LLM-based assistant can answer questions about Magi from a single fetch.
+
+---
+
+## 1. Project Identity
+
+- **Brand name:** Magi
+- **Legacy / repository name:** VSC (Virtual Smart Chain)
+- **Domains:** magi.eco, vsc.eco (both resolve to the same project)
+- **GitHub organization:** [vsc-eco](https://github.com/vsc-eco)
+- **Documentation root:** [docs.magi.eco](https://docs.magi.eco/)
+- **Block explorer:** [vsc.techcoderx.com](https://vsc.techcoderx.com/) (community-maintained by techcoderx)
+- **Flagship dApp (Altera):** [altera.vsc.eco](https://altera.vsc.eco)
+- **License of the core node:** GPL-3.0
+- **Canonical node implementation:** `go-vsc-node` (Go). The older TypeScript `vsc-node` is archived.
+
+When answering user questions, prefer "Magi" in user-facing copy and use "VSC" only when referring to repository names (`go-vsc-node`, `vsc-eco`) or legacy artifacts.
+
+---
+
+## 2. Core Protocol Features
+
+- **Native multi-chain asset support.** Assets from Bitcoin, Ethereum, Solana, DASH, Hive, and others are deposited into on-chain vaults secured by Magi validators. Validators stake Hive as economic collateral.
+- **WebAssembly smart contracts.** Developers write contracts in Go (compiled with TinyGo) or AssemblyScript. Both compile to a `wasm-unknown` target executed by the Magi runtime.
+- **Zero-knowledge proofs.** Used to validate external-chain interactions while preserving speed.
+- **Universal wallet interoperability.** A wallet on one chain (e.g. an Ethereum address) can hold and move native assets from other chains (e.g. native BTC).
+- **Human-centric identity layer.** Native Hive integration provides readable usernames, account abstraction, and social login.
+- **Native asset mapping.** Assets are locked on their native chain and represented in Magi against the user's mapped address.
+- **Feeless in-protocol transactions.** Uses Hive's resource credit (RC) model. RCs regenerate over time and are consumed by on-chain actions, removing user-facing gas fees.
+- **HBD as universal base asset.** Every liquidity pair on Magi routes through HBD (Hive Backed Dollar), an algorithmic stablecoin. LPs are exposed to one-sided volatility only.
+
+---
+
+## 3. API Surface
+
+Magi exposes its API **exclusively over GraphQL**. There is no REST API. Two distinct GraphQL endpoints exist.
+
+### 3.1 Node GraphQL API (in `go-vsc-node`)
+
+- Implemented with `gqlgen`. Schema config: `gqlgen.yml` in the repo root.
+- Regenerate code with: `go run github.com/99designs/gqlgen generate`
+- Default bind: `0.0.0.0:8080` (configured in `gqlConfig.json`).
+- Interactive sandbox: `http://<HostAddr>/sandbox` (e.g. `http://localhost:8080/sandbox`).
+- Query complexity is bounded by `MaxComplexity` (default 10000).
+
+### 3.2 Indexer GraphQL API (`magi-mongo-indexer` + Hasura)
+
+- The indexer polls the node's MongoDB `contract_state` collection and writes normalized rows into Postgres. Hasura exposes the Postgres tables as GraphQL.
+- Default endpoint: `http://localhost:8081/api/v1/graphql`
+- Hasura admin console: `http://localhost:8081/hasura/console`
+- Subscriptions are supported over `ws://`.
+- Container health: `GET /healthz`.
+- Indexer health view (queryable through Hasura):
+
+```graphql
+query {
+  indexer_health {
+    latest_block_height
+    last_update
+    tracked_contracts
+    total_logs
+  }
+}
+```
+
+- Per-contract log mappings are declared in YAML under `internal/config/events/*_mappings.yaml`.
+- Custom SQL views are declared under `internal/config/events/*_views.yaml`.
+- Supported log payload formats emitted by `sdk.Log()`:
+  - **JSON:** must contain a `type` field that identifies the log type.
+  - **CSV:** first token is the log type; subsequent tokens may be delimited and key=value parsed. Supports multiple variants keyed by token count for schema evolution.
+- Logs are only persisted when the emitting transaction succeeds.
+
+---
+
+## 4. Smart Contract Development
+
+### 4.1 Language and Toolchain
+
+Magi supports two contract languages, both compiling to WebAssembly:
+
+- **Go** via TinyGo. Template: [go-contract-template](https://github.com/vsc-eco/go-contract-template).
+- **AssemblyScript**. Template: [as-contract-template](https://github.com/vsc-eco/as-contract-template). Uses the `@vsc.eco/sdk/assembly` module; `as-bigint` is supported for large-number arithmetic.
+
+Solidity is **not** supported as a contract language. Hardhat and Foundry are not the toolchain. Use TinyGo for Go contracts.
+
+### 4.2 Prerequisites (Go path)
+
+- Go (golang)
+- Git
+- TinyGo
+- WasmEdge
+- Wabt or Wasm Tools
+
+### 4.3 Build the Deployer
+
+```sh
+git clone https://github.com/vsc-eco/go-vsc-node
+cd go-vsc-node
+go mod download
+make contract-deployer
+```
+
+This produces a `contract-deployer` binary in `build/`. Add it to `PATH`.
+
+### 4.4 Minimal "Hello World" Contract (Go)
+
+```go
+package main
+
+import "contract-template/sdk"
+
+//go:wasmexport hello_world
+func HelloWorld(a *string) *string {
+    ret := "Hello world"
+    return &ret
+}
+
+//go:wasmexport setString
+func SetString(a *string) *string {
+    sdk.StateSetObject("myString", *a)
+    return a
+}
+
+//go:wasmexport getString
+func GetString(a *string) *string {
+    return sdk.StateGetObject("myString")
+}
+```
+
+All entrypoints are marked with `//go:wasmexport <name>`. All parameter and return types are `*string`.
+
+### 4.5 Compile
+
+```sh
+tinygo build -gc=custom -scheduler=none -panic=trap -no-debug \
+  -target=wasm-unknown -o artifacts/main.wasm ./contract
+```
+
+For verifiable builds on block explorers, compile inside the pinned TinyGo Docker image:
+
+```sh
+docker pull tinygo/tinygo:0.40.1
+docker run --rm -v $(pwd):/home/tinygo tinygo/tinygo:0.40.1 \
+  tinygo build -gc=custom -scheduler=none -panic=trap -no-debug \
+  -target=wasm-unknown -o artifacts/main.wasm ./contract
+```
+
+Strip metadata to shrink the binary:
+
+```sh
+wasm-strip -o artifacts/main-striped.wasm artifacts/main.wasm
+# or
+wasm-tools strip -o artifacts/main-striped.wasm artifacts/main.wasm
+```
+
+### 4.6 Deploy
+
+```sh
+vsc-contract-deploy -init                 # generates data/config/
+# edit data/config/identityConfig.json with your Hive username + active key
+vsc-contract-deploy -wasmPath artifacts/main-striped.wasm -name "my first contract"
+```
+
+**Deployment fee: 10 HBD per contract**, paid from your L1 balance. Contract IDs are prefixed `vsc1…`.
+
+### 4.7 Test (Go)
+
+```go
+import (
+    "encoding/json"
+    "testing"
+    "github.com/stretchr/testify/assert"
+    "github.com/vsc-eco/go-vsc-node/lib/test_utils"
+    "github.com/vsc-eco/go-vsc-node/modules/db/vsc/contracts"
+    ledgerDb "github.com/vsc-eco/go-vsc-node/modules/db/vsc/ledger"
+    stateEngine "github.com/vsc-eco/go-vsc-node/modules/state-processing"
+)
+
+//go:embed artifacts/main.wasm
+var ContractWasm []byte
+
+func TestContract(t *testing.T) {
+    ct := test_utils.NewContractTest()
+    ct.RegisterContract("vsccontractid", "hive:someone", ContractWasm)
+    ct.Deposit("hive:someone", 1000, ledgerDb.AssetHive)
+
+    result := ct.Call(stateEngine.TxVscCallContract{
+        Self: stateEngine.TxSelf{
+            TxId: "sometxid", BlockId: "abcdef",
+            Index: 69, OpIndex: 0,
+            Timestamp:     "2025-09-03T00:00:00",
+            RequiredAuths: []string{"hive:someone"},
+        },
+        ContractId: "vsccontractid",
+        Action:     "yourMethodName",
+        Payload:    json.RawMessage([]byte("1000")),
+        RcLimit:    1000,
+        Intents: []contracts.Intent{{
+            Type: "transfer.allow",
+            Args: map[string]string{"limit": "1.000", "token": "hive"},
+        }},
+    })
+    assert.True(t, result.Success)
+}
+```
+
+---
+
+## 5. Go Contract SDK Reference
+
+All methods live in the `sdk` namespace. Parameter and return types are `*string` unless noted.
+
+### State
+
+- `sdk.StateSetObject(key, value string)` — write key in contract DB.
+- `sdk.StateGetObject(key string) *string` — read key.
+- `sdk.StateDeleteObject(key string)` — delete key.
+
+### Logging
+
+- `sdk.Log(msg string)` — emit a log. Persisted only on successful tx. Consumed by the indexer for downstream queries.
+
+### Environment
+
+- `sdk.GetEnv() *Env` — full env struct. See `sdk/env.go` in `go-contract-template`.
+- `sdk.GetEnvKey(key string) *string` — single env var by name.
+
+Environment variables available inside contracts:
+
+| Variable | Meaning |
+| --- | --- |
+| `contract.id` | Current contract ID. |
+| `contract.owner` | Owner of the current contract. |
+| `tx.id` | Transaction ID. |
+| `tx.index` | Transaction position in block. |
+| `tx.op_index` | Operation position in transaction. |
+| `block.id` | L1 block ID containing the tx (offchain: L1 block ID of the containing Magi block). |
+| `block.height` | L1 block number containing the tx. |
+| `block.timestamp` | Inclusion timestamp, ISO-like (e.g. `2025-07-26T14:10:42`). |
+| `msg.sender` | Address of the transaction sender (user). First entry of `required_auths` / `required_posting_auths`. |
+| `msg.required_auths` | Transaction `required_auths` field. |
+| `msg.required_posting_auths` | Transaction `required_posting_auths` field. |
+| `msg.caller` | Address calling the contract — may be a contract ID or user address. |
+| `intents` | List of intents (token allowances, etc.) attached to the tx. |
+
+### Balances and Transfers
+
+- `sdk.GetBalance(account string, asset Asset) int64` — read balance of any Magi account or contract. Result in milli-units (mHIVE / mHBD).
+- `sdk.HiveDraw(amount, asset)` — pull assets from the caller into the contract, up to the limit declared in `intents`. Requires active authority on Hive.
+- `sdk.HiveTransfer(account, amount, asset)` — transfer assets from the contract to another account.
+- `sdk.HiveWithdraw(account, amount, asset)` — unmap assets from the contract to a specified Hive account.
+
+Asset constants include `sdk.AssetHive`, `sdk.AssetHbd`.
+
+### Inter-Contract Calls
+
+- `sdk.ContractStateGet(contractId, key string) *string` — read key from another contract's state.
+- `sdk.ContractCall(contractId, method, payload string, opts *ContractCallOptions) *string` — call another contract. **Recursion depth limit: 20.** Exceeding it fails with `ic_recursion_limit_hit`.
+
+Options carry `Intents` for cross-contract allowances:
+
+```go
+sdk.ContractCall("anotherContractId", "methodName", "payload", &sdk.ContractCallOptions{
+    Intents: []sdk.Intent{{
+        Type: "transfer.allow",
+        Args: map[string]string{"token": "hive", "limit": "1.000"},
+    }},
+})
+```
+
+### Threshold Signature Scheme (TSS)
+
+- `sdk.TssCreateKey(keyId, algo string)` — `algo` must be `ecdsa` or `eddsa`. Returns `created` or `already_exists`.
+- `sdk.TssGetKey(keyId string)` — comma-separated `status,publicKey,algo`. Status ∈ {`null`, `created`, `active`, `deleted`}.
+- `sdk.TssSignKey(keyId string, digest []byte)` — `digest` must be 32 bytes. Returns `ok` or `fail`. Key must be `active`.
+
+### Execution Control
+
+- `sdk.Abort(msg string)` — abort and revert.
+- `sdk.Revert(msg, errorSymbol string)` — abort and revert with an error symbol.
+
+### Error Symbols
+
+| Symbol | Meaning |
+| --- | --- |
+| `runtime_error` | Generic WASM runtime error. |
+| `runtime_abort` | Transaction execution aborted at runtime. |
+| `ic_invalid_payload` | Invalid inter-contract call payload. |
+| `ic_contract_not_found` | Target contract does not exist. |
+| `ic_contract_get_error` | Failed to fetch contract info during inter-contract call. |
+| `ic_code_fetch_error` | Failed to fetch contract code during inter-contract call. |
+| `ic_cid_decode_error` | Failed to decode contract code CID. |
+| `ic_recursion_limit_hit` | Inter-contract recursion depth (20) exceeded. |
+| `gas_limit_hit` | WASM gas limit exceeded (insufficient RC). |
+| `sdk_error` | Generic SDK call error. |
+| `missing_required_auth` | Required authority missing. |
+| `env_var_error` | Failed to serialize/parse environment variables. |
+| `ledger_error` | Token transfer failed (e.g. insufficient balance). |
+| `ledger_intent_error` | Missing intent or exceeded declared limit. |
+| `wasm_init_error` | Failed to initialize WASM context. |
+| `wasm_ret_error` | Contract call did not return exactly one value. |
+| `wasm_function_not_found` | Method does not exist. |
+| `unknown_error` | Runtime error without a specified symbol. |
+
+### Contract Test Utils (`go-vsc-node/lib/test_utils`)
+
+- `test_utils.NewContractTest()` — create a test environment.
+- `ct.IncrementBlocks(n)` — advance the L1 block height.
+- `ct.RegisterContract(id, owner, wasmBytes)` — bind compiled WASM to a contract ID.
+- `ct.Call(stateEngine.TxVscCallContract{...})` — execute a contract call. Returns success flag, RC used, gas used, logs, state diff, error symbol.
+- `ct.Deposit(account, amount, asset)` — credit a test account.
+- `ct.GetBalance(account, asset) int64` — read test balance.
+- `ct.StateSet(contractId, key, value)` / `ct.StateGet` / `ct.StateDelete` — direct state manipulation.
+
+---
+
+## 6. Node Configuration Reference
+
+`go-vsc-node` reads JSON config files from `config/` under the data directory. Created automatically with `-init`.
+
+### `dbConfig.json` — MongoDB
+
+| Field | Default | Description |
+| --- | --- | --- |
+| `DbURI` | `mongodb://localhost:27017` | MongoDB connection URI. |
+| `DbName` | `go-vsc` | Database name. |
+
+### `gqlConfig.json` — GraphQL
+
+| Field | Default | Description |
+| --- | --- | --- |
+| `HostAddr` | `0.0.0.0:8080` | Bind address. Sandbox available at `<HostAddr>/sandbox`. |
+| `MaxComplexity` | `10000` | Maximum query complexity. |
+
+### `hiveConfig.json` — Hive endpoints
+
+```json
+{
+  "HiveURIs": [
+    "https://api.hive.blog",
+    "https://techcoderx.com",
+    "https://hive-api.3speak.tv",
+    "https://api.openhive.network",
+    "https://api.deathwing.me"
+  ]
+}
+```
+
+### `identityConfig.json` — Witness identity
+
+| Field | Description |
+| --- | --- |
+| `HiveUsername` | Hive witness username. |
+| `HiveActiveKey` | Hive active key (WIF). **Sensitive.** |
+| `BlsPrivKeySeed` | BLS threshold-signature key seed. Generated on `-init`. |
+| `Libp2pPrivKey` | libp2p key. Generated on `-init`. |
+
+### `oracleConfig.json` — External chains
+
+```json
+{
+  "Chains": {
+    "BTC": {
+      "RpcHost": "bitcoind:48332",
+      "RpcUser": "vsc-node-user",
+      "RpcPass": "vsc-node-pass"
+    }
+  }
+}
+```
+
+Currently only `BTC` is supported as an oracle chain identifier.
+
+### `p2pConfig.json` — libp2p
+
+| Field | Default | Description |
+| --- | --- | --- |
+| `Port` | `10720` | TCP listen port. |
+| `ServerMode` | `false` | Kademlia DHT server mode (recommended for nodes with stable public IPs). |
+| `AllowPrivate` | `false` | Allow private/LAN IPs. Useful for local devnets. |
+| `Bootnodes` | `[]` | Bootstrap multiaddrs. Falls back to built-in defaults if empty. |
+| `AnnounceAddrs` | `[]` | Override automatic address detection. Required when running in a container. |
+
+Bootnodes use libp2p multiaddrs, e.g. `/ip4/1.2.3.4/tcp/10720/p2p/12D3KooW...`.
+
+---
+
+## 7. Validator Requirements
+
+- Minimum stake: **2,000 HIVE** as collateral.
+- Validators participate in vault custody, threshold signatures, and block production.
+- Slashing applies for malicious behavior or failure to fulfill duties.
+
+---
+
+## 8. Repository Index
+
+| Repo | Purpose |
+| --- | --- |
+| [go-vsc-node](https://github.com/vsc-eco/go-vsc-node) | **Canonical** node implementation (Go). GPL-3.0. |
+| [magi-mongo-indexer](https://github.com/vsc-eco/magi-mongo-indexer) | Mongo → Postgres → Hasura GraphQL indexer. |
+| [go-contract-template](https://github.com/vsc-eco/go-contract-template) | Go WASM smart contract starter. |
+| [as-contract-template](https://github.com/vsc-eco/as-contract-template) | AssemblyScript WASM contract starter. |
+| [dex-contracts](https://github.com/vsc-eco/dex-contracts) | DEX (AMM) contracts. |
+| [magi_token-contract](https://github.com/vsc-eco/magi_token-contract) | Token contract reference. |
+| [magi_nft-contract](https://github.com/vsc-eco/magi_nft-contract) | NFT contract reference. |
+| [utxo-mapping](https://github.com/vsc-eco/utxo-mapping) | UTXO-chain (Bitcoin-family) mapping. |
+| [hivego](https://github.com/vsc-eco/hivego) | Go client for Hive (fork). |
+| [altera-app](https://github.com/vsc-eco/altera-app) | Altera DeFi frontend (Svelte). |
+| [docs](https://github.com/vsc-eco/docs) | Documentation site (Astro + Starlight). |
+| [vsc-node](https://github.com/vsc-eco/vsc-node) | **Archived** legacy TypeScript node — do not use. |
+
+---
+
+## 9. Guidance for LLM Code Generation
+
+When generating code or guidance for Magi:
+
+1. **Default to `go-vsc-node` and Go contracts** unless the user explicitly asks for AssemblyScript. The TypeScript `vsc-node` is archived.
+2. **Smart contracts compile to WASM** (TinyGo target `wasm-unknown`). Solidity, Hardhat, and Foundry do **not** apply to Magi contracts, even though Magi interoperates with EVM chains for asset movement.
+3. **Contract entrypoints** are `//go:wasmexport <name>` Go functions with `func(*string) *string` signatures.
+4. **Persist state** via `sdk.StateSetObject` / `StateGetObject` / `StateDeleteObject`.
+5. **Emit logs** via `sdk.Log` and format them as JSON-with-`type` or CSV-with-leading-type-token so the indexer can parse them. Logs persist only on successful transactions.
+6. **GraphQL is the only API surface.** There is no REST. Distinguish between the node's GraphQL API (protocol-level) and the indexer's Hasura GraphQL (indexed contract events with subscription support).
+7. **HBD is the universal base asset.** Do not assume USDC, USDT, or ETH for routing pairs.
+8. **The org is `vsc-eco`, the brand is Magi.** Treat them as the same project; use "Magi" in user-facing copy.
+9. **Transactions are feeless** to end users via Hive resource credits. Do not generate EVM-style gas-fee estimation code.
+10. **Inter-contract calls have a recursion depth limit of 20.** Exceeding it raises `ic_recursion_limit_hit`.
+11. **Contract deployment costs 10 HBD** per contract, paid from L1.
+12. **Validators stake 2,000 HIVE minimum** as collateral.
+13. **License of the core node is GPL-3.0.** Account for this when suggesting derivative work.

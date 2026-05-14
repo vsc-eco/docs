@@ -1,0 +1,82 @@
+# Magi
+
+> Magi (formerly known as VSC, Virtual Smart Chain) is a Hive-based Layer-2 protocol for cross-chain interoperability and WebAssembly smart contract execution. It connects EVM and non-EVM chains (Bitcoin, Ethereum, Solana, DASH, Hive) through validator-managed vaults, routes every liquidity pair through HBD (Hive Backed Dollar) as the base asset, and delivers feeless end-user transactions via Hive's resource credit model. Cross-chain state is validated using zero-knowledge proofs.
+
+The public brand is Magi; the source code lives under the GitHub organization `vsc-eco`. Both `magi.eco` and `vsc.eco` resolve to the same project. The canonical, actively-maintained node is `go-vsc-node` (Go); the older TypeScript `vsc-node` is archived. Smart contracts are written in Go (with TinyGo) or AssemblyScript and compiled to WebAssembly. The protocol exposes its API exclusively over GraphQL — there is no REST surface.
+
+The flagship reference application is Altera, a non-custodial multi-chain DeFi wallet. The canonical block explorer is Magi Blocks at vsc.techcoderx.com.
+
+## Documentation
+
+- [Introduction](https://docs.magi.eco/): Protocol overview, core features, and architectural innovations.
+- [Using Magi](https://docs.magi.eco/using-vsc/): Concepts users need — AMMs, liquidity pools, HBD pairing, validator staking, Altera.
+- [Native Asset Mapping](https://docs.magi.eco/03_native-asset-mapping/): How assets are locked on source chains and held by wallets on other chains.
+- [Feeless In-Protocol Transactions](https://docs.magi.eco/04_feeless-in-protocol-transactions/): The Hive resource-credit model that eliminates user-facing gas fees.
+- [Stablecoin (HBD) as Base Asset](https://docs.magi.eco/05_stablecoin-hbd-as-the-base-asset/): Why every liquidity pair routes through HBD.
+- [Block Explorers](https://docs.magi.eco/block-explorers/): Magi Blocks (vsc.techcoderx.com) — blocks, transactions, witnesses, contracts.
+- [FAQ](https://docs.magi.eco/faq/): Frequently asked questions.
+
+## Technology
+
+- [Technology Overview](https://docs.magi.eco/technology/): Architecture summary.
+- [Cross-Chain Architecture](https://docs.magi.eco/technology/cross-chain-arhitecture/): Vaults, oracles, and settlement between source chains and Magi.
+- [Execution Environment](https://docs.magi.eco/technology/execution-environment/): WASM contract execution model.
+- [Validator Operations](https://docs.magi.eco/technology/validator-operations/): Validator responsibilities, slashing, threshold signatures.
+
+## Roles
+
+- [Roles Overview](https://docs.magi.eco/roles/): Index of network participant roles.
+- [Developers](https://docs.magi.eco/roles/developers/): Building on Magi.
+- [Validators](https://docs.magi.eco/roles/validators/): Running a validator node, 2,000 HIVE minimum stake.
+- [Liquidity Providers (LPs)](https://docs.magi.eco/roles/liquidity-providers/): Earning fees by providing pool liquidity.
+- [Senders and Receivers](https://docs.magi.eco/roles/senders-and-receivers/): Sending and receiving native cross-chain assets.
+- [dApp Users](https://docs.magi.eco/roles/dapp-users/): Interacting with applications on Magi.
+- [Traders](https://docs.magi.eco/roles/traders/): Trading via AMMs.
+- [Arbitrageurs](https://docs.magi.eco/roles/arbitrageurs/): Arbitrage opportunities in the routing graph.
+
+## Developer Guides
+
+- [How-To Overview](https://docs.magi.eco/how-to/): Index of practical guides.
+- [Develop a Smart Contract](https://docs.magi.eco/how-to/smart-contract-development/): End-to-end Go contract development — TinyGo build, testing, deployment via `vsc-contract-deploy`. Deployment fee is 10 HBD per contract.
+- [Build on Magi](https://docs.magi.eco/how-to/build-on-magi/): General dApp integration patterns.
+- [Create a Token](https://docs.magi.eco/how-to/create-a-token/): Token issuance walkthrough.
+- [Generate Wallet](https://docs.magi.eco/how-to/generate-wallet/): Wallet creation flow.
+- [Setup a Development Testnet](https://docs.magi.eco/how-to/devnet-setup/): Local devnet for testing.
+- [Run a Validator Node](https://docs.magi.eco/how-to/deploy-a-validator/): Validator deployment.
+
+## References
+
+- [References Index](https://docs.magi.eco/references/): All technical references.
+- [Contract SDK](https://docs.magi.eco/references/sdk/): Full Go SDK surface — `sdk.Log`, `sdk.StateSetObject`/`StateGetObject`/`StateDeleteObject`, `sdk.GetEnv`/`GetEnvKey`, `sdk.GetBalance`, `sdk.HiveDraw`/`HiveTransfer`/`HiveWithdraw`, `sdk.ContractCall` (recursion limit 20), `sdk.TssCreateKey`/`TssGetKey`/`TssSignKey`, `sdk.Abort`/`Revert`. Includes contract env vars, error symbols, and `test_utils` testing API.
+- [Account Types](https://docs.magi.eco/references/account-types/): Hive accounts, EVM addresses, mapped identities.
+- [Node Configuration](https://docs.magi.eco/references/node-config/): JSON config files in `config/` — `dbConfig.json`, `gqlConfig.json` (GraphQL default `0.0.0.0:8080`, sandbox at `/sandbox`), `hiveConfig.json`, `identityConfig.json`, `oracleConfig.json`, `p2pConfig.json` (libp2p default port 10720).
+
+## Source Code
+
+- [vsc-eco GitHub organization](https://github.com/vsc-eco): All open-source repositories.
+- [go-vsc-node](https://github.com/vsc-eco/go-vsc-node): Canonical node implementation in Go. Core protocol, consensus, GraphQL API (gqlgen). License: GPL-3.0.
+- [magi-mongo-indexer](https://github.com/vsc-eco/magi-mongo-indexer): Mongo → Postgres → Hasura GraphQL indexer for contract logs and DEX events. Supports queries and subscriptions.
+- [go-contract-template](https://github.com/vsc-eco/go-contract-template): Go-based WASM smart contract starter with SDK, runtime, mock tests, and deploy script.
+- [as-contract-template](https://github.com/vsc-eco/as-contract-template): AssemblyScript-based WASM smart contract starter using `@vsc.eco/sdk/assembly`.
+- [dex-contracts](https://github.com/vsc-eco/dex-contracts): DEX (AMM) contracts.
+- [magi_token-contract](https://github.com/vsc-eco/magi_token-contract): Token contract reference implementation.
+- [magi_nft-contract](https://github.com/vsc-eco/magi_nft-contract): NFT contract reference implementation.
+- [utxo-mapping](https://github.com/vsc-eco/utxo-mapping): UTXO-chain (Bitcoin-family) mapping logic.
+- [hivego](https://github.com/vsc-eco/hivego): Go client for the Hive blockchain.
+- [altera-app](https://github.com/vsc-eco/altera-app): Altera DeFi frontend (Svelte).
+- [docs](https://github.com/vsc-eco/docs): This documentation site (Astro + Starlight).
+
+## Applications
+
+- [Altera (live app)](https://altera.vsc.eco): Flagship Magi dApp — multi-chain wallet, swaps, liquidity.
+- [Magi Blocks (block explorer)](https://vsc.techcoderx.com/): Inspect blocks, transactions, witnesses, and contracts. Maintained by techcoderx.
+- [Magi website](https://magi.eco/): Marketing and product overview.
+
+## Optional
+
+- [Bug Bounty Guidelines](https://docs.magi.eco/bug_bounty/): Responsible disclosure scope and rewards.
+- [Discord](https://discord.gg/yvGXZsQTU6): Community and developer chat.
+- [X / Twitter](https://x.com/vsc_eco): Announcements.
+- [Blog (PeakD)](https://peakd.com/@vsc.network): Long-form posts.
+- [LinkedIn](https://www.linkedin.com/company/vsc-project/): Company page.
+- [vsc-node (archived)](https://github.com/vsc-eco/vsc-node): Legacy TypeScript node — do not use for new development.
