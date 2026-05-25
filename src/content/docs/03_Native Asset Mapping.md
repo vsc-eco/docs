@@ -7,16 +7,16 @@ sidebar:
 
 **Native Asset Mapping** is the primary innovative feature of the Magi protocol that enables users to send and receive native assets between different blockchains wallet addresses, through Magi, reducing concerns about chain compatibility.
 
-It allows users to send, for example, **SOL from a Solana wallet to an Ethereum wallet address**. The recipient receives **native SOL**, viewable and usable on Magi when they log in with their Ethereum wallet. The received SOL tokens remain in the Magi vault on the Solana mainnet and are secured by the Magi protocol validator system. By completing the transaction, the ownership of those tokens is transferred to the account receiving the SOL. 
+It allows users to send, for example, **BTC from a Bitcoin wallet to an Ethereum wallet address**. The recipient receives **native BTC**, viewable and usable on Magi when they log in with their Ethereum wallet. The received BTC remains in the Magi vault on the Bitcoin mainnet and is secured by the Magi protocol validator system. By completing the transaction, the ownership of those tokens is transferred to the account receiving the BTC. (Litecoin, Dash, and Solana support is planned; the same flow applies to those chains once live.) 
 
 ## How It Works
 
 Native Asset Mapping links a user’s single wallet address (e.g., ETH) to their Magi account, enabling them to receive native assets from any supported blockchain even if those assets originate from a different chain than the wallet they connected.
 
-1. User connects to Magi using one wallet - for example, their Solana wallet.
-2. Sender deposits Sol tokens to Magi. Under the "transfer" option, the sender inputs the receiver’s ETH address. *(This differs from cross-chain atomic swaps, another key functionality of Magi)*
+1. User connects to Magi using one wallet - for example, their Bitcoin wallet.
+2. Sender deposits BTC to Magi. Under the "transfer" option, the sender inputs the receiver’s ETH address. *(This differs from cross-chain atomic swaps, another key functionality of Magi)*
 3. Magi maps the incoming asset to the ETH address on its internal ledger. *(Transfers within Magi incur **no direct transaction fees to users**)*
-4. The receiver logs in with their ETH wallet and sees the deposited asset (e.g., SOL).
+4. The receiver logs in with their ETH wallet and sees the deposited asset (e.g., BTC).
 5. The receiver can now **swap**, **withdraw**, or **use** the asset within Magi.
 
 ## Implications

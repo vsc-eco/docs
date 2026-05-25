@@ -14,7 +14,7 @@ Magi dApp users benefit in key ways:
 
 - **Native asset ownership**
 - **Feeless experience**: Once assets are inside Magi, users can move and interact with them across dApps **without paying any network fees**.
-- **Interoperable UX**: A user with an ETH wallet can seamlessly interact with applications involving Bitcoin or Solana-based assets, without needing additional wallets or chains.
+- **Interoperable UX**: A user with an ETH wallet can seamlessly interact with applications involving Bitcoin-based assets (with Litecoin, Dash, and Solana planned), without needing additional wallets or chains.
 - **Secure and decentralized**: All interactions happen on-chain and are secured by the Magi validator network, eliminating reliance on centralized servers or custodians.
 
 This creates a fundamentally smoother and more powerful user experience: less friction, no need for managing multiple wallets for every single blockchain.

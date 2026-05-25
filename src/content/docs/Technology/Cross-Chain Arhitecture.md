@@ -12,7 +12,7 @@ This section describes how Magi interfaces with external blockchains, processes 
 Magi interfaces with external chains through a combination of:
 
 - **Blockchain light clients**  
-- **Zero-knowledge proofs (ZKPs)**  
+- **Zero-knowledge proofs (ZKPs)** — currently for Ethereum (via SP1-Helios), with broader use planned  
 - **Threshold signature schemes (TSS)**  
 
 These components enable Magi to operate trustlessly and without centralized custodians. This architecture removes the need for centralized custodians, allowing users to interact with external blockchains without relinquishing control of their assets.
