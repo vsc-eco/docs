@@ -17,7 +17,7 @@ export default defineConfig({
         starlightLlmsTxt({
           projectName: 'Magi',
           description:
-            "Magi (formerly known as VSC, Virtual Smart Chain) is a Hive-based Layer-2 protocol for cross-chain interoperability and WebAssembly smart contract execution. It connects EVM and non-EVM chains (Bitcoin, Ethereum, Solana, DASH, Hive) through validator-managed vaults, routes every liquidity pair through HBD (Hive Backed Dollar) as the base asset, and delivers feeless end-user transactions via Hive's resource credit model. Cross-chain state is validated using zero-knowledge proofs.",
+            "Magi (formerly known as VSC, Virtual Smart Chain) is a Hive-based Layer-2 protocol for cross-chain interoperability and WebAssembly smart contract execution. It currently connects Bitcoin and Ethereum on mainnet, with Litecoin, Dash, and Solana planned, through validator-managed vaults. Every liquidity pair routes through HBD (Hive Backed Dollar) as the base asset, and end-user transactions are feeless via Hive's resource credit model. Validators observe each external chain by running native clients (e.g. bitcoind, geth) and reaching BLS-signed consensus; zero-knowledge proofs are currently used for EVM (Ethereum) validation, with broader use planned for other chains.",
           details:
             'The public brand is Magi; source code lives under the GitHub organization vsc-eco. Both magi.eco and vsc.eco resolve to the same project. The canonical node is go-vsc-node (Go); the older TypeScript vsc-node is archived. Smart contracts are written in Go (TinyGo) or AssemblyScript and compile to WebAssembly. The API is exclusively GraphQL — no REST.',
           optionalLinks: [

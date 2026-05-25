@@ -8,7 +8,7 @@ sidebar:
 *This documentation provides a technical overview of Magi (Virtual Smart Chain), a decentralized protocol for cross-chain asset custody and swaps, settlement, and smart contract execution. Magi connects EVM and non-EVM chains through validator-managed vaults and a unified stablecoin-based routing system using HBD. Magi enables feeless transactions, native asset support, and composable cross-chain logic in a single trust-minimized environment.*
 
 
-Built as a high-performance, feeless settlement layer, Magi leverages **WebAssembly smart contracts**, **zero-knowledge proofs**, **validator-managed vaults** and a **collateral-backed native asset model** that reduces liquidity fragmentation across ecosystems.
+Built as a high-performance, feeless settlement layer, Magi leverages **WebAssembly smart contracts**, **BLS threshold-signature consensus**, **validator-managed vaults**, **zero-knowledge proofs** (currently for Ethereum, with broader use planned), and a **collateral-backed native asset model** that reduces liquidity fragmentation across ecosystems.
 
 All swaps are routed through a single base asset, a stablecoin, **HBD (Hive Backed Dollars). Using HBD exposes LPs only to 1-sided volatility which** makes liquidity provision on Magi **more predictable and efficient** for both institutional and retail participants.
 
@@ -18,15 +18,15 @@ Unlike other cross-chain protocols limited to basic swap mechanics, Magi support
 
 - **Native Multi-Chain Asset Support** 
 
-Assets from supported blockchains (including Bitcoin, Solana, Ethereum, and others) are deposited directly into **on-chain vaults** secured by Magi validators. These validators are required to stake **Hive** as economic collateral, ensuring security and accountability.
+Assets from supported blockchains (Bitcoin and Ethereum on mainnet today; Litecoin, Dash, and Solana planned) are deposited directly into **on-chain vaults** secured by Magi validators. These validators are required to stake **Hive** as economic collateral, ensuring security and accountability.
 
 - **Smart Contracts via WebAssembly (WASM)** 
 
 Developers can build powerful on-chain logic using WASM-based contracts, with native access to assets from multiple chains.
 
-- **Zero-Knowledge Proof Architecture** 
+- **Validator Observation & Zero-Knowledge Proofs**
 
-ZKPs are used to validate external chain interactions and maintain verifiability across systems, without compromising speed or user privacy.
+Validators observe each external chain by running native clients (e.g. `bitcoind` for Bitcoin, `geth` for Ethereum) and reach BLS-signed consensus on chain state. Zero-knowledge proofs are currently used for Ethereum validation (via the SP1-Helios light client), with broader ZK use planned for other chains.
 
 - **Universal Wallet Interoperability** 
 
@@ -42,7 +42,7 @@ Magi introduces several novel architectural components to address common limitat
 
 - **Native Asset Mapping** 
 
-Magi enables assets from different blockchains (e.g., BTC, SOL, Hive, ETH) to be securely locked on their native chains and mapped to Magi-connected addresses. For example: this allows Ethereum wallet addresses to hold native Bitcoin (BTC), Solana wallet addresses to hold native Ethereum (ETH), and vice versa, all while leveraging Magi's decentralized validator network for seamless cross-chain interoperability.
+Magi enables assets from different blockchains to be securely locked on their native chains and mapped to Magi-connected addresses. Today this covers BTC and ETH (with LTC, DASH, and SOL support planned), plus Hive as the L1. For example: this allows Ethereum wallet addresses to hold native Bitcoin (BTC) and vice versa, all while leveraging Magi's decentralized validator network for seamless cross-chain interoperability.
 
 - **Feeless In-Protocol Transactions** 
 

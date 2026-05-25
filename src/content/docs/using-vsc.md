@@ -14,11 +14,11 @@ sidebar:
 
 Liquidity pools are collections of two or more assets (tokens) that are locked into a smart contract. These pools are used by **Automated Market Makers (AMMs)** to facilitate decentralized trading and ensure liquidity for the users interacting with the protocol.
 
-In Magi, liquidity pools are designed to pair a volatile asset (such as Bitcoin, Ethereum, Solana…) with a stable asset: **HBD (Hive Backed Dollars)**. This structure is intended to manage the risk of volatility in liquidity provision, making it more predictable for users providing liquidity.
+In Magi, liquidity pools are designed to pair a volatile asset (such as Bitcoin or Ethereum today, with Litecoin, Dash, and Solana planned) with a stable asset: **HBD (Hive Backed Dollars)**. This structure is intended to manage the risk of volatility in liquidity provision, making it more predictable for users providing liquidity.
 
 ## LP Creation and Pairing
 
-Every liquidity pool on Magi involves pairing a volatile asset (like BTC, ETH, SOL) with **HBD**. For instance, a **BTC/HBD** liquidity pool would contain both BTC and HBD tokens. By providing liquidity to this pool, liquidity providers (LPs) deposit equal values of both assets (e.g., an amount of BTC and an equivalent amount of HBD) into the pool.
+Every liquidity pool on Magi involves pairing a volatile asset (like BTC or ETH; LTC, DASH, and SOL planned) with **HBD**. For instance, a **BTC/HBD** liquidity pool would contain both BTC and HBD tokens. By providing liquidity to this pool, liquidity providers (LPs) deposit equal values of both assets (e.g., an amount of BTC and an equivalent amount of HBD) into the pool.
 
 ## The Role of HBD
 

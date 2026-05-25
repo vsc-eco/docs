@@ -6,7 +6,7 @@ sidebar:
 
 # Build Decentralized Applications (dApps) on Magi
 
-Developers on Magi gain a powerful advantage. Any application they build is instantly **interoperable with all supported blockchains**. Magi acts as a cross-chain hub which means your project isn’t siloed to one ecosystem. Instead, it's natively accessible to users from multiple chains, including Bitcoin, Ethereum, Solana, Hive and others.
+Developers on Magi gain a powerful advantage. Any application they build is instantly **interoperable with all supported blockchains**. Magi acts as a cross-chain hub which means your project isn’t siloed to one ecosystem. Instead, it's natively accessible to users from multiple chains: Bitcoin, Ethereum, and Hive are live today, with Litecoin, Dash, and Solana planned.
 
 ## Wallet Interoperability
 
@@ -18,7 +18,7 @@ Magi enables developers to build powerful decentralized applications using **Web
 
 ## Native Asset Mapping
 
-A major breakthrough for developers on Magi is **Native Asset Mapping**. This allows smart contracts to interact with native assets - such as BTC, ETH, Hive and SOL - **inside** the smart contract environment.
+A major breakthrough for developers on Magi is **Native Asset Mapping**. This allows smart contracts to interact with native assets - currently BTC, ETH, and Hive (with LTC, DASH, and SOL planned) - **inside** the smart contract environment.
 
 This capability means developers can build advanced dApps that utilize native assets seamlessly, whether it’s payments, games, DeFi tools, or even decentralized exchanges (DEXs). These applications can move and manage native assets in real time with the same ease or in many cases easier, than native tokens on a single chain.
 
@@ -30,7 +30,7 @@ What makes this even more powerful is Magi’s **zero-fee internal architecture*
 
 In short, developers can:
 
-- Use native BTC, ETH, SOL, and more directly in smart contracts  
+- Use native BTC and ETH directly in smart contracts today (with LTC, DASH, and SOL planned)  
 - Build DEXs, payment systems, and asset management tools with full native coin support  
 - Eliminate in-protocol fees, improving UX and scalability  
 
